@@ -1,0 +1,976 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-has-toc data-has-sidebar class="astro-bguv2lll"> <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>C3 Specification | The C3 Handbook</title><link rel="canonical" href="https://c3-lang.org/implementation-details/specification/"/><link rel="sitemap" href="/sitemap-index.xml"/><link rel="shortcut icon" href="/ico.svg" type="image/svg+xml"/><meta name="generator" content="Astro v4.0.7"/><meta name="generator" content="Starlight v0.15.2"/><meta property="og:title" content="C3 Specification"/><meta property="og:type" content="article"/><meta property="og:url" content="https://c3-lang.org/implementation-details/specification/"/><meta property="og:locale" content="en"/><meta property="og:description" content="C3 Specification"/><meta property="og:site_name" content="The C3 Handbook"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="C3 Specification"/><meta name="twitter:description" content="C3 Specification"/><meta name="description" content="C3 Specification"/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg> <svg aria-hidden="true" class="dark astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg> <svg aria-hidden="true" class="auto astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg> </template><link rel="stylesheet" href="/_astro/index.oWxOCcey.css" /><script type="module" src="/_astro/hoisted.dSDs6aBR.js"></script>
+<script type="module" src="/_astro/page.36aCzv65.js"></script></head> <body class="astro-bguv2lll"> <a href="#_top" class="astro-7q3lir66">Skip to content</a>  <div class="page sl-flex astro-vrdttmbt"> <header class="header astro-vrdttmbt"><div class="header sl-flex astro-kmkmnagf"> <div class="sl-flex astro-kmkmnagf"> <a href="/" class="site-title sl-flex astro-m46x6ez3">  <span class="astro-m46x6ez3"> The C3 Handbook </span> </a>  </div> <div class="sl-flex astro-kmkmnagf"> <site-search data-translations="{&#34;placeholder&#34;:&#34;Search&#34;}" class="astro-v37mnknz"> <button data-open-modal disabled class="astro-v37mnknz">  <svg aria-label="Search" class="astro-v37mnknz astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg>  <span class="sl-hidden md:sl-block astro-v37mnknz" aria-hidden="true">Search</span> <svg aria-label="(Press / to Search)" class="sl-hidden md:sl-block astro-v37mnknz astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 2H7a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5Zm3 15a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v10Z"/><path d="M15.293 6.707a1 1 0 1 1 1.414 1.414l-8.485 8.486a1 1 0 0 1-1.414-1.415l8.485-8.485Z"/></svg>  </button> <dialog style="padding:0" aria-label="Search" class="astro-v37mnknz"> <div class="dialog-frame sl-flex astro-v37mnknz">  <button data-close-modal class="sl-flex md:sl-hidden astro-v37mnknz"> Cancel </button> <div class="search-container astro-v37mnknz"> <div id="starlight__search" class="astro-v37mnknz"></div> </div> </div> </dialog> </site-search>    </div> <div class="sl-hidden md:sl-flex right-group astro-kmkmnagf"> <div class="sl-flex social-icons astro-kmkmnagf">  </div> <starlight-theme-select>  <label style="--sl-select-width: 6.25em" class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">Select theme</span> <svg aria-hidden="true" class="icon label-icon astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg>  <select value="auto" class="astro-4yphtoen"> <option value="dark" class="astro-4yphtoen">Dark</option><option value="light" class="astro-4yphtoen">Light</option><option value="auto" selected="true" class="astro-4yphtoen">Auto</option> </select> <svg aria-hidden="true" class="icon caret astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </label>  </starlight-theme-select>  <script>
+	StarlightThemeProvider.updatePickers();
+</script>   </div> </div> </header> <nav class="sidebar astro-vrdttmbt" aria-label="Main"> <starlight-menu-button class="astro-jif73yzw"> <button aria-expanded="false" aria-label="Menu" aria-controls="starlight__sidebar" class="sl-flex md:sl-hidden astro-jif73yzw"> <svg aria-hidden="true" class="astro-jif73yzw astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg>  </button> </starlight-menu-button>    <div id="starlight__sidebar" class="sidebar-pane astro-vrdttmbt"> <div class="sidebar-content sl-flex astro-vrdttmbt"> <ul class="top-level astro-3ii7xxms"> <li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Introduction</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/introduction/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">The C3 Guide</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/introduction/design-goals/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Design Goals and Origins</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/introduction/roadmap/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Roadmap For c3</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Get Involved</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/get-involved/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Community &amp; Contribute</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Install C3</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/install-c3/prebuilt-binaries/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Install C3 Compiler Binary</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/install-c3/compile/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Build C3 From Source</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Getting Started</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/getting-started/my-first-hello-world/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">My first Hello World</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/getting-started/my-first-project/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">My first C3 Project</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/getting-started/basic-types-and-values/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Basic types and values</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Language Fundamentals</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/language-fundamentals/comments/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Comments &amp; Documentation</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-fundamentals/naming/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Naming Rules</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-fundamentals/variables/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Variables</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-fundamentals/expressions/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Expressions</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-fundamentals/statements/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Statements</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-fundamentals/precedence/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Precedence</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-fundamentals/functions/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Functions</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-fundamentals/modules/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Modules</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-fundamentals/conversion/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Conversions and Promotions</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-fundamentals/undefined-behaviour/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Undefined Behaviour</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Language Common</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/language-common/arrays/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Arrays</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-common/define/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Define</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-common/vectors/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Vectors</span>  </a> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Optionals</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/language-common/optionals/essential/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Essential Error Handling</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-common/optionals/advanced/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Advanced Error Handling</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <a href="/language-common/defer/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Defer and Cleanup</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-common/contracts/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Contracts</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-common/attributes/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Attributes</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-common/cinterop/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">C Interoperability</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Generic Programming</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/generic-programming/anyinterfaces/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Any and interfaces</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/generic-programming/operator-overloading/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Operator Overloading</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/generic-programming/generics/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Generics</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/generic-programming/macros/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Macros</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/generic-programming/compiletime/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Compile Time Evaluation</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/generic-programming/reflection/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Reflection</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Standard Library</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/standard-library/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Standard Library</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/standard-library/stdlib_refcard/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Standard Library Function Signatures</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Build Your Project</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/build-your-project/build-commands/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Project Build Commands</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/build-your-project/project-config/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Project Configuration</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Misc Advanced</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/misc-advanced/builtins/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Builtins</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/misc-advanced/library-packaging/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Library Packaging</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/misc-advanced/asm/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Inline Assembly</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">FAQ</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/faq/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Frequently Asked Questions</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/faq/compare-languages/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Comparisons with other languages</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/faq/changesfromc/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Changes from C</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/faq/rejected-ideas/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Rejected ideas</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Language Overview</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/language-overview/examples/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Examples</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-overview/allfeatures/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">All features</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-overview/primer/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">A quick primer on C3</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-overview/sample/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">More Code Examples</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/language-overview/types/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Types</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">Implementation Details</span>  </div> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </summary> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/implementation-details/change-logs/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Change logs</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/implementation-details/grammar/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Grammar</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/implementation-details/specification/" aria-current="page" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">C3 Specification</span>  </a> </li> </ul>  </details> </li> </ul>  <div class="md:sl-hidden"> <div class="mobile-preferences sl-flex astro-wu23bvmt"> <div class="sl-flex social-icons astro-wu23bvmt">  </div> <starlight-theme-select>  <label style="--sl-select-width: 6.25em" class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">Select theme</span> <svg aria-hidden="true" class="icon label-icon astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg>  <select value="auto" class="astro-4yphtoen"> <option value="dark" class="astro-4yphtoen">Dark</option><option value="light" class="astro-4yphtoen">Light</option><option value="auto" selected="true" class="astro-4yphtoen">Auto</option> </select> <svg aria-hidden="true" class="icon caret astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg>  </label>  </starlight-theme-select>  <script>
+	StarlightThemeProvider.updatePickers();
+</script>   </div>  </div> </div> </div> </nav> <div class="main-frame astro-vrdttmbt">  <div class="lg:sl-flex astro-67yu43on"> <aside class="right-sidebar-container astro-67yu43on"> <div class="right-sidebar astro-67yu43on"> <div class="lg:sl-hidden astro-pb3aqygn"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-doynk5tl"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-doynk5tl"><details id="starlight__mobile-toc" class="astro-doynk5tl"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-doynk5tl"><div class="toggle sl-flex astro-doynk5tl">On this page<svg aria-hidden="true" class="caret astro-doynk5tl astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </div><span class="display-current astro-doynk5tl"></span></summary><div class="dropdown astro-doynk5tl"><ul class="isMobile astro-g2bywc46" style="--depth: 0;"> <li class="astro-g2bywc46" style="--depth: 0;"> <a href="#_top" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Overview</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#notation" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Notation</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#source-code-representation" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Source code representation</span> </a> <ul class="isMobile astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#lexical-translations" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Lexical Translations</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#line-terminators" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Line Terminators</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#input-elements-and-tokens" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Input Elements and Tokens</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#white-space" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">White Space</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#letters-and-digits" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Letters and digits</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#comments" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Comments</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#doc-comments" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Doc comments</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#identifiers" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Identifiers</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#keywords" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Keywords</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#operators-and-punctuation" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Operators and punctuation</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#integer-literals" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Integer literals</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#floating-point-literals" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Floating point literals</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#characters" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Characters</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#backslash-escapes" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Backslash escapes</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#string-literals" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">String literals</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#raw-string-literals" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Raw string literals</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#character-literals" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Character literals</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#types" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Types</span> </a> <ul class="isMobile astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#boolean-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Boolean types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#integer-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Integer types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#floating-point-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Floating point types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#vector-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Vector types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#array-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Array types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#slice-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Slice types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#pointer-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Pointer types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#struct-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Struct types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#union-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Union types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#fault-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Fault types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#enum-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Enum types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#function-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Function types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#typeid-type" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Typeid type</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#any-type" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Any type</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#anyfault-type" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Anyfault type</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#declarations-and-scope" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Declarations and scope</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#expressions" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Expressions</span> </a> <ul class="isMobile astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#assignment-expression" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Assignment expression</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#ternary-elvis-and-or-else-expressions" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Ternary, elvis and or-else expressions</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#suffix-expression" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Suffix expression</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#rethrow-expression" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Rethrow expression</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#relational-expression" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Relational expression</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#and-expression" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">And expression</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#or-expression" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Or expression</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#casts" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Casts</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#pointer-casts" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Pointer casts</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#subscript-operator" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Subscript operator</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#operands" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Operands</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#compound-literals" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Compound Literals</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#function-calls" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Function calls</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#statements" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Statements</span> </a> <ul class="isMobile astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#asm-block-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Asm block statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#assert-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Assert statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#break-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Break statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#compile-time-echo-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Compile time echo statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#compile-time-assert-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Compile time assert statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#compile-time-error-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Compile time error statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#compile-time-if-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Compile time if statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#compile-time-switch-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Compile time switch statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#continue-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Continue statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#declaration-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Declaration statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#defer-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Defer statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#expr-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Expr statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#if-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">If statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#nextcase-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Nextcase statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#switch-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Switch statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#for-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">For statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#foreach-and-foreach_r-statements" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Foreach and foreach_r statements</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#return-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Return statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#while-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">While statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#var-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Var statement</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#attributes" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Attributes</span> </a> <ul class="isMobile astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#user-defined-attributes" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">User defined attributes</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#methods" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Methods</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#modules" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Modules</span> </a>  </li> </ul> </div></details></nav></mobile-starlight-toc></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-pb3aqygn"><div class="sl-container astro-pb3aqygn"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-g2bywc46" style="--depth: 0;"> <li class="astro-g2bywc46" style="--depth: 0;"> <a href="#_top" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Overview</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#notation" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Notation</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#source-code-representation" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Source code representation</span> </a> <ul class="astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#lexical-translations" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Lexical Translations</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#line-terminators" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Line Terminators</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#input-elements-and-tokens" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Input Elements and Tokens</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#white-space" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">White Space</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#letters-and-digits" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Letters and digits</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#comments" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Comments</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#doc-comments" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Doc comments</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#identifiers" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Identifiers</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#keywords" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Keywords</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#operators-and-punctuation" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Operators and punctuation</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#integer-literals" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Integer literals</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#floating-point-literals" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Floating point literals</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#characters" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Characters</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#backslash-escapes" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Backslash escapes</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#string-literals" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">String literals</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#raw-string-literals" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Raw string literals</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#character-literals" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Character literals</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#types" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Types</span> </a> <ul class="astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#boolean-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Boolean types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#integer-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Integer types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#floating-point-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Floating point types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#vector-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Vector types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#array-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Array types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#slice-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Slice types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#pointer-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Pointer types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#struct-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Struct types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#union-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Union types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#fault-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Fault types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#enum-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Enum types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#function-types" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Function types</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#typeid-type" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Typeid type</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#any-type" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Any type</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#anyfault-type" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Anyfault type</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#declarations-and-scope" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Declarations and scope</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#expressions" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Expressions</span> </a> <ul class="astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#assignment-expression" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Assignment expression</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#ternary-elvis-and-or-else-expressions" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Ternary, elvis and or-else expressions</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#suffix-expression" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Suffix expression</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#rethrow-expression" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Rethrow expression</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#relational-expression" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Relational expression</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#and-expression" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">And expression</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#or-expression" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Or expression</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#casts" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Casts</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#pointer-casts" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Pointer casts</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#subscript-operator" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Subscript operator</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#operands" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Operands</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#compound-literals" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Compound Literals</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#function-calls" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Function calls</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#statements" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Statements</span> </a> <ul class="astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#asm-block-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Asm block statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#assert-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Assert statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#break-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Break statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#compile-time-echo-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Compile time echo statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#compile-time-assert-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Compile time assert statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#compile-time-error-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Compile time error statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#compile-time-if-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Compile time if statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#compile-time-switch-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Compile time switch statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#continue-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Continue statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#declaration-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Declaration statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#defer-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Defer statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#expr-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Expr statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#if-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">If statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#nextcase-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Nextcase statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#switch-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Switch statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#for-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">For statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#foreach-and-foreach_r-statements" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Foreach and foreach_r statements</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#return-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Return statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#while-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">While statement</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#var-statement" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Var statement</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#attributes" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Attributes</span> </a> <ul class="astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#user-defined-attributes" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">User defined attributes</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#methods" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Methods</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#modules" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Modules</span> </a>  </li> </ul> </nav></starlight-toc></div></div> </div> </aside> <div class="main-pane astro-67yu43on">  <main data-pagefind-body lang="en" dir="ltr" class="astro-bguv2lll">    <div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z"> <h1 id="_top" class="astro-j6tvhyss">C3 Specification</h1>  </div> </div>  <div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z"> <div class="sl-markdown-content"> <p><em>THIS SPECIFICATION IS UNDER DEVELOPMENT</em></p>
+<h2 id="notation">Notation</h2>
+<p>The syntax is specified using Extended Backus-Naur Form (EBNF):</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.664at.css"><script type="module" src="/_astro/ec.sgewm.js"></script><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">production  ::= PRODUCTION_NAME '::=' expression?</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">expression  ::= alternative ("|" alternative)*</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">alternative ::= term term*</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">term        ::= PRODUCTION_NAME | TOKEN | set | group | option | repetition</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">set         ::= '[' (range | CHAR) (rang | CHAR)* ']'</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">range       ::= CHAR '-' CHAR</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">group       ::= '(' expression ')'</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">option      ::= expression '?'</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">repetition  ::= expression '*'</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="production  ::= PRODUCTION_NAME &#x27;::=&#x27; expression?expression  ::= alternative (&#x22;|&#x22; alternative)*alternative ::= term term*term        ::= PRODUCTION_NAME | TOKEN | set | group | option | repetitionset         ::= &#x27;[&#x27; (range | CHAR) (rang | CHAR)* &#x27;]&#x27;range       ::= CHAR &#x27;-&#x27; CHARgroup       ::= &#x27;(&#x27; expression &#x27;)&#x27;option      ::= expression &#x27;?&#x27;repetition  ::= expression &#x27;*&#x27;"><div></div></button></div></figure></div>
+<p>Productions are expressions constructed from terms and the following operators, in increasing precedence:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">|   alternation</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">()  grouping</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">?  option (0 or 1 times)</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">*  repetition (0 to n times)</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="|   alternation()  grouping?  option (0 or 1 times)*  repetition (0 to n times)"><div></div></button></div></figure></div>
+<p>Uppercase production names are used to identify lexical tokens. Non-terminals are in lower case. Lexical tokens are
+enclosed in single quotes ”.</p>
+<p>The form <code dir="auto">a..b</code> represents the set of characters from a through b as alternatives.</p>
+<h2 id="source-code-representation">Source code representation</h2>
+<p>A program consists of one or more <em>translation units</em> stored in files written in the Unicode character set,
+stored as a sequence of bytes using the UTF-8 encoding. Except for comments and the contents of character and string
+literals, all input elements are formed only from the ASCII subset (U+0000 to U+007F) of Unicode.</p>
+<p>A raw byte stream is translated into a sequence of tokens which white space and non-doc comments are discarded. Doc
+comments may optionally be discarded as well. The resulting input elements form the tokens that are the terminal symbols
+of the syntactic grammar.</p>
+<h3 id="lexical-translations">Lexical Translations</h3>
+<p>A raw byte stream is translated into a sequence of tokens which white space and non-doc comments are discarded. Doc
+comments may optionally be discarded as well. The resulting input elements form the tokens that are the terminal symbols
+of the syntactic grammar.</p>
+<p>The longest possible translation is used at each step, even if the result does not ultimately make a correct program
+while another lexical translation would.</p>
+<blockquote>
+<p>Example: <code dir="auto">a--b</code> is translated as <code dir="auto">a</code>, <code dir="auto">--</code>, <code dir="auto">b</code>, which does not form a grammatically correct expression, even though the tokenization <code dir="auto">a</code>, <code dir="auto">-</code>, <code dir="auto">-</code>, <code dir="auto">b</code> could form a grammatically correct expression.</p>
+</blockquote>
+<h3 id="line-terminators">Line Terminators</h3>
+<p>The C3 compiler divides the sequence of input bytes into lines by recognizing <em>line terminators</em></p>
+<p>Lines are terminated by the ASCII LF character (U+000A), also known as “newline”. A line termination specifies the
+termination of the // form of a comment.</p>
+<h3 id="input-elements-and-tokens">Input Elements and Tokens</h3>
+<p>An input element may be:</p>
+<ol>
+<li>White space</li>
+<li>Comment</li>
+<li>Doc Comment</li>
+<li>Token</li>
+</ol>
+<p>A token may be:</p>
+<ol>
+<li>Identifier</li>
+<li>Keyword</li>
+<li>Literal</li>
+<li>Separator</li>
+<li>Operator</li>
+</ol>
+<p>A Doc Comment consists of:</p>
+<ol>
+<li>A stream of descriptive text</li>
+<li>A list of directive Tokens</li>
+</ol>
+<p>Those input elements that are not white space or comments are tokens. The tokens are the terminal symbols of the
+syntactic grammar. Whitespace and comments can serve to separate tokens that might be tokenized in another manner. For
+example the characters <code dir="auto">+</code> and <code dir="auto">=</code> may form the operator token <code dir="auto">+=</code> only if there is no intervening white space or
+comment.</p>
+<h3 id="white-space">White Space</h3>
+<p>White space is defined as the ASCII horizontal tab character (U+0009), form feed character (U+000A), vertical tab (
+U+000B), carriage return (U+000D), space character (U+0020) and the line terminator character (U+000D).</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">WHITESPACE      ::= [ \t\f\v\r\n]</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="WHITESPACE      ::= [ \t\f\v\r\n]"><div></div></button></div></figure></div>
+<h3 id="letters-and-digits">Letters and digits</h3>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">UC_LETTER       ::= [A-Z]</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">LC_LETTER       ::= [a-z]</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">LETTER          ::= UC_LETTER | LC_LETTER</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">DIGIT           ::= [0-9]</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">HEX_DIGIT       ::= [0-9a-fA-F]</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">BINARY_DIGIT    ::= [01]</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">OCTAL_DIGIT     ::= [0-7]</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">LC_LETTER_US    ::= LC_LETTER | "_"</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">UC_LETTER_US    ::= UC_LETTER | "_"</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">ALPHANUM        ::= LETTER | DIGIT</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">ALPHANUM_US     ::= ALPHANUM | "_"</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">UC_ALPHANUM_US  ::= UC_LETTER_US | DIGIT</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">LC_ALPHANUM_US  ::= LC_LETTER_US | DIGIT</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="UC_LETTER       ::= [A-Z]LC_LETTER       ::= [a-z]LETTER          ::= UC_LETTER | LC_LETTERDIGIT           ::= [0-9]HEX_DIGIT       ::= [0-9a-fA-F]BINARY_DIGIT    ::= [01]OCTAL_DIGIT     ::= [0-7]LC_LETTER_US    ::= LC_LETTER | &#x22;_&#x22;UC_LETTER_US    ::= UC_LETTER | &#x22;_&#x22;ALPHANUM        ::= LETTER | DIGITALPHANUM_US     ::= ALPHANUM | &#x22;_&#x22;UC_ALPHANUM_US  ::= UC_LETTER_US | DIGITLC_ALPHANUM_US  ::= LC_LETTER_US | DIGIT"><div></div></button></div></figure></div>
+<h3 id="comments">Comments</h3>
+<p>There are three types of regular comments:</p>
+<ol>
+<li><code dir="auto">// text</code> a line comment. The text between <code dir="auto">//</code> and line end is ignored.</li>
+<li><code dir="auto">/* text */</code> block comments. The text between <code dir="auto">/*</code> and <code dir="auto">*/</code> is ignored. It has nesting behaviour, so for every <code dir="auto">/*</code>
+discovered between the first <code dir="auto">/*</code> and the last <code dir="auto">*/</code> a corresponding <code dir="auto">*/</code> must be found.</li>
+</ol>
+<h3 id="doc-comments">Doc comments</h3>
+<ol>
+<li><code dir="auto">/** text **/</code> doc block comment. The text between <code dir="auto">/**</code> and <code dir="auto">**/</code> is optionally parsed using the doc comment
+syntactic grammar. A compiler may choose to read <code dir="auto">/** text **/</code> as a regular comment.</li>
+</ol>
+<h3 id="identifiers">Identifiers</h3>
+<p>Identifiers name program entities such as variables and types. An identifier is a sequence of one or more letters and
+digits.
+The first character in an identifier must be a letter or underscore.</p>
+<p>C3 has three types of identifiers: const identifiers - containing only underscore and upper-case letters,
+type identifiers - starting with an upper case letter followed by at least one underscore letter and regular
+identifiers, starting with a lower case letter.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">IDENTIFIER      ::=  "_"* LC_LETTER ALPHANUM_US*</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">CONST_IDENT     ::=  "_"* UC_LETTER UC_ALPHANUM_US*</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">TYPE_IDENT      ::=  "_"* UC_LETTER "_"* LC_LETTER ALPHANUM_US*</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">CT_IDENT        ::=  "$" IDENTIFIER</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">CT_CONST_IDENT  ::=  "$" CONST_IDENT</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">CT_TYPE_IDENT   ::=  "$" TYPE_IDENT</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">AT_TYPE_IDENT   ::=  "@" TYPE_IDENT</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">PATH_SEGMENT    ::= "_"* LC_LETTER LC_ALPHANUM_US*</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="IDENTIFIER      ::=  &#x22;_&#x22;* LC_LETTER ALPHANUM_US*CONST_IDENT     ::=  &#x22;_&#x22;* UC_LETTER UC_ALPHANUM_US*TYPE_IDENT      ::=  &#x22;_&#x22;* UC_LETTER &#x22;_&#x22;* LC_LETTER ALPHANUM_US*CT_IDENT        ::=  &#x22;$&#x22; IDENTIFIERCT_CONST_IDENT  ::=  &#x22;$&#x22; CONST_IDENTCT_TYPE_IDENT   ::=  &#x22;$&#x22; TYPE_IDENTAT_TYPE_IDENT   ::=  &#x22;@&#x22; TYPE_IDENTPATH_SEGMENT    ::= &#x22;_&#x22;* LC_LETTER LC_ALPHANUM_US*"><div></div></button></div></figure></div>
+<h3 id="keywords">Keywords</h3>
+<p>The following keywords are reserved and may not be used as identifiers:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">asm         any         anyfault</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">assert      attribute   break</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">case        cast        catch</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">const       continue    default</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">defer       def         do</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">else        enum        extern</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">errtype     false       fn</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">generic     if          import</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">inline      macro</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">module      nextcase    null</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">public      return      struct</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">switch      true        try</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">typeid      var         void</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">while</span></div><div class="ec-line">
+</div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">bool        quad        double</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">float       long        ulong</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">int         uint        byte</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">short       ushort      char</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">isz         usz         float16</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">float128</span></div><div class="ec-line">
+</div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">$and        $assert     $case</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">$default    $echo       $else</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">$error      $endfor     $endforeach</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">$endif      $endswitch  $for</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">$foreach    $if         $switch</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">$typef      $vaarg      $vaconst</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">$vacount    $varef      $vatype</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="asm         any         anyfaultassert      attribute   breakcase        cast        catchconst       continue    defaultdefer       def         doelse        enum        externerrtype     false       fngeneric     if          importinline      macromodule      nextcase    nullpublic      return      structswitch      true        trytypeid      var         voidwhilebool        quad        doublefloat       long        ulongint         uint        byteshort       ushort      charisz         usz         float16float128$and        $assert     $case$default    $echo       $else$error      $endfor     $endforeach$endif      $endswitch  $for$foreach    $if         $switch$typef      $vaarg      $vaconst$vacount    $varef      $vatype"><div></div></button></div></figure></div>
+<h3 id="operators-and-punctuation">Operators and punctuation</h3>
+<p>The following character sequences represent operators and punctuation.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">&#x26;       @       ~       |       ^       :</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">,       /       $       .       ;       )</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">>       &#x3C;       #       {       }       -</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">(       )       *       [       ]       %</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">>=      &#x3C;=      +       +=      -=      !</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">?       ?:      &#x26;&#x26;      ??      &#x26;=      |=</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">^=      /=      ..      ==      ({      })</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">[&#x3C;      >]      (&#x3C;      >)      ++      --</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">%=      !=      ||      ::      &#x3C;&#x3C;      >></span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">!!      ...     &#x3C;&#x3C;=     >>=</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="&#x26;       @       ~       |       ^       :,       /       $       .       ;       )>       <       #       {       }       -(       )       *       [       ]       %>=      <=      +       +=      -=      !?       ?:      &#x26;&#x26;      ??      &#x26;=      |=^=      /=      ..      ==      ({      })[<      >]      (<      >)      ++      --%=      !=      ||      ::      <<      >>!!      ...     <<=     >>="><div></div></button></div></figure></div>
+<h3 id="integer-literals">Integer literals</h3>
+<p>An integer literal is a sequence of digits representing an integer constant.
+An optional prefix sets a non-decimal base: 0b or 0B for binary,
+0o, or 0O for octal, and 0x or 0X for hexadecimal.
+A single 0 is considered a decimal zero.
+In hexadecimal literals, letters a through f and A through F represent values 10 through 15.</p>
+<p>For readability, an underscore character _ may appear after a base prefix
+or between successive digits; such underscores do not change the literal’s value.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">INTEGER         ::= DECIMAL_LIT | BINARY_LIT | OCTAL_LIT | HEX_LIT</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">DECIMAL_LIT     ::= '0' | [1-9] ('_'* DECIMAL_DIGITS)?</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">BINARY_LIT      ::= '0' [bB] '_'* BINARY_DIGITS</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">OCTAL_LIT       ::= '0' [oO] '_'* OCTAL_DIGITS</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">HEX_LIT         ::= '0' [xX] '_'* HEX_DIGITS</span></div><div class="ec-line">
+</div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">BINARY_DIGIT    ::= [01]</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">HEX_DIGIT       ::= [0-9a-fA-F]</span></div><div class="ec-line">
+</div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">DECIMAL_DIGITS  ::= DIGIT ('_'* DIGIT)*</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">BINARY_DIGITS   ::= BINARY_DIGIT ('_'* BINARY_DIGIT)*</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">OCTAL_DIGITS    ::= OCTAL_DIGIT ('_'* OCTAL_DIGIT)*</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">HEX_DIGITS      ::= HEX_DIGIT ('_'* HEX_DIGIT)*</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="INTEGER         ::= DECIMAL_LIT | BINARY_LIT | OCTAL_LIT | HEX_LITDECIMAL_LIT     ::= &#x27;0&#x27; | [1-9] (&#x27;_&#x27;* DECIMAL_DIGITS)?BINARY_LIT      ::= &#x27;0&#x27; [bB] &#x27;_&#x27;* BINARY_DIGITSOCTAL_LIT       ::= &#x27;0&#x27; [oO] &#x27;_&#x27;* OCTAL_DIGITSHEX_LIT         ::= &#x27;0&#x27; [xX] &#x27;_&#x27;* HEX_DIGITSBINARY_DIGIT    ::= [01]HEX_DIGIT       ::= [0-9a-fA-F]DECIMAL_DIGITS  ::= DIGIT (&#x27;_&#x27;* DIGIT)*BINARY_DIGITS   ::= BINARY_DIGIT (&#x27;_&#x27;* BINARY_DIGIT)*OCTAL_DIGITS    ::= OCTAL_DIGIT (&#x27;_&#x27;* OCTAL_DIGIT)*HEX_DIGITS      ::= HEX_DIGIT (&#x27;_&#x27;* HEX_DIGIT)*"><div></div></button></div></figure></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">42</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">4_2</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">0_600</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">0o600</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">0O600           // second character is capital letter 'O'</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">0xBadFace</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">0xBad_Face</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">0x_67_7a_2f_cc_40_c6</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">170141183460469231731687303715884105727</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">170_141183_460469_231731_687303_715884_105727</span></div><div class="ec-line">
+</div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">0600            // Invalid, non zero decimal number may not start with 0</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">_42             // an identifier, not an integer literal</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">42_             // invalid: _ must separate successive digits</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">0_xBadFace      // invalid: _ must separate successive digits</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="424_20_6000o6000O600           // second character is capital letter &#x27;O&#x27;0xBadFace0xBad_Face0x_67_7a_2f_cc_40_c6170141183460469231731687303715884105727170_141183_460469_231731_687303_715884_1057270600            // Invalid, non zero decimal number may not start with 0_42             // an identifier, not an integer literal42_             // invalid: _ must separate successive digits0_xBadFace      // invalid: _ must separate successive digits"><div></div></button></div></figure></div>
+<h3 id="floating-point-literals">Floating point literals</h3>
+<p>A floating-point literal is a decimal or hexadecimal representation of a floating-point constant.</p>
+<p>A decimal floating-point literal consists of an integer part (decimal digits), a decimal point,
+a fractional part (decimal digits), and an exponent part (e or E followed by an optional
+sign and decimal digits). One of the integer part or the fractional part may be elided;
+one of the decimal point or the exponent part may be elided. An exponent value exp scales
+the mantissa (integer and fractional part) by powers of 10.</p>
+<p>A hexadecimal floating-point literal consists of a 0x or 0X prefix, an integer part
+(hexadecimal digits), a radix point, a fractional part (hexadecimal digits),
+and an exponent part (p or P followed by an optional sign and decimal digits).
+One of the integer part or the fractional part may be elided; the radix point
+may be elided as well, but the exponent part is required.
+An exponent value exp scales the mantissa (integer and fractional part) by powers of 2.</p>
+<p>For readability, an underscore character _ may appear after a base prefix or between successive digits;
+such underscores do not change the literal value.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">FLOAT_LIT       ::= DEC_FLOAT_LIT | HEX_FLOAT_LIT</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">DEC_FLOAT_LIT   ::= DECIMAL_DIGITS '.' DECIMAL_DIGITS? DEC_EXPONENT?</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">                    | DECIMAL_DIGITS DEC_EXPONENT</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">                    | '.' DECIMAL_DIGITS DEC_EXPONENT?</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">DEC_EXPONENT    ::= [eE] [+-]? DECIMAL_DIGITS</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">HEX_FLOAT_LIT   ::= '0' [xX] HEX_MANTISSA HEX_EXPONENT</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">HEX_MANTISSA    ::= HEX_DIGITS '.' HEX_DIGITS?</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">                    | HEX_DIGITS</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">                    | '.' HEX_DIGITS</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">HEX_EXPONENT    ::= [pP] [+-] DECIMAL_DIGITS</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="FLOAT_LIT       ::= DEC_FLOAT_LIT | HEX_FLOAT_LITDEC_FLOAT_LIT   ::= DECIMAL_DIGITS &#x27;.&#x27; DECIMAL_DIGITS? DEC_EXPONENT?                    | DECIMAL_DIGITS DEC_EXPONENT                    | &#x27;.&#x27; DECIMAL_DIGITS DEC_EXPONENT?DEC_EXPONENT    ::= [eE] [+-]? DECIMAL_DIGITSHEX_FLOAT_LIT   ::= &#x27;0&#x27; [xX] HEX_MANTISSA HEX_EXPONENTHEX_MANTISSA    ::= HEX_DIGITS &#x27;.&#x27; HEX_DIGITS?                    | HEX_DIGITS                    | &#x27;.&#x27; HEX_DIGITSHEX_EXPONENT    ::= [pP] [+-] DECIMAL_DIGITS"><div></div></button></div></figure></div>
+<h3 id="characters">Characters</h3>
+<p>Characters are the fundamental components of strings and character literals.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">CHAR_ELEMENT    ::= [\x20-\x26] | [\x28-\x5B] | [\x5D-\x7F]</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">CHAR_LIT_BYTE   ::= CHAR_ELEMENT | \x5C CHAR_ESCAPE</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">CHAR_ESCAPE     ::= [abefnrtv\'\"\\]</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">                    | 'x' HEX_DIGIT HEX_DIGIT</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">UNICODE_CHAR    ::= unicode_char</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">                    | 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">                    | 'U' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">                          HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="CHAR_ELEMENT    ::= [\x20-\x26] | [\x28-\x5B] | [\x5D-\x7F]CHAR_LIT_BYTE   ::= CHAR_ELEMENT | \x5C CHAR_ESCAPECHAR_ESCAPE     ::= [abefnrtv\&#x27;\&#x22;\\]                    | &#x27;x&#x27; HEX_DIGIT HEX_DIGITUNICODE_CHAR    ::= unicode_char                    | &#x27;u&#x27; HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT                    | &#x27;U&#x27; HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT                          HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT"><div></div></button></div></figure></div>
+<h3 id="backslash-escapes">Backslash escapes</h3>
+<p>The following backslash escapes are available for characters and string literals:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">\0      0x00 zero value</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">\a      0x07 alert/bell</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">\b      0x08 backspace</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">\e      0x1B escape</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">\f      0x0C form feed</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">\n      0x0A newline</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">\r      0x0D carriage return</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">\t      0x09 horizontal tab</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">\v      0x0B vertical tab</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">\\      0x5C backslash</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">\'      0x27 single quote '</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">\"      0x22 double quote "</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">\x      Escapes a single byte hex value</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">\u      Escapes a two byte unicode hex value</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">\U      Escapes a four byte unicode hex value</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="\0      0x00 zero value\a      0x07 alert/bell\b      0x08 backspace\e      0x1B escape\f      0x0C form feed\n      0x0A newline\r      0x0D carriage return\t      0x09 horizontal tab\v      0x0B vertical tab\\      0x5C backslash\&#x27;      0x27 single quote &#x27;\&#x22;      0x22 double quote &#x22;\x      Escapes a single byte hex value\u      Escapes a two byte unicode hex value\U      Escapes a four byte unicode hex value"><div></div></button></div></figure></div>
+<h3 id="string-literals">String literals</h3>
+<p>A string literal represents a string constant obtained from concatenating a sequence of characters.
+String literals are character sequences between double quotes, as in “bar”. Within the quotes,
+any character may appear except newline and unescaped double quote. The text between the
+quotes forms the value of the literal, with backslash escapes interpreted as they are in
+rune literals, with the same restrictions. The two-digit hexadecimal (\xnn) escapes represent
+individual bytes of the resulting string; all other escapes represent the (possibly multibyte)
+UTF-8 encoding of individual characters. Thus inside a string literal <code dir="auto">\xFF</code> represent a single
+byte of value <code dir="auto">0xFF</code> = 255, while <code dir="auto">ÿ</code>, <code dir="auto">\u00FF</code>, <code dir="auto">\U000000FF</code> and <code dir="auto">\xc3\xbf</code> represent the two bytes
+<code dir="auto">0xc3 0xbf</code> of the UTF-8 encoding of character <code dir="auto">U+00FF</code>.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">STRING_LIT      ::= \x22 (CHAR_LIT_BYTE | UNICODE_CHAR)* \x22</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="STRING_LIT      ::= \x22 (CHAR_LIT_BYTE | UNICODE_CHAR)* \x22"><div></div></button></div></figure></div>
+<h4 id="compile-time-string-concatenation">Compile time string concatenation</h4>
+<p>Strings will concatenate if declared in sequence.</p>
+<p>Example:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">String s </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">abc</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">def</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">ghi</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div><div class="ec-line"><span style="--0:#919F9F;--1:#5D6376">// This is equivalent to:</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">String s </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">abcdefghi</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="String s = &#x22;abc&#x22; &#x22;def&#x22; &#x22;ghi&#x22;;// This is equivalent to:String s = &#x22;abcdefghi&#x22;;"><div></div></button></div></figure></div>
+<h3 id="raw-string-literals">Raw string literals</h3>
+<p>Raw string literals are enclosed between “ and consist of the raw UTF8 in the source
+code between the ”`“. A sequence of two ”`” will be interpreted as a single escaped ”`” that does
+not terminate the literal.</p>
+<h4 id="compile-time-concatenation">Compile time concatenation</h4>
+<p>Raw strings will concatenate with other regular strings and raw strings (
+see <a href="#compile-time-string-concatenation">string literal compile time concatenation</a>).</p>
+<h4 id="source-code-pre-filtering">Source code pre-filtering</h4>
+<p>The source code will pre-filter <code dir="auto">\r</code> (<code dir="auto">0x0D</code>) from the source code. This means that it is also implicitly
+filtered out of raw strings.</p>
+<h3 id="character-literals">Character literals</h3>
+<p>A character literal is enclosed in <code dir="auto">'</code> and may either consist of 1, 2, 4, 8, 16 bytes.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">CHARACTER_LIT   ::= "'" (CHAR_LIT_BYTE+) | UNICODE_CHAR "'"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="CHARACTER_LIT   ::= &#x22;&#x27;&#x22; (CHAR_LIT_BYTE+) | UNICODE_CHAR &#x22;&#x27;&#x22;"><div></div></button></div></figure></div>
+<h2 id="types">Types</h2>
+<p>Types consist of built-in types and user-defined types (enums, structs, unions, bitstructs, fault and distinct).</p>
+<h3 id="boolean-types">Boolean types</h3>
+<p><code dir="auto">bool</code> may have the two values <code dir="auto">true</code> and <code dir="auto">false</code>. It holds a single bit of information but is
+stored in a <code dir="auto">char</code> type.</p>
+<h3 id="integer-types">Integer types</h3>
+<p>The built-in integer types:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">char      unsigned 8-bit</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">ichar     signed 8-bit</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">ushort    unsigned 16-bit</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">short     signed 16-bit</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">uint      unsigned 32-bit</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">int       signed 32-bit</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">ulong     unsigned 64-bit</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">long      signed 64-bit</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">uint128   unsigned 128-bit</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">int128    singed 128-bit</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="char      unsigned 8-bitichar     signed 8-bitushort    unsigned 16-bitshort     signed 16-bituint      unsigned 32-bitint       signed 32-bitulong     unsigned 64-bitlong      signed 64-bituint128   unsigned 128-bitint128    singed 128-bit"><div></div></button></div></figure></div>
+<p>In addition, the following type aliases exist:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">uptr      unsigned pointer size</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">iptr      signed pointer size</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">usz       unsigned pointer offset / object size</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">isz       signed pointer offset  / object size</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="uptr      unsigned pointer sizeiptr      signed pointer sizeusz       unsigned pointer offset / object sizeisz       signed pointer offset  / object size"><div></div></button></div></figure></div>
+<h3 id="floating-point-types">Floating point types</h3>
+<p>Built-in floating point types:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">float16   IEEE 16-bit*</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">bfloat16  Brainfloat*</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">float     IEEE 32-bit</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">double    IEEE 64-bit</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">float128  IEEE 128-bit*</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="float16   IEEE 16-bit*bfloat16  Brainfloat*float     IEEE 32-bitdouble    IEEE 64-bitfloat128  IEEE 128-bit*"><div></div></button></div></figure></div>
+<p>(* optionally supported)</p>
+<h3 id="vector-types">Vector types</h3>
+<p>A vector lowers to the platform’s vector types where available. A vector has a base type and a width.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">vector_type        ::= type "[&#x3C;" length ">]"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="vector_type        ::= type &#x22;[<&#x22; length &#x22;>]&#x22;"><div></div></button></div></figure></div>
+<h4 id="vector-base-type">Vector base type</h4>
+<p>The base type of a vector must be boolean, an integer or a floating point type.</p>
+<h4 id="min-width">Min width</h4>
+<p>The vector width must be at least 1.</p>
+<h4 id="element-access">Element access</h4>
+<p>Vector elements are accessed using <code dir="auto">[]</code>. It is possible to take the address of a single element.</p>
+<h4 id="alignment">Alignment</h4>
+<p>Alignment of vectors are platform dependent, but is at least the alignment of its element type.</p>
+<h4 id="vector-operations">Vector operations</h4>
+<p>Vectors support the same arithmetics as its underlying type, and will perform the operation
+element-wise.</p>
+<p>Example:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#C792EA;--1:#8844AE">&#x3C;</span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#C792EA;--1:#8844AE">></span><span style="--0:#D6DEEB;--1:#403F53">] a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> { </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53"> };</span></div><div class="ec-line"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#C792EA;--1:#8844AE">&#x3C;</span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#C792EA;--1:#8844AE">></span><span style="--0:#D6DEEB;--1:#403F53">] b </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> { </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">7</span><span style="--0:#D6DEEB;--1:#403F53"> };</span></div><div class="ec-line">
+</div><div class="ec-line"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#C792EA;--1:#8844AE">&#x3C;</span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#C792EA;--1:#8844AE">></span><span style="--0:#D6DEEB;--1:#403F53">] c </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#7FDBCA;--1:#096E72">*</span><span style="--0:#D6DEEB;--1:#403F53"> b;</span></div><div class="ec-line"><span style="--0:#919F9F;--1:#5D6376">// Equivalent to</span></div><div class="ec-line"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#C792EA;--1:#8844AE">&#x3C;</span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#C792EA;--1:#8844AE">></span><span style="--0:#D6DEEB;--1:#403F53">] c </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> { </span><span style="--0:#C5E478;--1:#3B61B0">a</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#7FDBCA;--1:#096E72">*</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">b</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">], </span><span style="--0:#C5E478;--1:#3B61B0">a</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">] </span><span style="--0:#7FDBCA;--1:#096E72">*</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">b</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">] };</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="int[<2>] a = { 1, 3 };int[<2>] b = { 2, 7 };int[<2>] c = a * b;// Equivalent toint[<2>] c = { a[0] * b[0], a[1] * b[1] };"><div></div></button></div></figure></div>
+<h3 id="array-types">Array types</h3>
+<p>An array has the alignment of its elements. An array must have at least one element.</p>
+<h3 id="slice-types">Slice types</h3>
+<p>The slice consist of a pointer, followed by an usz length, having the alignment of pointers.</p>
+<h3 id="pointer-types">Pointer types</h3>
+<p>A pointer is the address to memory.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">pointer_type       ::= type "*"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="pointer_type       ::= type &#x22;*&#x22;"><div></div></button></div></figure></div>
+<h4 id="pointee-type">Pointee type</h4>
+<p>The type of the memory pointed to is the <strong>pointee type</strong>. It may be any runtime type.</p>
+<h4 id="iptr-and-uptr">iptr and uptr</h4>
+<p>A pointer may be losslessly cast to an <code dir="auto">iptr</code> or <code dir="auto">uptr</code>. An <code dir="auto">iptr</code> or <code dir="auto">uptr</code> may be cast to a pointer of any type.</p>
+<h4 id="the-wildcard-pointer-void">The wildcard pointer void*</h4>
+<p>The <code dir="auto">void*</code> may implicitly cast into any other pointer type. The <code dir="auto">void*</code>
+[implicitly casts into any other pointer.</p>
+<p>A void* pointer may never be dereferenced.</p>
+<h4 id="pointer-arithmetic-on-void">Pointer arithmetic on void*</h4>
+<p>Performing pointer arithmetics on void* will assume that the element size is 1. This includes
+pointer arithmetics using subscripting.</p>
+<h4 id="subscripting">Subscripting</h4>
+<p>Subscripting a pointer is equal to performing pointer arithmetics using the index, followed by a deref.
+Subscripts on pointers may be negative and will never do bounds checks.</p>
+<h4 id="deref">Deref</h4>
+<p>Dereferencing a pointer will return the value in the memory location interpreted as the <strong>pointee type</strong>.</p>
+<h4 id=""></h4>
+<h3 id="struct-types">Struct types</h3>
+<p>A struct may not have zero members.</p>
+<h4 id="alignment-1">Alignment</h4>
+<p>A non-packed struct has the alignment of the member that has the highest alignment. A packed struct
+has alignment 1. See <a href="#attributes">align attribute</a> for details on changing the alignment.</p>
+<h3 id="union-types">Union types</h3>
+<p>A union may not have zero members.</p>
+<h4 id="alignment-2">Alignment</h4>
+<p>A union has the alignment of the member that has the highest alignment. See <a href="#attributes">align attribute</a> for
+details on changing the alignment.</p>
+<h3 id="fault-types">Fault types</h3>
+<p>A fault is an extensible enum which can be used to create an Excuse for an empty <a href="/language-common/optionals/essential/#what-is-an-optional">optional</a>.</p>
+<h4 id="alignment-3">Alignment</h4>
+<p>A fault type has the same alignment as a pointer. See <a href="#attributes">align attribute</a> for details on changing the
+alignment.</p>
+<h3 id="enum-types">Enum types</h3>
+<h3 id="function-types">Function types</h3>
+<h3 id="typeid-type">Typeid type</h3>
+<p>The typeid is a pointer sized value which uniquely identifies a type.</p>
+<h3 id="any-type">Any type</h3>
+<p>The <code dir="auto">any</code> is a fat pointer (2 pointers wide) holding a pointer to a value and its corresponding <a href="#typeid-type">typeid</a>.
+It cannot be dereferenced.</p>
+<h4 id="fields">Fields</h4>
+<p><code dir="auto">.ptr</code> returns a <code dir="auto">void*</code> pointer to the underlying value <code dir="auto">.type</code> returns the <a href="#typeid-type">typeid</a>
+of the underlying value.</p>
+<h4 id="switching-over-any">Switching over <code dir="auto">any</code></h4>
+<p>Switching over an <code dir="auto">any</code> value creates an <a href="#any-switch">any switch</a>.</p>
+<h3 id="anyfault-type">Anyfault type</h3>
+<h2 id="declarations-and-scope">Declarations and scope</h2>
+<h2 id="expressions">Expressions</h2>
+<h3 id="assignment-expression">Assignment expression</h3>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">assignment_expr    ::= ct_type_assign | unary_expr assignment_op expr</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">ct_type_assign     ::= ct_type_ident "=" type</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">assignment_op      ::= "=" | "+=" | "-=" | "*=" | "/=" | "%=" | "&#x3C;&#x3C;=" | ">>=" | "&#x26;=" | "^=" | "|="</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="assignment_expr    ::= ct_type_assign | unary_expr assignment_op exprct_type_assign     ::= ct_type_ident &#x22;=&#x22; typeassignment_op      ::= &#x22;=&#x22; | &#x22;+=&#x22; | &#x22;-=&#x22; | &#x22;*=&#x22; | &#x22;/=&#x22; | &#x22;%=&#x22; | &#x22;<<=&#x22; | &#x22;>>=&#x22; | &#x22;&#x26;=&#x22; | &#x22;^=&#x22; | &#x22;|=&#x22;"><div></div></button></div></figure></div>
+<h4 id="type-assign">Type assign</h4>
+<p>This assigns a new type to a compile time type variable. The value of the expression is the type assigned.</p>
+<h4 id="combined-assign">Combined assign</h4>
+<p>All assignment operations except for ”=” are combined assign operation. They first perform the operation indicated
+by the leftmost character(s) in the operator (e.g <code dir="auto">+</code> for <code dir="auto">+=</code>, <code dir="auto">&#x3C;&#x3C;</code> for <code dir="auto">&#x3C;&#x3C;=</code> etc) with the lhs and the rhs.
+The result is then assigned to the left hand side. The result of the operation is the new value of the left
+hand side.</p>
+<h4 id="implicit-conversion">Implicit conversion</h4>
+<p>If the left hand side is a pointer and the operation is ”+=” or ”-=” an attempt to implicitly convert to
+isz/usz will be tried.</p>
+<p>For all other types and operations, <strong>an implicit conversion</strong> of rhs to the type of lhs will be tried.</p>
+<h3 id="ternary-elvis-and-or-else-expressions">Ternary, elvis and or-else expressions</h3>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">ternary_group_expr ::= suffix_group_expr | ternary_expr | elvis_expr | orelse_expr</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">ternary_expr       ::= or_expr "?" expr ":" ternary_group_expr</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">elvis_expr         ::= suffix_expr "?:" ternary_group_expr</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">orelse_expr        ::= suffix_expr "??" ternary_group_expr</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="ternary_group_expr ::= suffix_group_expr | ternary_expr | elvis_expr | orelse_exprternary_expr       ::= or_expr &#x22;?&#x22; expr &#x22;:&#x22; ternary_group_exprelvis_expr         ::= suffix_expr &#x22;?:&#x22; ternary_group_exprorelse_expr        ::= suffix_expr &#x22;??&#x22; ternary_group_expr"><div></div></button></div></figure></div>
+<h4 id="ternary-evaluation">Ternary evaluation</h4>
+<p>The most left-hand expression is evaluated to a boolean. If it is true, the value of the middle
+expression is returned, otherwise the last expression is returned.</p>
+<p>Only the most left-hand expression and the returned expressions are evaluated.</p>
+<p>The middle and last expression are implicitly converted to their <strong>unified type</strong>.</p>
+<p>The resulting type is the <strong>unified type</strong>.</p>
+<h4 id="elvis-evaluation">Elvis evaluation</h4>
+<p>Lhs and rhs are implicitly converted to their <strong>unified type</strong>.</p>
+<p>The lhs is evaluated, it is then converted to a boolean, if the result it true, return the lhs value
+before its boolean conversion. Otherwise return the right hand side.</p>
+<p>The right hand side is only evaluated if the lhs evaluates to false.</p>
+<p>The resulting type is the <strong>unified type</strong>.</p>
+<h4 id="orelse-evaluation">Orelse evaluation</h4>
+<p>The lhs must be optional. The non-optional type for lhs and rhs are calculated.
+The <strong>unified type</strong> of the result is calculated. Lhs are converted to the unified type
+preserving their optionality.</p>
+<p>At runtime, lhs is evaluated. If it evaluates to an optional, rhs is returned instead.</p>
+<p>Rhs is only evaluated if lhs evaluates to an optional.</p>
+<p>The resulting type of the orelse is the post conversion type of the rhs.</p>
+<h3 id="suffix-expression">Suffix expression</h3>
+<p>Suffix expressions convert a fault to an optional.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">suffix_group_exp   ::= or_group_expr | suffix_expr</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">suffix_expr        ::= or_group_expr "?" "!"?</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="suffix_group_exp   ::= or_group_expr | suffix_exprsuffix_expr        ::= or_group_expr &#x22;?&#x22; &#x22;!&#x22;?"><div></div></button></div></figure></div>
+<h4 id="effect-of">Effect of ”?”</h4>
+<p>The ”?” will convert the expression into an optional. The left hand side must be a fault type.
+If an optional ”!” follows, this optional is immediately returned, as if by a <code dir="auto">return &#x3C;expr>?</code> statement.</p>
+<h4 id="type-of-the-expression">Type of the expression</h4>
+<p>The type is a <strong>wildcard optional</strong>. If ”!” is added, it is a <strong>wildcard</strong> type.</p>
+<h3 id="rethrow-expression">Rethrow expression</h3>
+<p>If the expression is optional, implicitly return with the optional value.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">rethrow_expr       ::= expr "!"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="rethrow_expr       ::= expr &#x22;!&#x22;"><div></div></button></div></figure></div>
+<h4 id="the-expression-to-rethrow">The expression to rethrow</h4>
+<p>The expression must have an optional type, otherwise this is a compile time error.</p>
+<h4 id="type">Type</h4>
+<p>The type of “rethrow” is the inner expr type without optional.</p>
+<h3 id="relational-expression">Relational expression</h3>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">rel_group_expr     ::= add_group_expr | relational_expr</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">relational_expr    ::= rel_group_expr relational_op add_group_expr</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">relational_op      ::= "&#x3C;" | ">" | "&#x3C;=" | ">="</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="rel_group_expr     ::= add_group_expr | relational_exprrelational_expr    ::= rel_group_expr relational_op add_group_exprrelational_op      ::= &#x22;<&#x22; | &#x22;>&#x22; | &#x22;<=&#x22; | &#x22;>=&#x22;"><div></div></button></div></figure></div>
+<p>TODO</p>
+<h3 id="and-expression">And expression</h3>
+<p>This binary expression evaluates the lhs, and if the result is <code dir="auto">true</code> evaluates the rhs. The
+result is true if both lhs and rhs are true.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">and_group_expr     ::= rel_group_expr | and_expr</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">and_expr           ::= and_group_expr "&#x26;&#x26;" rel_group_expr</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="and_group_expr     ::= rel_group_expr | and_exprand_expr           ::= and_group_expr &#x22;&#x26;&#x26;&#x22; rel_group_expr"><div></div></button></div></figure></div>
+<h4 id="type-1">Type</h4>
+<p>The type of the and-expression is <code dir="auto">bool</code>.</p>
+<h3 id="or-expression">Or expression</h3>
+<p>This binary expression evaluates the lhs, and if the result is <code dir="auto">false</code> evaluates the rhs. The
+result is true if lhs or rhs is true.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">or_group_expr      ::= and_group_expr | or_expr</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">or_expr            ::= or_group_expr "||" and_group_expr</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="or_group_expr      ::= and_group_expr | or_expror_expr            ::= or_group_expr &#x22;||&#x22; and_group_expr"><div></div></button></div></figure></div>
+<h4 id="constant-folded-arithmetics">Constant folded arithmetics</h4>
+<p>Constant folding will happen for constant integers and floating. Vectors operations will
+not be constant-folded.</p>
+<p>Constant folded operations are: multiplication, division, addition, subtraction,
+bit shifts, bit negation, bitwise and, or and xor, comparison, logical and/or,
+and negation.</p>
+<h4 id="type-2">Type</h4>
+<p>The type of the or-expression is <code dir="auto">bool</code>.</p>
+<h3 id="casts">Casts</h3>
+<h3 id="pointer-casts">Pointer casts</h3>
+<h4 id="integer-to-pointer-cast">Integer to pointer cast</h4>
+<p>Any integer of pointer size or larger may be explicitly cast to a pointer. An integer to pointer cast is considered
+non-constant, except in the special case where the integer == 0. In that case, the result is constant <code dir="auto">null</code>.</p>
+<p>Example:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">byte a = 1;</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">int* b = (int*)a; // Invalid, pointer type is > 8 bits.</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">int* c = (int*)1; // Valid, but runtime value.</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">int* d = (int*)0; // Valid and constant value.</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="byte a = 1;int* b = (int*)a; // Invalid, pointer type is > 8 bits.int* c = (int*)1; // Valid, but runtime value.int* d = (int*)0; // Valid and constant value."><div></div></button></div></figure></div>
+<h4 id="pointer-to-integer-cast">Pointer to integer cast</h4>
+<p>A pointer may be cast to any integer, truncating the pointer value if the size of the pointer is larger than the pointer
+size. A pointer to integer cast is considered non-constant, except in the special case of a null pointer, where it is
+equal to the integer value 0.</p>
+<p>Example:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">fn void test() { ... }</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">def VoidFunc = fn void test();</span></div><div class="ec-line">
+</div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">VoidFunc a = &#x26;test;</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">int b = (int)null;</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">int c = (int)a; // Invalid, not constant</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">int d = (int)((int*)1); // Invalid, not constant</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="fn void test() { ... }def VoidFunc = fn void test();VoidFunc a = &#x26;test;int b = (int)null;int c = (int)a; // Invalid, not constantint d = (int)((int*)1); // Invalid, not constant"><div></div></button></div></figure></div>
+<h3 id="subscript-operator">Subscript operator</h3>
+<p>The subscript operator may take as its left side a pointer, array or slice. The index may be of any integer
+type. TODO
+<em>NOTE</em> The subscript operator is not symmetrical as in C. For example in C3 <code dir="auto">array[n] = 33</code> is allowed, but
+not <code dir="auto">n[array] = 33</code>. This is a change from C.</p>
+<h3 id="operands">Operands</h3>
+<h3 id="compound-literals">Compound Literals</h3>
+<p>Compound literals have the format</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">compound_literal   ::= TYPE_IDENTIFIER '(' initializer_list ')'</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">initializer_list   ::= '{' (initializer_param (',' initializer_param)* ','?)? '}'</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">initializer_param  ::= expression | designator '=' expression</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">designator         ::= array_designator | range_designator | field_designator</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">array_designator   ::= '[' expression ']'</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">range_designator   ::= '[' range_expression ']'</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">field_designator   ::= IDENTIFIER</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">range_expression   ::= (range_index)? '..' (range_index)?</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">range_index        ::= expression | '^' expression</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="compound_literal   ::= TYPE_IDENTIFIER &#x27;(&#x27; initializer_list &#x27;)&#x27;initializer_list   ::= &#x27;{&#x27; (initializer_param (&#x27;,&#x27; initializer_param)* &#x27;,&#x27;?)? &#x27;}&#x27;initializer_param  ::= expression | designator &#x27;=&#x27; expressiondesignator         ::= array_designator | range_designator | field_designatorarray_designator   ::= &#x27;[&#x27; expression &#x27;]&#x27;range_designator   ::= &#x27;[&#x27; range_expression &#x27;]&#x27;field_designator   ::= IDENTIFIERrange_expression   ::= (range_index)? &#x27;..&#x27; (range_index)?range_index        ::= expression | &#x27;^&#x27; expression"><div></div></button></div></figure></div>
+<p>Taking the address of a compound literal will yield a pointer to stack allocated temporary.</p>
+<h3 id="function-calls">Function calls</h3>
+<h4 id="function-argument-resolution">Function argument resolution</h4>
+<p>Call slots are in order: regular slots, vaarg slot, name-only slots.</p>
+<p>No regular slots may appear after the vaarg slot, however there may be named parameters with default values
+after the vaarg slot if it’s not a raw vaarg.</p>
+<p>These “name-only” slots need to have a parameter name and a default value, and may only be called as named
+arguments.</p>
+<p>Named arguments may never be <em>splat</em> expressions.</p>
+<ol>
+<li>Step through all the arguments, resolve the named arguments and determine if there are any regular arguments.</li>
+<li>If there are regular arguments, then named arguments may only be in name-only slots, otherwise it is an error.</li>
+<li>If there are named arguments in the regular slots, all slots not provided arguments must have default values.</li>
+<li>Proceed with evaluation of arguments from left to right in call invocation order.</li>
+<li>Regular arguments are placed in the regular slots from left to right.</li>
+<li>If a regular argument is a <em>splat</em> expression, evaluate it <em>without inference</em> and determine if it is an array, vector, untyped list or slice with a known size, otherwise it is an error.</li>
+<li>A regular argument <em>splat</em> will be expanded into as many slots as its length, this may expand into vaarg arguments.</li>
+<li>In the vaarg slot, <em>splatting</em> a slice will <em>forward</em> it.</li>
+<li>In the vaarg slot, <em>splatting</em> an array, vector or untyped list will expand its elements as if they were provided as arguments.</li>
+<li>A named argument may never appear more than once.</li>
+<li>The vaarg slot may never be accessed using named arguments.</li>
+</ol>
+<h4 id="varargs">Varargs</h4>
+<p>For varargs, a <code dir="auto">bool</code> or <em>any integer</em> smaller than what the C ABI specifies for the c <code dir="auto">int</code> type is cast to <code dir="auto">int</code>. Any
+float smaller than a double is cast to <code dir="auto">double</code>. Compile time floats will be cast to double. Compile time integers will
+be cast to c <code dir="auto">int</code> type.</p>
+<h2 id="statements">Statements</h2>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">stmt               ::= compound_stmt | non_compound_stmt</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">non_compound_stmt  ::= assert_stmt | if_stmt | while_stmt | do_stmt | foreach_stmt | foreach_r_stmt</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">                       | for_stmt | return_stmt | break_stmt | continue_stmt | var_stmt</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">                       | declaration_stmt | defer_stmt | nextcase_stmt | asm_block_stmt</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">                       | ct_echo_stmt | ct_error_stmt | ct_assert_stmt | ct_if_stmt | ct_switch_stmt</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">                       | ct_for_stmt | ct_foreach_stmt | expr_stmt</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="stmt               ::= compound_stmt | non_compound_stmtnon_compound_stmt  ::= assert_stmt | if_stmt | while_stmt | do_stmt | foreach_stmt | foreach_r_stmt                       | for_stmt | return_stmt | break_stmt | continue_stmt | var_stmt                       | declaration_stmt | defer_stmt | nextcase_stmt | asm_block_stmt                       | ct_echo_stmt | ct_error_stmt | ct_assert_stmt | ct_if_stmt | ct_switch_stmt                       | ct_for_stmt | ct_foreach_stmt | expr_stmt"><div></div></button></div></figure></div>
+<h3 id="asm-block-statement">Asm block statement</h3>
+<p>An asm block is either a string expression or a brace enclosed list of asm statements.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">asm_block_stmt      ::= "asm" ("(" constant_expr ")" | "{" asm_stmt* "}")</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">asm_stmt            ::= asm_instr asm_exprs? ";"</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">asm_instr           ::= ("int" | IDENTIFIER) ("." IDENTIFIER)</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">asm_expr            ::= CT_IDENT | CT_CONST_IDENT | "&#x26;"? IDENTIFIER | CONST_IDENT | FLOAT_LITERAL</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">                        | INTEGER | "(" expr ")" | "[" asm_addr "]"</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">asm_addr            ::= asm_expr (additive_op asm_expr asm_addr_trail?)?</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">asm_addr_trail      ::= "*" INTEGER (additive_op INTEGER)? | (shift_op | additive_op) INTEGER</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="asm_block_stmt      ::= &#x22;asm&#x22; (&#x22;(&#x22; constant_expr &#x22;)&#x22; | &#x22;{&#x22; asm_stmt* &#x22;}&#x22;)asm_stmt            ::= asm_instr asm_exprs? &#x22;;&#x22;asm_instr           ::= (&#x22;int&#x22; | IDENTIFIER) (&#x22;.&#x22; IDENTIFIER)asm_expr            ::= CT_IDENT | CT_CONST_IDENT | &#x22;&#x26;&#x22;? IDENTIFIER | CONST_IDENT | FLOAT_LITERAL                        | INTEGER | &#x22;(&#x22; expr &#x22;)&#x22; | &#x22;[&#x22; asm_addr &#x22;]&#x22;asm_addr            ::= asm_expr (additive_op asm_expr asm_addr_trail?)?asm_addr_trail      ::= &#x22;*&#x22; INTEGER (additive_op INTEGER)? | (shift_op | additive_op) INTEGER"><div></div></button></div></figure></div>
+<p>TODO</p>
+<h3 id="assert-statement">Assert statement</h3>
+<p>The assert statement will evaluate the expression and call the panic function if it evaluates
+to false.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">assert_stmt        ::= "assert" "(" expr ("," assert_message)? ")" ";"</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">assert_message     ::= constant_expr ("," expr)*</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="assert_stmt        ::= &#x22;assert&#x22; &#x22;(&#x22; expr (&#x22;,&#x22; assert_message)? &#x22;)&#x22; &#x22;;&#x22;assert_message     ::= constant_expr (&#x22;,&#x22; expr)*"><div></div></button></div></figure></div>
+<h4 id="conditional-inclusion">Conditional inclusion</h4>
+<p><code dir="auto">assert</code> statements are only included in “safe” builds. They may turn into <strong>assume directives</strong> for
+the compiler on “fast” builds.</p>
+<h4 id="assert-message">Assert message</h4>
+<p>The assert message is optional. It can be followed by an arbitrary number of expressions, in which case
+the message is understood to be a format string, and the following arguments are passed as values to the
+format function.</p>
+<p>The assert message must be a compile time constant. There are no restriction on the format argument expressions.</p>
+<h4 id="panic-function">Panic function</h4>
+<p>If the assert message has no format arguments or no assert message is included,
+then the regular panic function is called. If it has format arguments then <code dir="auto">panicf</code> is called instead.</p>
+<p>In the case the <code dir="auto">panicf</code> function does not exist (for example, compiling without the standard library),
+then the format and the format arguments will be ignored and the <code dir="auto">assert</code> will be treated
+as if no assert message was available.</p>
+<h3 id="break-statement">Break statement</h3>
+<p>A break statement exits a <code dir="auto">while</code>, <code dir="auto">for</code>, <code dir="auto">do</code>, <code dir="auto">foreach</code> or <code dir="auto">switch</code> scope. A labelled break
+may also exit a labelled <code dir="auto">if</code>.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">break_stmt         ::= "break" label? ";"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="break_stmt         ::= &#x22;break&#x22; label? &#x22;;&#x22;"><div></div></button></div></figure></div>
+<h4 id="break-labels">Break labels</h4>
+<p>If a break has a label, then it will instead exit an outer scope with the label.</p>
+<h4 id="unreachable-code">Unreachable code</h4>
+<p>Any statement following break in the same scope is considered unreachable.</p>
+<h3 id="compile-time-echo-statement">Compile time echo statement</h3>
+<p>During parsing, the compiler will output the text in the statement when it is semantically checked.
+The statement will be turned into a NOP statement after checking.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">ct_echo_stmt       ::= "$echo" constant_expr ";"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="ct_echo_stmt       ::= &#x22;$echo&#x22; constant_expr &#x22;;&#x22;"><div></div></button></div></figure></div>
+<h4 id="the-message">The message</h4>
+<p>The message must be a compile time constant string.</p>
+<h3 id="compile-time-assert-statement">Compile time assert statement</h3>
+<p>During parsing, the compiler will check the compile time expression
+and create a compile time error with the optional message. After
+evaluation, the <code dir="auto">$assert</code> becomes a <strong>NOP</strong> statement.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">ct_assert_stmt     ::= "$assert" constant_expr (":" constant_expr) ";"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="ct_assert_stmt     ::= &#x22;$assert&#x22; constant_expr (&#x22;:&#x22; constant_expr) &#x22;;&#x22;"><div></div></button></div></figure></div>
+<h4 id="evaluated-expression">Evaluated expression</h4>
+<p>The checked expression must evaluate to a boolean compile time constant.</p>
+<h4 id="error-message">Error message</h4>
+<p>The second parameter, which is optional, must evaluate to a constant string.</p>
+<h3 id="compile-time-error-statement">Compile time error statement</h3>
+<p>During parsing, when semantically checked this statement will output
+a compile time error with the message given.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">ct_error_stmt      ::= "$error" constant_expr ";"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="ct_error_stmt      ::= &#x22;$error&#x22; constant_expr &#x22;;&#x22;"><div></div></button></div></figure></div>
+<h4 id="error-message-1">Error message</h4>
+<p>The parameter must evaluate to a constant string.</p>
+<h3 id="compile-time-if-statement">Compile time if statement</h3>
+<p>If the cond expression is true, the then-branch is processed by the compiler. If it
+evaluates to false, the else-branch is processed if it exists.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">ct_if_stmt         ::= "$if" constant_expr ":" stmt* ("$else" stmt*)? "$endif"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="ct_if_stmt         ::= &#x22;$if&#x22; constant_expr &#x22;:&#x22; stmt* (&#x22;$else&#x22; stmt*)? &#x22;$endif&#x22;"><div></div></button></div></figure></div>
+<h4 id="cond-expression">Cond expression</h4>
+<p>The cond expression must be possible to evaluate to true or false at compile time.</p>
+<h4 id="scopes">Scopes</h4>
+<p>The “then” and “else” branches will add a compile time scope that is exited when reaching <code dir="auto">$endif</code>.
+It adds no runtime scope.</p>
+<h4 id="evaluation">Evaluation</h4>
+<p>Statements in the branch not picked will not be semantically checked.</p>
+<h3 id="compile-time-switch-statement">Compile time switch statement</h3>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">ct_switch_stmt     ::= "$switch" ("(" ct_expr_or_type ")")? ct_case_stmt+ "$endswitch"</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">ct_case_stmt       ::= ("$default" | "$case" ct_expr_or_type) ":" stmt*</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="ct_switch_stmt     ::= &#x22;$switch&#x22; (&#x22;(&#x22; ct_expr_or_type &#x22;)&#x22;)? ct_case_stmt+ &#x22;$endswitch&#x22;ct_case_stmt       ::= (&#x22;$default&#x22; | &#x22;$case&#x22; ct_expr_or_type) &#x22;:&#x22; stmt*"><div></div></button></div></figure></div>
+<h4 id="no-cond-expression-switch">No cond expression switch</h4>
+<p>If the cond expression is missing, evaluation will go through each case until one case expression
+evaluates to true.</p>
+<h4 id="type-expressions">Type expressions</h4>
+<p>If a cond expression is a type, then all case statement expressions must be types as well.</p>
+<h4 id="ranged-cases">Ranged cases</h4>
+<p>Compile time switch does not support ranged cases.</p>
+<h4 id="fallthrough">Fallthrough</h4>
+<p>If a case clause has no statements, then when executing the case, rather than exiting the switch,
+the next case clause immediately following it will be used. If that one should also be missing statements,
+the procedure will be repeated until a case clause with statements is encountered,
+or the end of the switch is reached.</p>
+<h4 id="break-and-nextcase">Break and nextcase</h4>
+<p>Compile time switches do not support <code dir="auto">break</code> nor <code dir="auto">nextcase</code>.</p>
+<h4 id="evaluation-of-statements">Evaluation of statements</h4>
+<p>Only the case which is first matched has its statements processed by the compiler. All other statements
+are ignored and will not be semantically checked.</p>
+<h3 id="continue-statement">Continue statement</h3>
+<p>A continue statement jumps to the cond expression of a <code dir="auto">while</code>, <code dir="auto">for</code>, <code dir="auto">do</code> or <code dir="auto">foreach</code></p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">continue_stmt      ::= "continue" label? ";"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="continue_stmt      ::= &#x22;continue&#x22; label? &#x22;;&#x22;"><div></div></button></div></figure></div>
+<h4 id="continue-labels">Continue labels</h4>
+<p>If a <code dir="auto">continue</code> has a label, then it will jump to the cond of the while/for/do in the outer scope
+with the corresponding label.</p>
+<h4 id="unreachable-code-1">Unreachable code</h4>
+<p>Any statement following <code dir="auto">continue</code> in the same scope is considered unreachable.</p>
+<h3 id="declaration-statement">Declaration statement</h3>
+<p>A declaration statement adds a new runtime or compile time variable to the current scope. It is available after the
+declaration statement.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">declaration_stmt   ::= const_declaration | local_decl_storage? optional_type decls_after_type ";"</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">local_decl_storage ::= "tlocal" | "static"</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">decls_after_type   ::= local_decl_after_type ("," local_decl_after_type)*</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">decl_after_type    ::= CT_IDENT ("=" constant_expr)? | IDENTIFIER opt_attributes ("=" expr)?</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="declaration_stmt   ::= const_declaration | local_decl_storage? optional_type decls_after_type &#x22;;&#x22;local_decl_storage ::= &#x22;tlocal&#x22; | &#x22;static&#x22;decls_after_type   ::= local_decl_after_type (&#x22;,&#x22; local_decl_after_type)*decl_after_type    ::= CT_IDENT (&#x22;=&#x22; constant_expr)? | IDENTIFIER opt_attributes (&#x22;=&#x22; expr)?"><div></div></button></div></figure></div>
+<h4 id="thread-local-storage">Thread local storage</h4>
+<p>Using <code dir="auto">tlocal</code> allocates the runtime variable as a <strong>thread local</strong> variable. In effect this is the same as declaring
+the variable as a global <code dir="auto">tlocal</code> variable, but the visibility is limited to the function. <code dir="auto">tlocal</code> may not be
+combined with <code dir="auto">static</code>.</p>
+<p>The initializer for a <code dir="auto">tlocal</code> variable must be a valid global init expression.</p>
+<h4 id="static-storage">Static storage</h4>
+<p>Using <code dir="auto">static</code> allocates the runtime variable as a function <strong>global</strong> variable. In effect this is the same as declaring
+a global, but visibility is limited to the function. <code dir="auto">static</code> may not be combined with <code dir="auto">tlocal</code>.</p>
+<p>The initializer for a <code dir="auto">static</code> variable must be a valid global init expression.</p>
+<h4 id="scopes-1">Scopes</h4>
+<p>Runtime variables are added to the runtime scope, compile time variables to the compile time scope. See **var statements
+**.</p>
+<h4 id="multiple-declarations">Multiple declarations</h4>
+<p>If more than one variable is declared, no init expressions are allowed for any of the variables.</p>
+<h4 id="no-init-expression">No init expression</h4>
+<p>If no init expression is provided, the variable is <strong>zero initialized</strong>.</p>
+<h4 id="opt-out-of-zero-initialization">Opt-out of zero initialization</h4>
+<p>Using the @noinit attribute opts out of <strong>zero initialization</strong>.</p>
+<h4 id="self-referencing-initialization">Self referencing initialization</h4>
+<p>An init expression may refer to the <strong>address</strong> of the same variable that is declared, but not the <strong>value</strong> of the
+variable.</p>
+<p>Example:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#C792EA;--1:#8844AE">void</span><span style="--0:#7FDBCA;--1:#096E72">*</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#7FDBCA;--1:#096E72">&#x26;</span><span style="--0:#D6DEEB;--1:#403F53">a;</span><span style="--0:#919F9F;--1:#5D6376">  // Valid</span></div><div class="ec-line"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#7FDBCA;--1:#096E72">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // Invalid</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="void* a = &#x26;a;  // Validint a = a + 1; // Invalid"><div></div></button></div></figure></div>
+<h3 id="defer-statement">Defer statement</h3>
+<p>The defer statements are executed at (runtime) scope exit, whether through <code dir="auto">return</code>, <code dir="auto">break</code>, <code dir="auto">continue</code> or rethrow.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">defer_stmt         ::= "defer" ("try" | "catch")? stmt</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="defer_stmt         ::= &#x22;defer&#x22; (&#x22;try&#x22; | &#x22;catch&#x22;)? stmt"><div></div></button></div></figure></div>
+<h4 id="defer-in-defer">Defer in defer</h4>
+<p>The defer body (statement) may not be a defer statement. However, if the body is a compound statement then
+this may have any number of defer statements.</p>
+<h4 id="static-and-tlocal-variables-in-defer">Static and tlocal variables in defer</h4>
+<p>Static and tlocal variables are allowed in a defer statement. Only a single variable is instantiated regardless of
+the number of inlining locations.</p>
+<h4 id="defer-and-return">Defer and return</h4>
+<p>If the <code dir="auto">return</code> has an expression, then it is evaluated before the defer statements (due to exit from the current
+function scope),
+are executed.</p>
+<p>Example:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">defer a</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div><div class="ec-line"><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> a;</span></div><div class="ec-line"><span style="--0:#919F9F;--1:#5D6376">// This is equivalent to</span></div><div class="ec-line"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div><div class="ec-line"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> temp </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> a;</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">a</span><span style="--0:#C792EA;--1:#8844AE">++</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div><div class="ec-line"><span style="--0:#C792EA;--1:#8844AE">return</span><span style="--0:#D6DEEB;--1:#403F53"> temp;</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="int a = 0;defer a++;return a;// This is equivalent toint a = 0;int temp = a;a++;return temp;"><div></div></button></div></figure></div>
+<h4 id="defer-and-jump-statements">Defer and jump statements</h4>
+<p>A defer body may not contain a <code dir="auto">break</code>, <code dir="auto">continue</code>, <code dir="auto">return</code> or rethrow that would exit the statement.</p>
+<h4 id="defer-execution">Defer execution</h4>
+<p>Defer statements are executed in the reverse order of their declaration, starting from the last declared
+defer statement.</p>
+<h4 id="defer-try">Defer try</h4>
+<p>A <code dir="auto">defer try</code> type of defer will only execute if the scope is left through normal fallthrough, <code dir="auto">break</code>,
+<code dir="auto">continue</code> or a <code dir="auto">return</code> with a result.</p>
+<p>It will not execute if the exit is through a rethrow or a <code dir="auto">return</code> with an optional value.</p>
+<h4 id="defer-catch">Defer catch</h4>
+<p>A <code dir="auto">defer catch</code> type of defer will only execute if the scope is left through a rethrow or a <code dir="auto">return</code> with an optional
+value</p>
+<p>It will not execute if the exit is a normal fallthrough, <code dir="auto">break</code>, <code dir="auto">continue</code> or a <code dir="auto">return</code> with a result.</p>
+<h4 id="non-regular-returns---longjmp-panic-and-other-errors">Non-regular returns - longjmp, panic and other errors</h4>
+<p>Defers will not execute when doing <code dir="auto">longjmp</code> terminating through a <code dir="auto">panic</code> or other error. They
+are only invoked on regular scope exits.</p>
+<h3 id="expr-statement">Expr statement</h3>
+<p>An expression statement evaluates an expression.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">expr_stmt          ::= expr ";"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="expr_stmt          ::= expr &#x22;;&#x22;"><div></div></button></div></figure></div>
+<h4 id="no-discard">No discard</h4>
+<p>If the expression is a function or macro call either returning an optional <em>or</em> annotated <code dir="auto">@nodiscard</code>, then
+the expression is a compile time error. A function or macro returning an optional can use the <code dir="auto">@maydiscard</code>
+attribute to suppress this error.</p>
+<h3 id="if-statement">If statement</h3>
+<p>An if statement will evaluate the cond expression, then execute the first statement (the “then clause”) in the if-body
+if it evaluates to “true”, otherwise execute the else clause. If no else clause exists, then the
+next statement is executed.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">if_stmt            ::= "if" (label ":")? "(" cond_expr ")" if_body</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">if_body            ::= non_compound_stmt | compound_stmt else_clause? | "{" switch_body "}"</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">else_clause        ::= "else" (if_stmt | compound_stmt)</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="if_stmt            ::= &#x22;if&#x22; (label &#x22;:&#x22;)? &#x22;(&#x22; cond_expr &#x22;)&#x22; if_bodyif_body            ::= non_compound_stmt | compound_stmt else_clause? | &#x22;{&#x22; switch_body &#x22;}&#x22;else_clause        ::= &#x22;else&#x22; (if_stmt | compound_stmt)"><div></div></button></div></figure></div>
+<h4 id="scopes-2">Scopes</h4>
+<p>Both the “then” clause and the else clause open new scopes, even if they are non-compound statements.
+The cond expression scope is valid until the exit of the entire statement, so any declarations in the
+cond expression are available both in then and else clauses. Declarations in the “then” clause is not available
+in the else clause and vice versa.</p>
+<h4 id="special-parsing-of-the-then-clause">Special parsing of the “then” clause</h4>
+<p>If the then-clause isn’t a compound statement, then it must follow on the same row as the cond expression.
+It may not appear on a consecutive row.</p>
+<h4 id="break">Break</h4>
+<p>It is possible to use labelled break to break out of an if statement. Note that an unlabelled <code dir="auto">break</code> may not
+be used.</p>
+<h4 id="if-try">If-try</h4>
+<p>The cond expression may be a try-unwrap chain. In this case, the unwrapped variables are
+scoped to the “then” clause only.</p>
+<h4 id="if-catch">If-catch</h4>
+<p>The cond expression may be a catch-unwrap. The unwrap is scoped to the “then” clause only.
+If one or more variables are in the catch, then the “else” clause have these variables
+implicitly unwrapped.</p>
+<p>Example:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">int! a = foo();</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">int! b = foo();</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">if (catch a, b)</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">{</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">    // Do something</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">}</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">else</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">{</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">    int x = a + b; // Valid, a and b are implicitly unwrapped.</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">}</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="int! a = foo();int! b = foo();if (catch a, b){    // Do something}else{    int x = a + b; // Valid, a and b are implicitly unwrapped.}"><div></div></button></div></figure></div>
+<h4 id="if-catch-implicit-unwrap">If-catch implicit unwrap</h4>
+<p>If an if-catch’s “then”-clause will jump out of the outer scope in all code paths and
+the catch is on one or more variables, then this variable(s) will be implicitly unwrapped in the outer scope
+after the if-statement.</p>
+<p>Example:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">int! a = foo();</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">if (catch a)</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">{</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">  return;</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">}</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">int x = a; // Valid, a is implicitly unwrapped.</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="int! a = foo();if (catch a){  return;}int x = a; // Valid, a is implicitly unwrapped."><div></div></button></div></figure></div>
+<h3 id="nextcase-statement">Nextcase statement</h3>
+<p>Nextcase will jump to another <code dir="auto">switch</code> case.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">nextcase_stmt      ::= "nextcase" ((label ":")? (expr | "default"))? ";"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="nextcase_stmt      ::= &#x22;nextcase&#x22; ((label &#x22;:&#x22;)? (expr | &#x22;default&#x22;))? &#x22;;&#x22;"><div></div></button></div></figure></div>
+<h4 id="labels">Labels</h4>
+<p>When a nextcase has a label, the jump is to the switch in an outer scope with the corresponding label.</p>
+<h4 id="no-expression-jumps">No expression jumps</h4>
+<p>A <code dir="auto">nextcase</code> without any expression jumps to the next case clause in the current switch. It is not possible
+to use no expression <code dir="auto">nextcase</code> with labels.</p>
+<h4 id="jumps-to-default">Jumps to default</h4>
+<p>Using <code dir="auto">default</code> jumps to the default clause of a switch.</p>
+<h4 id="missing-case">Missing case</h4>
+<p>If the switch has constant case values, and the nextcase expression is constant, then the value of
+the expression must match a case clause. Not matching a case is a compile time error.</p>
+<p>If one or more cases are non-constant and/or the nextcase expression is non-constant, then no compile time check is
+made.</p>
+<h4 id="variable-expression">Variable expression</h4>
+<p>If the nextcase has a non-constant expression, or the cases are not all constant, then first the nextcase expression
+is evaluated. Next, execution will proceed <em>as if</em> the switch was invoked again, but with the nextcase expression as the
+switch cond expression. See <strong>switch statement</strong>.</p>
+<p>If the switch does not have a cond expression, nextcase with an expression is not allowed.</p>
+<h4 id="unreachable-code-2">Unreachable code</h4>
+<p>Any statement in the same scope after a <code dir="auto">nextcase</code> are considered <strong>unreachable</strong>.</p>
+<h3 id="switch-statement">Switch statement</h3>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">switch_stmt        ::= "switch" (label ":")? ("(" cond_expr ")")? switch body</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">switch_body        ::= "{" case_clause* "}"</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">case_clause        ::= default_stmt | case_stmt</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">default_stmt       ::= "default" ":" stmt*</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">case_stmt          ::= "case" label? expr (".." expr)? ":" stmt*</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="switch_stmt        ::= &#x22;switch&#x22; (label &#x22;:&#x22;)? (&#x22;(&#x22; cond_expr &#x22;)&#x22;)? switch bodyswitch_body        ::= &#x22;{&#x22; case_clause* &#x22;}&#x22;case_clause        ::= default_stmt | case_stmtdefault_stmt       ::= &#x22;default&#x22; &#x22;:&#x22; stmt*case_stmt          ::= &#x22;case&#x22; label? expr (&#x22;..&#x22; expr)? &#x22;:&#x22; stmt*"><div></div></button></div></figure></div>
+<h4 id="regular-switch">Regular switch</h4>
+<p>If the cond expression exists and all case statements have constant expression, then first the
+cond expression is evaluated, next the case corresponding to the expression’s value will be jumped to
+and the statement will be executed. After reaching the end of the statements and a new case clause <em>or</em> the
+end of the switch body, the execution will jump to the first statement after the switch.</p>
+<h4 id="if-switch">If-switch</h4>
+<p>If the cond expression is missing or the case statements are non-constant expressions, then each case clause will
+be evaluated in order after the cond expression has been evaluated (if it exists):</p>
+<ol>
+<li>If a cond expression exists, calculate the case expression and execute the case if it is matching the
+cond expression. A default statement has no expression and will always be considered matching the cond expression
+reached.</li>
+<li>If no con expression exists, calculate the case expression and execute the case if the expression evaluates to
+“true” when implicitly converted to boolean. A default statement will always be considered having the “true” result.</li>
+</ol>
+<h4 id="any-switch">Any-switch</h4>
+<p>If the cond expression is an <code dir="auto">any</code> type, the switch is handled as if switching was done over the <code dir="auto">type</code>
+field of the <code dir="auto">any</code>. This field has the type of <a href="#typeid-type">typeid</a>, and the cases follows the rules
+for <a href="#switching-over-typeid">switching over typeid</a>.</p>
+<p>If the cond expression is a variable, then this variable is implicitly converted to a pointer with
+the pointee type given by the case statement.</p>
+<p>Example:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">any a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">abc</span><span style="--0:#D6DEEB;--1:#403F53">();</span></div><div class="ec-line"><span style="--0:#C792EA;--1:#8844AE">switch</span><span style="--0:#D6DEEB;--1:#403F53"> (a)</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">{</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    </span><span style="--0:#C792EA;--1:#8844AE">case</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">:</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> b </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#7FDBCA;--1:#096E72">*</span><span style="--0:#D6DEEB;--1:#403F53">a;</span><span style="--0:#919F9F;--1:#5D6376">   // a is int*</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    </span><span style="--0:#C792EA;--1:#8844AE">case</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">float</span><span style="--0:#D6DEEB;--1:#403F53">:</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        </span><span style="--0:#C792EA;--1:#8844AE">float</span><span style="--0:#D6DEEB;--1:#403F53"> z </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#7FDBCA;--1:#096E72">*</span><span style="--0:#D6DEEB;--1:#403F53">a;</span><span style="--0:#919F9F;--1:#5D6376"> // a is float*</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    </span><span style="--0:#C792EA;--1:#8844AE">case</span><span style="--0:#D6DEEB;--1:#403F53"> Bar:</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        Bar f </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#7FDBCA;--1:#096E72">*</span><span style="--0:#D6DEEB;--1:#403F53">a;</span><span style="--0:#919F9F;--1:#5D6376">   // a is Bar*</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">    </span><span style="--0:#C792EA;--1:#8844AE">default</span><span style="--0:#D6DEEB;--1:#403F53">:</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">        </span><span style="--0:#919F9F;--1:#5D6376">// a is not unwrapped</span></div><div class="ec-line"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="any a = abc();switch (a){    case int:        int b = *a;   // a is int*    case float:        float z = *a; // a is float*    case Bar:        Bar f = *a;   // a is Bar*    default:        // a is not unwrapped}"><div></div></button></div></figure></div>
+<h4 id="ranged-cases-1">Ranged cases</h4>
+<p>Cases may be ranged. The start and end of the range must both be constant integer values. The start must
+be less or equal to the end value. Using non-integers or non-constant values is a compile time error.</p>
+<h4 id="fallthrough-1">Fallthrough</h4>
+<p>If a case clause has no statements, then when executing the case, rather than exiting the switch, the next case clause
+immediately following it will be executed. If that one should also be missing statement, the procedure
+will be repeated until a case clause with statements is encountered (and executed), or the end of the switch is reached.</p>
+<h4 id="exhaustive-switch">Exhaustive switch</h4>
+<p>If a switch case has a default clause <em>or</em> it is switching over an enum and there exists a case for each enum value
+then the switch is exhaustive.</p>
+<h4 id="break-1">Break</h4>
+<p>If an unlabelled break, or a break with the switch’s label is encountered,
+then the execution will jump out of the switch and proceed directly after the end of the switch body.</p>
+<h4 id="unreachable-code-3">Unreachable code</h4>
+<p>If a switch is exhaustive and all case clauses end with a jump instruction, containing no break statement out
+of the current switch, then the code directly following the switch will be considered <strong>unreachable</strong>.</p>
+<h4 id="switching-over-typeid">Switching over typeid</h4>
+<p>If the switch cond expression is a typeid, then case declarations may use only the type name after the case,
+which will be interpreted as having an implicit <code dir="auto">.typeid</code>. Example: <code dir="auto">case int:</code> will be interpreted as if
+written <code dir="auto">case int.typeid</code>.</p>
+<h4 id="nextcase-without-expression">Nextcase without expression</h4>
+<p>Without a value <code dir="auto">nextcase</code> will jump to the beginning of the next case clause. It is not allowed to
+put <code dir="auto">nextcase</code> without an expression if there are no following case clauses.</p>
+<h4 id="nextcase-with-expression">Nextcase with expression</h4>
+<p>Nextcase with an expression will evaluate the expression and then jump <em>as if</em> the switch was entered with
+the cond expression corresponding to the value of the nextcase expression. Nextcase with an expression cannot
+be used on a switch without a cond expression.</p>
+<h4 id="do-statement">Do statement</h4>
+<p>The do statement first evaluates its body (inner statement), then evaluates the cond expression.
+If the cond expression evaluates to true, jumps back into the body and repeats the process.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">do_stmt            ::= "do" label? compound_stmt ("while" "(" cond_expr ")")? ";"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="do_stmt            ::= &#x22;do&#x22; label? compound_stmt (&#x22;while&#x22; &#x22;(&#x22; cond_expr &#x22;)&#x22;)? &#x22;;&#x22;"><div></div></button></div></figure></div>
+<h4 id="unreachable-code-4">Unreachable code</h4>
+<p>The statement after a <code dir="auto">do</code> is considered unreachable if the cond expression cannot ever be false
+and there is no <code dir="auto">break</code> out of the do.</p>
+<h4 id="break-2">Break</h4>
+<p><code dir="auto">break</code> will exit the do with execution continuing on the following statement.</p>
+<h4 id="continue">Continue</h4>
+<p><code dir="auto">continue</code> will jump directly to the evaluation of the cond, as if the end of the statement had been reached.</p>
+<h4 id="do-block">Do block</h4>
+<p>If no <code dir="auto">while</code> part exists, it will only execute the block once, as if it ended with <code dir="auto">while (false)</code>, this is
+called a “do block”</p>
+<h3 id="for-statement">For statement</h3>
+<p>The <code dir="auto">for</code> statement will perform the (optional) init expression. The cond expression will then be tested. If
+it evaluates to <code dir="auto">true</code> then the body will execute, followed by the incr expression. After execution will
+jump back to the cond expression and execution will repeat until the cond expression evaluates to <code dir="auto">false</code>.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">for_stmt           ::= "for" label? "(" init_expr ";" cond_expr? ";" incr_expr ")" stmt</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">init_expr          ::= decl_expr_list?</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">incr_expr          ::= expr_list?</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="for_stmt           ::= &#x22;for&#x22; label? &#x22;(&#x22; init_expr &#x22;;&#x22; cond_expr? &#x22;;&#x22; incr_expr &#x22;)&#x22; stmtinit_expr          ::= decl_expr_list?incr_expr          ::= expr_list?"><div></div></button></div></figure></div>
+<h4 id="init-expression">Init expression</h4>
+<p>The init expression is only executed once before the rest of the for loop is executed.
+Any declarations in the init expression will be in scope until the for loop exits.</p>
+<p>The init expression may optionally be omitted.</p>
+<h4 id="incr-expression">Incr expression</h4>
+<p>The incr expression is evaluated before evaluating the cond expr every time except for the first one.</p>
+<p>The incr expression may optionally be omitted.</p>
+<h4 id="cond-expression-1">Cond expression</h4>
+<p>The cond expression is evaluated every loop. Any declaration in the cond expression is scoped to the
+current loop, i.e. it will be reinitialized at the start of every loop.</p>
+<p>The cond expression may optionally be omitted. This is equivalent to setting the cond expression to
+always return <code dir="auto">true</code>.</p>
+<h4 id="unreachable-code-5">Unreachable code</h4>
+<p>The statement after a <code dir="auto">for</code> is considered unreachable if the cond expression cannot ever be false, or is
+omitted and there is no <code dir="auto">break</code> out of the loop.</p>
+<h4 id="break-3">Break</h4>
+<p><code dir="auto">break</code> will exit the <code dir="auto">for</code> with execution continuing on the following statement after the <code dir="auto">for</code>.</p>
+<h4 id="continue-1">Continue</h4>
+<p><code dir="auto">continue</code> will jump directly to the evaluation of the cond, as if the end of the statement had been reached.</p>
+<h4 id="equivalence-of-while-and-for">Equivalence of <code dir="auto">while</code> and <code dir="auto">for</code></h4>
+<p>A <code dir="auto">while</code> loop is functionally equivalent to a <code dir="auto">for</code> loop without init and incr expressions.</p>
+<h3 id="foreach-and-foreach_r-statements">Foreach and foreach_r statements</h3>
+<p>The <code dir="auto">foreach</code> statement will loop over a sequence of values. The <code dir="auto">foreach_r</code> is equivalent to
+<code dir="auto">foreach</code> but the order of traversal is reversed.
+<code dir="auto">foreach</code> starts with element <code dir="auto">0</code> and proceeds step by step to element <code dir="auto">len - 1</code>.
+<code dir="auto">foreach_r</code> starts starts with element <code dir="auto">len - 1</code> and proceeds step by step to element <code dir="auto">0</code>.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">foreach_stmt       ::= "foreach" label? "(" foreach_vars ":" expr ")" stmt</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">foreach_r_stmt     ::= "foreach_r" label? "(" foreach_vars ":" expr ")" stmt</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">foreach_vars       ::= (foreach_index ",")? foreach_var</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">foreach_var        ::= type? "&#x26;"? IDENTIFIER</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="foreach_stmt       ::= &#x22;foreach&#x22; label? &#x22;(&#x22; foreach_vars &#x22;:&#x22; expr &#x22;)&#x22; stmtforeach_r_stmt     ::= &#x22;foreach_r&#x22; label? &#x22;(&#x22; foreach_vars &#x22;:&#x22; expr &#x22;)&#x22; stmtforeach_vars       ::= (foreach_index &#x22;,&#x22;)? foreach_varforeach_var        ::= type? &#x22;&#x26;&#x22;? IDENTIFIER"><div></div></button></div></figure></div>
+<h4 id="break-4">Break</h4>
+<p><code dir="auto">break</code> will exit the foreach statement with execution continuing on the following statement after.</p>
+<h4 id="continue-2">Continue</h4>
+<p><code dir="auto">continue</code> will cause the next iteration to commence, as if the end of the statement had been reached.</p>
+<h4 id="iteration-by-value-or-reference">Iteration by value or reference</h4>
+<p>Normally iteration are by value. Each element is copied into the foreach variable. If <code dir="auto">&#x26;</code>
+is added before the variable name, the elements will be retrieved by reference instead, and consequently
+the type of the variable will be a pointer to the element type instead.</p>
+<h4 id="foreach-variable">Foreach variable</h4>
+<p>The foreach variable may omit the type. In this case the type is inferred. If the type differs from the element
+type, then an implicit conversion will be attempted. Failing this is a compile time error.</p>
+<h4 id="foreach-index">Foreach index</h4>
+<p>If a variable name is added before the foreach variable, then this variable will receive the index of the element.
+For <code dir="auto">foreach_r</code> this mean that the first value of the index will be <code dir="auto">len - 1</code>.</p>
+<p>The index type defaults to <code dir="auto">usz</code>.</p>
+<p>If an optional type is added to the index, the index will be converted to this type. The type must be an
+integer type. The conversion happens as if the conversion was a direct cast. If the actual index value
+would exceed the maximum representable value of the type, this does not affect the actual iteration, but
+may cause the index value to take on an incorrect value due to the cast.</p>
+<p>For example, if the optional index type is <code dir="auto">char</code> and the actual index is <code dir="auto">256</code>, then the index value would show <code dir="auto">0</code>
+as <code dir="auto">(char)256</code> evaluates to zero.</p>
+<p>Modifying the index variable will not affect the foreach iteration.</p>
+<h4 id="foreach-support">Foreach support</h4>
+<p>Foreach is natively supported for any slice, array, pointer to an array, vector and pointer to a vector.
+These types support both iteration by value and reference.</p>
+<p>In addition, a type with <strong>operator overload</strong> for <code dir="auto">len</code> and <code dir="auto">[]</code> will support iteration by value,
+and a type with <strong>operator overload</strong> for <code dir="auto">len</code> and <code dir="auto">&#x26;[]</code> will support iteration by reference.</p>
+<h3 id="return-statement">Return statement</h3>
+<p>The return statement evaluates its expression (if present) and returns the result.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">return_stmt        ::= "return" expr? ";"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="return_stmt        ::= &#x22;return&#x22; expr? &#x22;;&#x22;"><div></div></button></div></figure></div>
+<h4 id="jumps-in-return-statements">Jumps in return statements</h4>
+<p>If the expression should in itself cause an implicit return, for example due to the rethrow operator <code dir="auto">!</code>, then this
+jump will happen before the return.</p>
+<p>An example:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">return foo()!;</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">// is equivalent to:</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">int temp = foo()!;</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">return temp;</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="return foo()!;// is equivalent to:int temp = foo()!;return temp;"><div></div></button></div></figure></div>
+<h4 id="return-from-expression-blocks">Return from expression blocks</h4>
+<p>A <code dir="auto">return</code> from an expression block only returns out of the expression block, it never returns from the
+expression block’s enclosing scope.</p>
+<h4 id="empty-returns">Empty returns</h4>
+<p>An empty return is equivalent to a return with a void type. Consequently constructs like <code dir="auto">foo(); return;</code>
+and <code dir="auto">return (void)foo();</code>
+are equivalent.</p>
+<h4 id="unreachable-code-6">Unreachable code</h4>
+<p>Any statement directly following a return in the same scope are considered unreachable.</p>
+<h3 id="while-statement">While statement</h3>
+<p>The while statement evaluates the cond expression and executes the statement if it evaluates to true.
+After this the cond expression is evaluated again and the process is repeated until cond expression returns false.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">while_stmt         ::= "while" label? "(" cond_expr ")" stmt</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="while_stmt         ::= &#x22;while&#x22; label? &#x22;(&#x22; cond_expr &#x22;)&#x22; stmt"><div></div></button></div></figure></div>
+<h4 id="unreachable-code-7">Unreachable code</h4>
+<p>The statement after a while is considered unreachable if the cond expression cannot ever be false
+and there is no <code dir="auto">break</code> out of the while.</p>
+<h4 id="break-5">Break</h4>
+<p><code dir="auto">break</code> will exit the while with execution continuing on the following statement.</p>
+<h4 id="continue-3">Continue</h4>
+<p><code dir="auto">continue</code> will jump directly to the evaluation of the cond, as if the end of the statement had been reached.</p>
+<h3 id="var-statement">Var statement</h3>
+<p>A var statement declares a variable with inferred type, or a compile time type variable. It can be used both
+for runtime and compile time variables. The use for runtime variables is limited to macros.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">var_stmt           ::= "var" IDENTIFIER | CT_IDENT | CT_TYPE_IDENT ("=" expr)? ";"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="var_stmt           ::= &#x22;var&#x22; IDENTIFIER | CT_IDENT | CT_TYPE_IDENT (&#x22;=&#x22; expr)? &#x22;;&#x22;"><div></div></button></div></figure></div>
+<h4 id="inferring-type">Inferring type</h4>
+<p>In the case of a runtime variable, the type is inferred from the expression. Not providing an expression
+is a compile time error. The expression must resolve to a runtime type.</p>
+<p>For compile time variables, the expression is optional. The expression may resolve to a runtime or compile time type.</p>
+<h4 id="scope">Scope</h4>
+<p>Runtime variables will follow the runtime scopes, identical to behaviour in a declaration statement. The compile
+time variables will follow the compile time scopes which are delimited by scoping compile time
+statements (<code dir="auto">$if</code>, <code dir="auto">$switch</code>,
+<code dir="auto">$foreach</code> and <code dir="auto">$for</code>).</p>
+<h2 id="attributes">Attributes</h2>
+<p>Attributes are modifiers attached to modules, variables, type declarations etc.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>name</th><th>used with</th></tr></thead><tbody><tr><td>@align</td><td>fn, const, variables, user-defined types, struct member</td></tr><tr><td>@benchmark</td><td>module, fn</td></tr><tr><td>@bigendian</td><td>bitstruct only</td></tr><tr><td>@builtin</td><td>macro, fn, global, constant</td></tr><tr><td>@callconv</td><td>fn, call</td></tr><tr><td>@deprecated</td><td>fn, macro, interface, variables, constants, user-defined types, struct member</td></tr><tr><td>@dynamic</td><td>fn</td></tr><tr><td>@export</td><td>fn, globals, constants, struct, union, enum, fault</td></tr><tr><td>@extern</td><td>fn, globals, constants, user-defined types</td></tr><tr><td>@if</td><td>all except local variables and calls</td></tr><tr><td>@inline</td><td>fn, call</td></tr><tr><td>@interface</td><td>fn</td></tr><tr><td>@littleendian</td><td>bitstruct only</td></tr><tr><td>@local</td><td>module, fn, macro, globals, constants, user-defined types, attributes and aliases</td></tr><tr><td>@maydiscard</td><td>fn, macro</td></tr><tr><td>@naked</td><td>fn</td></tr><tr><td>@nodiscard</td><td>fn, macro</td></tr><tr><td>@noinit</td><td>variables</td></tr><tr><td>@noinline</td><td>fn, call</td></tr><tr><td>@noreturn</td><td>fn, macro</td></tr><tr><td>@nostrip</td><td>fn, globals, constants, struct, union, enum, fault</td></tr><tr><td>@obfuscate</td><td>enum, fault</td></tr><tr><td>@operator</td><td>fn, macro</td></tr><tr><td>@optional</td><td>interface methods</td></tr><tr><td>@overlap</td><td>bitstruct only</td></tr><tr><td>@packed</td><td>struct, union</td></tr><tr><td>@priority</td><td>initializer/finalizer</td></tr><tr><td>@private</td><td>module, fn, macro, globals, constants, user-defined types, attributes and aliases</td></tr><tr><td>@public</td><td>module, fn, macro, globals, constants, user-defined types, attributes and aliases</td></tr><tr><td>@pure</td><td>call</td></tr><tr><td>@reflect</td><td>fn, globals, constants, user-defined types</td></tr><tr><td>@section</td><td>fn, globals, constants</td></tr><tr><td>@test</td><td>module, fn</td></tr><tr><td>@unused</td><td>all except call and initializer/finalizers</td></tr><tr><td>@used</td><td>all except call and initializer/finalizers</td></tr><tr><td>@weak</td><td>fn, globals, constants</td></tr><tr><td>@winmain</td><td>fn</td></tr></tbody></table>
+<h4 id="deprecated">@deprecated</h4>
+<p>Takes an optional constant string.
+If the node is in use, print the deprecation and add the optional string if present.</p>
+<h4 id="optional">@optional</h4>
+<p>Marks an <em>interface</em> method as optional, and so does not need to be implemented by
+a conforming type.</p>
+<h4 id="winmain">@winmain</h4>
+<p>Marks a <code dir="auto">main</code> function as a win32 winmain function, which is the entrypoint for a windowed
+application on Windows. This allows the main function to take a different set of
+arguments than usual.</p>
+<h4 id="callconv">@callconv</h4>
+<p><code dir="auto">@callconv</code> can be used with a function or a call. It takes a constant string which is either “veccall”, “stdcall” or “cdecl”. If more than one <code dir="auto">@callconv</code>
+is applied to a function or call, the last one takes precedence.</p>
+<h3 id="user-defined-attributes">User defined attributes</h3>
+<p>User defined attributes group a list of attributes.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">attribute_decl     ::= "def" AT_TYPE_IDENT ("(" parameters ")")? attribute* "=" "{" attribute* "}" ";"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="attribute_decl     ::= &#x22;def&#x22; AT_TYPE_IDENT (&#x22;(&#x22; parameters &#x22;)&#x22;)? attribute* &#x22;=&#x22; &#x22;{&#x22; attribute* &#x22;}&#x22; &#x22;;&#x22;"><div></div></button></div></figure></div>
+<h4 id="empty-list-of-attributes">Empty list of attributes</h4>
+<p>The list of attributes may be empty.</p>
+<h4 id="parameter-arguments">Parameter arguments</h4>
+<p>Arguments given to user defined attributes will be passed on to the attributes in the list.</p>
+<h4 id="expansion">Expansion</h4>
+<p>When a user defined attribute is encountered, its list of attributes is
+copied and appended instead of the user defined attribute. Any argument passed to
+the attribute is evaluated and passed as a constant by the name of the parameter
+to the evaluation of the attribute parameters in the list.</p>
+<h4 id="nesting">Nesting</h4>
+<p>A user defined attribute can contain other user defined attributes. The definition
+may not be cyclic.</p>
+<h2 id="methods">Methods</h2>
+<h4 id="operator-overloading">Operator overloading</h4>
+<p><code dir="auto">@operator</code> overloads may only be added to user defined types (distinct, unions, struct, enum and fault).</p>
+<h5 id="indexing-operator">Indexing operator ([])</h5>
+<p>This requires a return type and a method parameter, which is the index.</p>
+<h5 id="reference-indexing-operator">Reference indexing operator (&#x26;[])</h5>
+<p>This requires a return type and a method parameter, which is the index. If <code dir="auto">[]</code> is implemented,
+it should return a pointer to <code dir="auto">[]</code>.</p>
+<h5 id="assigning-index-operator">Assigning index operator (=[])</h5>
+<p>This has a void return type, and index should match that of <code dir="auto">[]</code> and <code dir="auto">&#x26;[]</code>. Value should match that
+of <code dir="auto">[]</code> and be the pointee of the result of <code dir="auto">&#x26;[]</code>.</p>
+<h5 id="len-operator-len">Len operator (len)</h5>
+<p>This must have an integer return type.</p>
+<h4 id="dynamic-methods">Dynamic methods</h4>
+<p><code dir="auto">@dynamic</code> may be used on methods for any type except <code dir="auto">any</code> and interfaces.</p>
+<h2 id="modules">Modules</h2>
+<p>Module paths are hierarchal, with each sub-path appended with ’::’ + the name:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">path               ::= PATH_SEGMENT ("::" PATH_SEGMENT)</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="path               ::= PATH_SEGMENT (&#x22;::&#x22; PATH_SEGMENT)"><div></div></button></div></figure></div>
+<p>Each module declaration starts its own <strong>module section</strong>. All imports and all <code dir="auto">@local</code> declarations
+are only visible in the current <strong>module section</strong>.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre tabindex="0"><code><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">module_section     ::= "module" path opt_generic_params? attributes? ";"</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">generic_param      ::= TYPE_IDENT | CONST_IDENT</span></div><div class="ec-line"><span style="--0:#d6deeb;--1:#403f53">opt_generic_params ::= "(&#x3C;" generic_param ("," generic_param)* ">)"</span></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="module_section     ::= &#x22;module&#x22; path opt_generic_params? attributes? &#x22;;&#x22;generic_param      ::= TYPE_IDENT | CONST_IDENTopt_generic_params ::= &#x22;(<&#x22; generic_param (&#x22;,&#x22; generic_param)* &#x22;>)&#x22;"><div></div></button></div></figure></div>
+<p>Any visibility attribute defined in a <strong>module section</strong> will be the default visibility in all
+declarations in the section.</p>
+<p>If the <code dir="auto">@benchmark</code> attribute is applied to the <strong>module section</strong> then all function declarations
+will implicitly have the <code dir="auto">@benchmark</code> attribute.</p>
+<p>If the <code dir="auto">@test</code> attribute is applied to the <strong>module section</strong> then all function declarations
+will implicitly have the <code dir="auto">@test</code> attribute.</p> </div> <footer class="astro-3yyafb3n"> <div class="meta sl-flex astro-3yyafb3n">   </div> <div class="pagination-links astro-u2l5gyhi" dir="ltr"> <a href="/implementation-details/grammar/" rel="prev" class="astro-u2l5gyhi"> <svg aria-hidden="true" class="astro-u2l5gyhi astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg>  <span class="astro-u2l5gyhi"> Previous <br class="astro-u2l5gyhi"> <span class="link-title astro-u2l5gyhi">Grammar</span> </span> </a>  </div>  </footer>  </div> </div>   </main> </div> </div>  </div> </div>  </body></html>
