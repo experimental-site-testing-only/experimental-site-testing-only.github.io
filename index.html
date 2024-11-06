@@ -1,4 +1,4 @@
-<!DOCTYPE html><head><meta lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta name="og:title" content="C3"><meta name="og:description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta content="/logo.svg" property="og:image"><meta content="#4355ec" data-react-helmet="true" name="theme-color"><meta name="og:image" content="/logo.svg"><link rel="icon" href="/ico.svg" type="image/x-icon"><title>C3 | An evolution, not a revolution</title><link rel="stylesheet" href="/_astro/hoisted.Dpa-p9ho.css"><script type="module">function o(e){return function(t){if(localStorage[e]!=null&&localStorage[e]!=null&&localStorage[e]!=""&&t.target.id!=localStorage[e]){let s=document.getElementById(localStorage[e]);s.classList.remove("bg-blue-500"),s.classList.add("bg-gray-100"),s.classList.remove("dark:bg-blue-600"),s.classList.add("dark:bg-gray-900"),s.classList.remove("text-white"),s.classList.add("text-black"),s.classList.add("dark:text-white"),s.classList.add("dark:hover:text-blue-500"),s.classList.add("hover:text-blue-500");let L=document.getElementById(localStorage[e]+"_desktop_code"),d=document.getElementById(localStorage[e]+"_mobile_code");L.classList.remove("xl:flex"),d.classList.remove("flex"),d.classList.remove("xl:hidden"),d.classList.add("hidden")}t.target.classList.remove("bg-gray-100"),t.target.classList.remove("dark:bg-gray-900"),t.target.classList.add("dark:bg-blue-600"),t.target.classList.add("bg-blue-500"),t.target.classList.remove("text-black"),t.target.classList.remove("dark:hover:text-blue-500"),t.target.classList.remove("hover:text-blue-500"),t.target.classList.add("dark:text-white"),t.target.classList.add("text-white"),localStorage[e]=t.target.id;let l=document.getElementById(`${localStorage[e]}_desktop_code`),a=document.getElementById(`${localStorage[e]}_mobile_code`);l.classList.add("xl:flex"),l.classList.add("hidden"),a.classList.remove("hidden"),a.classList.add("flex"),a.classList.add("xl:hidden")}}const r="ergonomics_and_safety_selected_tab_id",c=["Optionals","Defer","Slices","Contracts"],u=o(r);c.forEach(e=>{document.getElementById(e).addEventListener("mousedown",u)});localStorage[r]=c[0];const i="perf_selected_tab_id",n=["Temp Allocator","SIMD","Inline ASM","Threads"],b=o(i);n.forEach(e=>{document.getElementById(e).addEventListener("mousedown",b)});localStorage[i]=n[0];const g="perf_selected_tab_id",m=["Containers","Strings","Cross Platform","Platform Access"],f=o(g);m.forEach(e=>{document.getElementById(e).addEventListener("mousedown",f)});localStorage[g]=m[0];
+<!DOCTYPE html><head><meta lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta name="og:title" content="C3"><meta name="og:description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta content="/logo.svg" property="og:image"><meta content="#4355ec" data-react-helmet="true" name="theme-color"><meta name="og:image" content="/logo.svg"><link rel="icon" href="/ico.svg" type="image/x-icon"><title>C3 | An evolution, not a revolution</title><link rel="stylesheet" href="/_astro/hoisted.CQ654IFe.css"><script type="module">function o(e){return function(t){if(localStorage[e]!=null&&localStorage[e]!=null&&localStorage[e]!=""&&t.target.id!=localStorage[e]){let s=document.getElementById(localStorage[e]);s.classList.remove("bg-blue-500"),s.classList.add("bg-gray-100"),s.classList.remove("dark:bg-blue-600"),s.classList.add("dark:bg-gray-900"),s.classList.remove("text-white"),s.classList.add("text-black"),s.classList.add("dark:text-white"),s.classList.add("dark:hover:text-blue-500"),s.classList.add("hover:text-blue-500");let L=document.getElementById(localStorage[e]+"_desktop_code"),d=document.getElementById(localStorage[e]+"_mobile_code");L.classList.remove("xl:flex"),d.classList.remove("flex"),d.classList.remove("xl:hidden"),d.classList.add("hidden")}t.target.classList.remove("bg-gray-100"),t.target.classList.remove("dark:bg-gray-900"),t.target.classList.add("dark:bg-blue-600"),t.target.classList.add("bg-blue-500"),t.target.classList.remove("text-black"),t.target.classList.remove("dark:hover:text-blue-500"),t.target.classList.remove("hover:text-blue-500"),t.target.classList.add("dark:text-white"),t.target.classList.add("text-white"),localStorage[e]=t.target.id;let l=document.getElementById(`${localStorage[e]}_desktop_code`),a=document.getElementById(`${localStorage[e]}_mobile_code`);l.classList.add("xl:flex"),l.classList.add("hidden"),a.classList.remove("hidden"),a.classList.add("flex"),a.classList.add("xl:hidden")}}const r="ergonomics_and_safety_selected_tab_id",c=["Optionals","Defer","Slices","Contracts"],u=o(r);c.forEach(e=>{document.getElementById(e).addEventListener("mousedown",u)});localStorage[r]=c[0];const i="perf_selected_tab_id",n=["Temp Allocator","SIMD","Inline ASM","Threads"],b=o(i);n.forEach(e=>{document.getElementById(e).addEventListener("mousedown",b)});localStorage[i]=n[0];const g="perf_selected_tab_id",m=["Containers","Strings","Cross Platform","Platform Access"],f=o(g);m.forEach(e=>{document.getElementById(e).addEventListener("mousedown",f)});localStorage[g]=m[0];
 </script>
 <script type="module" src="/_astro/page.7qqag-5g.js"></script></head> <!-- <div class="
     grid
@@ -448,15 +448,59 @@ Flexibly choose how you manage safety, as each feature
     md:grid-cols-4
     md:grid-cols-1
 
-    gap-2
+    gap-4
     
     dark:text-gray-200
-    md:mx-0"> <!-- Code container --> <div class="xl:h-[32rem] h-[37rem]
+    md:mx-0"> <!--  Buttons --> <button class="rounded-lg
+            p-3
+            mb-4
+            border-2
+            border-blue-500
+            dark:border-blue-500
+            flex
+            justify-center
+            items-center
+            
+            dark:text-white text-white bg-blue-600
+            false" id="Optionals" role="button" aria-label="show a code example, the button id is the example code title"> Optionals </button><button class="rounded-lg
+            p-3
+            mb-4
+            border-2
+            border-blue-500
+            dark:border-blue-500
+            flex
+            justify-center
+            items-center
+            
+            false
+            dark:text-white hover:text-blue-500 dark:hover:text-blue-500 bg-gray-100 dark:bg-gray-900" id="Defer" role="button" aria-label="show a code example, the button id is the example code title"> Defer </button><button class="rounded-lg
+            p-3
+            mb-4
+            border-2
+            border-blue-500
+            dark:border-blue-500
+            flex
+            justify-center
+            items-center
+            
+            false
+            dark:text-white hover:text-blue-500 dark:hover:text-blue-500 bg-gray-100 dark:bg-gray-900" id="Slices" role="button" aria-label="show a code example, the button id is the example code title"> Slices </button><button class="rounded-lg
+            p-3
+            mb-4
+            border-2
+            border-blue-500
+            dark:border-blue-500
+            flex
+            justify-center
+            items-center
+            
+            false
+            dark:text-white hover:text-blue-500 dark:hover:text-blue-500 bg-gray-100 dark:bg-gray-900" id="Contracts" role="button" aria-label="show a code example, the button id is the example code title"> Contracts </button> <!-- Code container --> <div class="xl:h-[32rem] h-[37rem]
         flex
         flex-col
         justify-start 
         lg:items-start
-        items-end
+        items-start
         col-span-2
         
         md:col-span-4
@@ -592,51 +636,7 @@ Flexibly choose how you manage safety, as each feature
 <span class="line"><span class="text-[#24292EFF] dark:text-[#D5CED9]">fn </span><span class="text-[#D32F2F] dark:text-[#C74DED]">float</span><span class="text-[#6F42C1] dark:text-[#FFE66D]"> divide</span><span class="text-[#24292EFF] dark:text-[#D5CED9]">(</span><span class="text-[#D32F2F] dark:text-[#C74DED]">int</span><span class="text-[#24292EFF] dark:text-[#D5CED9]"> x)</span></span>
 <span class="line"><span class="text-[#24292EFF] dark:text-[#D5CED9]">{</span></span>
 <span class="line"><span class="text-[#D32F2F] dark:text-[#C74DED]">    return</span><span class="text-[#1976D2] dark:text-[#F39C12]"> 1.0</span><span class="text-[#D32F2F] dark:text-[#C74DED]">f</span><span class="text-[#D32F2F] dark:text-[#EE5D43]"> /</span><span class="text-[#24292EFF] dark:text-[#D5CED9]"> x;</span></span>
-<span class="line"><span class="text-[#24292EFF] dark:text-[#D5CED9]">}</span></span></code></pre> </div> </div> <!--  Buttons --> <button class="rounded-lg
-            p-3
-            mt-4
-            border-2
-            border-blue-500
-            dark:border-blue-500
-            flex
-            justify-center
-            items-center
-            
-            dark:text-white text-white bg-blue-600
-            false" id="Optionals" role="button" aria-label="show a code example, the button id is the example code title"> Optionals </button><button class="rounded-lg
-            p-3
-            mt-4
-            border-2
-            border-blue-500
-            dark:border-blue-500
-            flex
-            justify-center
-            items-center
-            
-            false
-            dark:text-white hover:text-blue-500 dark:hover:text-blue-500 bg-gray-100 dark:bg-gray-900" id="Defer" role="button" aria-label="show a code example, the button id is the example code title"> Defer </button><button class="rounded-lg
-            p-3
-            mt-4
-            border-2
-            border-blue-500
-            dark:border-blue-500
-            flex
-            justify-center
-            items-center
-            
-            false
-            dark:text-white hover:text-blue-500 dark:hover:text-blue-500 bg-gray-100 dark:bg-gray-900" id="Slices" role="button" aria-label="show a code example, the button id is the example code title"> Slices </button><button class="rounded-lg
-            p-3
-            mt-4
-            border-2
-            border-blue-500
-            dark:border-blue-500
-            flex
-            justify-center
-            items-center
-            
-            false
-            dark:text-white hover:text-blue-500 dark:hover:text-blue-500 bg-gray-100 dark:bg-gray-900" id="Contracts" role="button" aria-label="show a code example, the button id is the example code title"> Contracts </button> </div> </div> </div> <!-- Features block --> <div class="
+<span class="line"><span class="text-[#24292EFF] dark:text-[#D5CED9]">}</span></span></code></pre> </div> </div> </div> </div> </div> <!-- Features block --> <div class="
     grid
     grid-cols-1
     lg:grid-cols-12
@@ -690,15 +690,59 @@ You no longer have to choose between performance and correctness,
     md:grid-cols-4
     md:grid-cols-1
 
-    gap-2
+    gap-4
     
     dark:text-gray-200
-    md:mx-0"> <!-- Code container --> <div class="xl:h-[36rem] h-[34rem]
+    md:mx-0"> <!--  Buttons --> <button class="rounded-lg
+            p-3
+            mb-4
+            border-2
+            border-blue-500
+            dark:border-blue-500
+            flex
+            justify-center
+            items-center
+            
+            dark:text-white text-white bg-blue-600
+            false" id="Temp Allocator" role="button" aria-label="show a code example, the button id is the example code title"> Temp Allocator </button><button class="rounded-lg
+            p-3
+            mb-4
+            border-2
+            border-blue-500
+            dark:border-blue-500
+            flex
+            justify-center
+            items-center
+            
+            false
+            dark:text-white hover:text-blue-500 dark:hover:text-blue-500 bg-gray-100 dark:bg-gray-900" id="SIMD" role="button" aria-label="show a code example, the button id is the example code title"> SIMD </button><button class="rounded-lg
+            p-3
+            mb-4
+            border-2
+            border-blue-500
+            dark:border-blue-500
+            flex
+            justify-center
+            items-center
+            
+            false
+            dark:text-white hover:text-blue-500 dark:hover:text-blue-500 bg-gray-100 dark:bg-gray-900" id="Inline ASM" role="button" aria-label="show a code example, the button id is the example code title"> Inline ASM </button><button class="rounded-lg
+            p-3
+            mb-4
+            border-2
+            border-blue-500
+            dark:border-blue-500
+            flex
+            justify-center
+            items-center
+            
+            false
+            dark:text-white hover:text-blue-500 dark:hover:text-blue-500 bg-gray-100 dark:bg-gray-900" id="Threads" role="button" aria-label="show a code example, the button id is the example code title"> Threads </button> <!-- Code container --> <div class="xl:h-[36rem] h-[34rem]
         flex
         flex-col
         justify-start 
         lg:items-start
-        items-end
+        items-start
         col-span-2
         
         md:col-span-4
@@ -877,51 +921,7 @@ You no longer have to choose between performance and correctness,
 <span class="line"></span>
 <span class="line"><span class="text-[#1976D2] dark:text-[#00E8C6]">    t1</span><span class="text-[#212121] dark:text-[#D5CED9]">.</span><span class="text-[#6F42C1] dark:text-[#FFE66D]">join</span><span class="text-[#24292EFF] dark:text-[#D5CED9]">()</span><span class="text-[#D32F2F] dark:text-[#EE5D43]">!</span><span class="text-[#24292EFF] dark:text-[#D5CED9]">;</span></span>
 <span class="line"><span class="text-[#1976D2] dark:text-[#00E8C6]">    t2</span><span class="text-[#212121] dark:text-[#D5CED9]">.</span><span class="text-[#6F42C1] dark:text-[#FFE66D]">join</span><span class="text-[#24292EFF] dark:text-[#D5CED9]">()</span><span class="text-[#D32F2F] dark:text-[#EE5D43]">!</span><span class="text-[#24292EFF] dark:text-[#D5CED9]">;</span></span>
-<span class="line"><span class="text-[#24292EFF] dark:text-[#D5CED9]">}</span></span></code></pre> </div> </div> <!--  Buttons --> <button class="rounded-lg
-            p-3
-            mt-4
-            border-2
-            border-blue-500
-            dark:border-blue-500
-            flex
-            justify-center
-            items-center
-            
-            dark:text-white text-white bg-blue-600
-            false" id="Temp Allocator" role="button" aria-label="show a code example, the button id is the example code title"> Temp Allocator </button><button class="rounded-lg
-            p-3
-            mt-4
-            border-2
-            border-blue-500
-            dark:border-blue-500
-            flex
-            justify-center
-            items-center
-            
-            false
-            dark:text-white hover:text-blue-500 dark:hover:text-blue-500 bg-gray-100 dark:bg-gray-900" id="SIMD" role="button" aria-label="show a code example, the button id is the example code title"> SIMD </button><button class="rounded-lg
-            p-3
-            mt-4
-            border-2
-            border-blue-500
-            dark:border-blue-500
-            flex
-            justify-center
-            items-center
-            
-            false
-            dark:text-white hover:text-blue-500 dark:hover:text-blue-500 bg-gray-100 dark:bg-gray-900" id="Inline ASM" role="button" aria-label="show a code example, the button id is the example code title"> Inline ASM </button><button class="rounded-lg
-            p-3
-            mt-4
-            border-2
-            border-blue-500
-            dark:border-blue-500
-            flex
-            justify-center
-            items-center
-            
-            false
-            dark:text-white hover:text-blue-500 dark:hover:text-blue-500 bg-gray-100 dark:bg-gray-900" id="Threads" role="button" aria-label="show a code example, the button id is the example code title"> Threads </button> </div> </div> </div> <!-- Features block --> <div class="
+<span class="line"><span class="text-[#24292EFF] dark:text-[#D5CED9]">}</span></span></code></pre> </div> </div> </div> </div> </div> <!-- Features block --> <div class="
     grid
     grid-cols-1
     lg:grid-cols-12
