@@ -1,4 +1,4 @@
-<!DOCTYPE html><head><meta lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta name="og:title" content="C3"><meta name="og:description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta content="/logo.svg" property="og:image"><meta content="#4355ec" data-react-helmet="true" name="theme-color"><meta name="og:image" content="/logo.svg"><link rel="icon" href="/ico.svg" type="image/x-icon"><title>C3 | An evolution, not a revolution</title><link rel="stylesheet" href="/_astro/hoisted.CPAzeHl2.css"><script type="module">function o(e){return function(t){if(localStorage[e]!=null&&localStorage[e]!=null&&localStorage[e]!=""&&t.target.value!=localStorage[e]){let a=document.getElementById(localStorage[e]);a.classList.remove("flex"),a.classList.add("hidden")}localStorage[e]=t.target.value;let l=document.getElementById(localStorage[e]);l.classList.remove("hidden"),l.classList.add("flex")}}const n="safety_selected_tab_id",s=["Optionals","Defer","Slices","Contracts"],c=o(n);document.getElementById("safety_code_examples").addEventListener("change",c);localStorage[n]=s[0];const d="perf_selected_tab_id",r=["Temp Allocator","SIMD","Inline ASM","Threads"],i=o(d);document.getElementById("perf_code_examples").addEventListener("change",i);localStorage[d]=r[0];
+<!DOCTYPE html><head><meta lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta name="og:title" content="C3"><meta name="og:description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta content="/logo.svg" property="og:image"><meta content="#4355ec" data-react-helmet="true" name="theme-color"><meta name="og:image" content="/logo.svg"><link rel="icon" href="/ico.svg" type="image/x-icon"><title>C3 | An evolution, not a revolution</title><link rel="stylesheet" href="/_astro/hoisted.eKltgAxV.css"><script type="module">function o(e){return function(t){if(localStorage[e]!=null&&localStorage[e]!=null&&localStorage[e]!=""&&t.target.value!=localStorage[e]){let a=document.getElementById(localStorage[e]);a.classList.remove("flex"),a.classList.add("hidden")}localStorage[e]=t.target.value;let l=document.getElementById(localStorage[e]);l.classList.remove("hidden"),l.classList.add("flex")}}const n="safety_selected_tab_id",s=["Optionals","Defer","Slices","Contracts"],c=o(n);document.getElementById("safety_code_examples").addEventListener("change",c);localStorage[n]=s[0];const d="perf_selected_tab_id",r=["Temp Allocator","SIMD","Inline ASM","Threads"],i=o(d);document.getElementById("perf_code_examples").addEventListener("change",i);localStorage[d]=r[0];
 </script>
 <script type="module" src="/_astro/page.7qqag-5g.js"></script></head> <!-- <div class="
     grid
@@ -385,27 +385,28 @@ Making it easier to write safe high performance C-Like code.
                 justify-center
                 items-center
                 text-center
-                bg-blue-600
-                border-blue-600
-                hover:border-slate-950
-                border-2
-                rounded-md
                 py-3
                 px-2
                 md:px-14
-                shadow-sm
-                focus:z-10
-                focus:outline-none focus:ring-2 dark:focus:ring-blue-200 focus:ring-blue-800 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-stone-950
-                transition-all
-                leading-1
-                text-sm
-                text-white
-                font-medium
-                select-none
-                dark:bg-blue-600
-                dark:hover:border-blue-500
-                dark:border-blue-600
-                dark:text-white" href="/getting-started/" aria-label="Read the C3 Documentation">
+
+                mt-4
+                md:mt-0
+                text-black
+                bg-white
+                dark:text-gray-100
+                dark:bg-[hsl(224,12%,4%)]
+                mb-6
+                border-2
+                border-gray-300
+                dark:border-gray-700
+            
+                rounded-md
+                ring-2
+                dark:ring-[hsl(224,12%,12%)]
+                ring-[hsl(224,12%,95%)]
+                dark:hover:border-gray-600
+                hover:border-gray-400
+                " href="/getting-started/" aria-label="Read the C3 Documentation">
 Get started
 <svg class="w-3 h-3 ml-2" viewBox="0 0 16 16" fill="none" role="img"> <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path> </svg> </a> </div> </div> </div> <!-- C3 Full Features grid --> <!-- <div class="
     bg-gray-50
@@ -664,6 +665,8 @@ Choose Code Example
             ring-2
             dark:ring-[hsl(224,12%,12%)]
             ring-[hsl(224,12%,95%)]
+            dark:hover:border-gray-600
+            hover:border-gray-400
             " name="perf_code_examples" id="perf_code_examples"> <option class="
                     " value="Temp Allocator" id="perf_code_examples_Temp Allocator"> Temp Allocator </option><option class="
                     " value="SIMD" id="perf_code_examples_SIMD"> SIMD </option><option class="
@@ -894,6 +897,8 @@ Choose Code Example
             ring-2
             dark:ring-[hsl(224,12%,12%)]
             ring-[hsl(224,12%,95%)]
+            dark:hover:border-gray-600
+            hover:border-gray-400
             " name="safety_code_examples" id="safety_code_examples"> <option class="
                     " value="Optionals" id="safety_code_examples_Optionals"> Optionals </option><option class="
                     " value="Defer" id="safety_code_examples_Defer"> Defer </option><option class="
@@ -1091,25 +1096,27 @@ No more anonymous "segmentation fault" errors: the C3 standard
             justify-center
             items-center
             text-center
-            bg-blue-600
-            border-blue-600
-            hover:border-slate-950
-            border-2
-            rounded-md
             py-3
             px-2
             md:px-14
-            shadow-sm
-            focus:z-10
-            focus:outline-none focus:ring-2 dark:focus:ring-blue-200 focus:ring-blue-800 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-stone-950
-            transition-all
-            text-white
-            font-medium
-            select-none
-            dark:bg-blue-600
-            dark:hover:border-blue-500
-            dark:border-blue-600
-            dark:text-white" href="/getting-started/" aria-label="Read the C3 documentation">
+
+            mt-4
+            md:mt-0
+            text-black
+            bg-white
+            dark:text-gray-100
+            dark:bg-[hsl(224,12%,4%)]
+            mb-6
+            border-2
+            border-gray-300
+            dark:border-gray-700
+        
+            rounded-md
+            ring-2
+            dark:ring-[hsl(224,12%,12%)]
+            ring-[hsl(224,12%,95%)]
+            dark:hover:border-gray-600
+            hover:border-gray-400" href="/getting-started/" aria-label="Read the C3 documentation">
 Get Started
 <svg class="w-3 h-3 ml-2" viewBox="0 0 16 16" fill="none" role="img"> <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path> </svg> </a> </div> <h2 class="
         flex
