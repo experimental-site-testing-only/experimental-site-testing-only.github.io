@@ -1,4 +1,4 @@
-<!DOCTYPE html><head><meta lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta name="og:title" content="C3"><meta name="og:description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta content="/logo.svg" property="og:image"><meta content="#4355ec" data-react-helmet="true" name="theme-color"><meta name="og:image" content="/logo.svg"><link rel="icon" href="/ico.svg" type="image/x-icon"><title>C3 | An evolution, not a revolution</title><link rel="stylesheet" href="/_astro/hoisted.Fbjpzzz_.css"><script type="module">function o(e){return function(t){if(localStorage[e]!=null&&localStorage[e]!=null&&localStorage[e]!=""&&t.target.value!=localStorage[e]){let a=document.getElementById(localStorage[e]);a.classList.remove("flex"),a.classList.add("hidden")}localStorage[e]=t.target.value;let l=document.getElementById(localStorage[e]);l.classList.remove("hidden"),l.classList.add("flex")}}const n="safety_selected_tab_id",s=["Optionals","Defer","Slices","Contracts"],c=o(n);document.getElementById("safety_code_examples").addEventListener("change",c);localStorage[n]=s[0];const d="perf_selected_tab_id",r=["Temp Allocator","SIMD","Inline ASM","Threads"],i=o(d);document.getElementById("perf_code_examples").addEventListener("change",i);localStorage[d]=r[0];
+<!DOCTYPE html><head><meta lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta name="og:title" content="C3"><meta name="og:description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta content="/logo.svg" property="og:image"><meta content="#4355ec" data-react-helmet="true" name="theme-color"><meta name="og:image" content="/logo.svg"><link rel="icon" href="/ico.svg" type="image/x-icon"><title>C3 | An evolution, not a revolution</title><link rel="stylesheet" href="/_astro/hoisted.C0x_n0i8.css"><script type="module">function o(e){return function(t){if(localStorage[e]!=null&&localStorage[e]!=null&&localStorage[e]!=""&&t.target.value!=localStorage[e]){let a=document.getElementById(localStorage[e]);a.classList.remove("flex"),a.classList.add("hidden")}localStorage[e]=t.target.value;let l=document.getElementById(localStorage[e]);l.classList.remove("hidden"),l.classList.add("flex")}}const n="safety_selected_tab_id",s=["Optionals","Defer","Slices","Contracts"],c=o(n);document.getElementById("safety_code_examples").addEventListener("change",c);localStorage[n]=s[0];const d="perf_selected_tab_id",r=["Temp Allocator","SIMD","Inline ASM","Threads"],i=o(d);document.getElementById("perf_code_examples").addEventListener("change",i);localStorage[d]=r[0];
 </script>
 <script type="module" src="/_astro/page.7qqag-5g.js"></script></head> <!-- <div class="
     grid
@@ -361,6 +361,8 @@ Effortlessly safe, high performance, modular code
             row-start-3
             md:row-start-3
             
+            px-10
+            sm:px-0
             grid 
             gap-3 
             w-full 
@@ -374,7 +376,6 @@ Effortlessly safe, high performance, modular code
                 text-center
                 py-3
                 px-2
-                mx-10
                 md:px-14
 
                 mt-4
@@ -437,27 +438,26 @@ Get started
                 dark:text-gray-100
                 pb-4
                 ">
-Simple And Reusable
+Use And Extend Existing Code
 </h2> <p class="
                 pb-8
                 text-gray-700 
                 dark:text-gray-400
                 ">
-Bring your existing C code with you! C3 fits into 
-                existing C projects (for example
+C3 fits into existing C projects, like
 <a class="
                     font-semibold 
                     text-blue-500 
                     hover:underline" href="https://github.com/c3lang/vkQuake" aria-label="C3 integrates with C projects here's an example with VKQuake">
-VKQuake</a>), 
-                or you can natively link C into C3 projects.
+VKQuake</a> for example was natively integrated with C3.
+                You can also natively link C into C3 projects without C3 bindings.
 </p> <p class="
                 pb-8
                 text-gray-700 
                 dark:text-gray-400
                 ">
 Code in C3 is organised into namespaced modules, with simple 
-                methods to share behaviour between structs via interfaces or 
+                mechanisms to share behaviour between structs via interfaces or 
                 struct subtyping and to abstract differences  in behaviour 
                 with typed function pointers.
 </p> <p class="
@@ -558,7 +558,7 @@ A simple and straightforward module system that doesn't get in the
                 text-xl
                 pb-2
                 ">
-Generic modules
+Generic Modules
 </h3> <p class="
                 col-start-2 
                 text-gray-700 
@@ -601,13 +601,13 @@ Macros that are just as easy to read and write as regular functions.
                 text-xl
                 pb-2
                 ">
-Runtime and compile reflection
+Run-Time And Compile-Time Reflection
 </h3> <p class="
                 col-start-2 
                 text-gray-700 
                 dark:text-gray-400
                 ">
-Type introspection is available both at compile time and runtime,
+Type introspection is available both at compile-time and run-time,
                 powering flexible macros and functions
 </p> </div> </div> </div> <!-- High Performance --> <div class="
     bg-[hsl(228,13%,93%)]
@@ -1039,14 +1039,14 @@ Choose Code Example
                 text-xl
                 pb-2
                 ">
-Built-in slices and slicing
+Built-In Slices And Slicing
 </h3> <p class="
                 col-start-2 
                 text-gray-700 
                 dark:text-gray-400
                 ">
-Slices are type safe "pointer + length" types which natively
-                supports copying and comparison.
+Slices are type safe "pointer + length" types that natively
+                support copying and comparison.
 </p> </div> <div class="   
             grid
             grid-cols-[min-content_minmax(0,1fr)]
@@ -1067,7 +1067,7 @@ Gradual Contracts
                 dark:text-gray-400
                 ">
 C3 brings programming-by-contract to the mainstream with
-                unobtrusive contracts that are used to express both runtime and
+                unobtrusive contracts that are used to express both run-time and
                 compile-time constraints.
 </p> </div> <div class="   
             grid
@@ -1083,7 +1083,7 @@ C3 brings programming-by-contract to the mainstream with
                 text-xl
                 pb-2
                 ">
-Debug with safety checks
+Debug With Safety Checks
 </h3> <p class="
                 col-start-2 
                 text-gray-700 
@@ -1106,13 +1106,13 @@ Feel confident in your code's correctness: in debug mode the
                 text-xl
                 pb-2
                 ">
-Detailed stacktraces
+Detailed Stacktraces
 </h3> <p class="
                 col-start-2 
                 text-gray-700 
                 dark:text-gray-400
                 ">
-No more anonymous "segmentation fault" errors: the C3 standard
+No more cryptic "segmentation fault" errors! The C3 standard
                 library enables detailed stacktraces out of the box for your debug
                 builds.
 </p> </div> </div> </div> <!-- Features end --> <!-- ================================ --> <!-- ================================ --> <!-- Call to Action --> <div class="
