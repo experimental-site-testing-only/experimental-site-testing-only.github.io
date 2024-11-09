@@ -1,0 +1,12 @@
+const id = "Misc Advanced/asm.md";
+						const collection = "docs";
+						const slug = "misc-advanced/asm";
+						const body = "\nC3 provides two ways to insert inline assembly: asm strings and asm blocks. \n\n## Asm strings\n\nThis form takes a single compile time string and passes it directly to the underlying\nbackend without any changes.\n\n```c3\nint x = 0;\nasm(\"nop\");\nint y = x;\n```\n\n## Asm block\n\nAsm blocks uses a common grammar for all types of processors. It assumes that\nall assembly statements can be reduced to the format:\n\n```asm\ninstruction (arg (',' arg)*)?;\n```\n\nWhere an arg is:\n\n1. An identifier, e.g. `FOO`, `x`.\n2. A numeric constant `1` `0xFF` etc.\n3. A register name (always lower case with a '$' prefix) e.g. `$eax` `$r7`.\n4. The address of a variable e.g. `&x`.\n5. An indirect address: `[addr]` or `[addr + index * <const> + offset]`.\n6. Any expression inside of \"()\" (will be evaluated before entering the `asm` block).\n \nAn example:\n\n```c3\nint aa = 3;\nint g;\nint* gp = &g;\nint* xa = &a;\nusz asf = 1;\nasm\n{\n    movl x, 4;                  // Move 4 into the variable x\n    movl [gp], x;               // Move the value of x into the address in gp\n    movl x, 1;                  // Move 1 into x\n    movl [xa + asf * 4 + 4], x; // Move x into the address at xa[asf + 1]\n    movl $eax, (23 + x);        // Move 23 + x into EAX\n    movl x, $eax;               // Move EAX into x\n    movq [&z], 33;              // Move 33 into the memory address of z\n}\n```\nThe asm block will infer register clobbers and in/out parameters.\n\n*\\*Please note that the current state of inline asm is a __work in progress__,\nonly a subset of x86, aarch64 and riscv instructions are available, other platforms\nhave no support at all. It is likely that the grammar will be extended as more \narchitectures are supported. More instructions can be added as they are needed,\nso please file issues when you encounter missing instructions you need.*";
+						const data = {title:"Inline Assembly",description:"Inline Assembly",editUrl:true,head:[],template:"doc",sidebar:{order:232,hidden:false,attrs:{}},pagefind:true,draft:false};
+						const _internal = {
+							type: 'content',
+							filePath: "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/src/content/docs/Misc Advanced/asm.md",
+							rawData: undefined,
+						};
+
+export { _internal, body, collection, data, id, slug };
