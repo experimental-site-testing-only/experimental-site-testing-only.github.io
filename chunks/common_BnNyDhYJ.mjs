@@ -1,8 +1,8 @@
 import { d as createAstro, c as createComponent, r as renderTemplate, m as maybeRenderHead, u as unescapeHTML, e as renderSlot, a as renderComponent, f as addAttribute, F as Fragment, g as defineStyleVars, s as spreadAttributes, b as renderHead } from './astro/server_DFSFkPP8.mjs';
 import 'kleur/colors';
-import { s as starlightConfig, a as getCollection, B as BuiltInDefaultLocale, p as pickLang, D as DeprecatedLabelsPropProxy, u as useTranslations } from './translations_CZoaAZvG.mjs';
+import { s as starlightConfig, a as getCollection, B as BuiltInDefaultLocale, p as pickLang, D as DeprecatedLabelsPropProxy, u as useTranslations } from './translations_DKOXEwTt.mjs';
 import { f as AstroUserError } from './astro/assets-service_BJoLDnY7.mjs';
-import { s as stripTrailingSlash, a as stripLeadingSlash, e as ensureHtmlExtension, b as ensureTrailingSlash, c as stripHtmlExtension, d as slugToLocaleData, f as slugToParam, l as localizedSlug, g as localizedId, h as localeToLang, i as ensureLeadingSlash, j as stripLeadingAndTrailingSlashes, k as slugToPathname, $ as $$Icon, m as $$LinkButton, n as $$Badge } from './Code_BVp9VohH.mjs';
+import { s as stripTrailingSlash, a as stripLeadingSlash, e as ensureHtmlExtension, b as ensureTrailingSlash, c as stripHtmlExtension, d as slugToLocaleData, f as slugToParam, l as localizedSlug, g as localizedId, h as localeToLang, i as ensureLeadingSlash, j as stripLeadingAndTrailingSlashes, k as slugToPathname, $ as $$Icon, m as $$LinkButton, n as $$Badge } from './Code_CG8Xlprh.mjs';
 /* empty css                         */
 import 'clsx';
 import * as z from 'zod';

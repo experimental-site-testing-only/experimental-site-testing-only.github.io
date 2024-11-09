@@ -1,4 +1,4 @@
-import { B as BuiltInDefaultLocale, s as starlightConfig, u as useTranslations } from './translations_CZoaAZvG.mjs';
+import { B as BuiltInDefaultLocale, s as starlightConfig, u as useTranslations } from './translations_DKOXEwTt.mjs';
 import { ExpressiveCodeTheme, pluginFramesTexts } from 'rehype-expressive-code';
 import { addClassName } from 'rehype-expressive-code/hast';
 

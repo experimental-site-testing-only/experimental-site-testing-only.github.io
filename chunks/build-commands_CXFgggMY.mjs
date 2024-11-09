@@ -1,7 +1,7 @@
 import { F as Fragment, _ as __astro_tag_component__, l as createVNode } from './astro/server_DFSFkPP8.mjs';
 import '@astrojs/internal-helpers/path';
 import { $ as $$Image } from './_astro_assets_Chkh7uj9.mjs';
-import { o as $$FileTree } from './Code_BVp9VohH.mjs';
+import { o as $$FileTree } from './Code_CG8Xlprh.mjs';
 import 'clsx';
 
 const frontmatter = {

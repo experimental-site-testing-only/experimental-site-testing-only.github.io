@@ -1,6 +1,6 @@
 import { d as createAstro, c as createComponent, r as renderTemplate, a as renderComponent } from '../chunks/astro/server_DFSFkPP8.mjs';
 import 'kleur/colors';
-import { $ as $$Common, p as paths } from '../chunks/common_Ctp79VK1.mjs';
+import { $ as $$Common, p as paths } from '../chunks/common_BnNyDhYJ.mjs';
 export { renderers } from '../renderers.mjs';
 
 const $$Astro = createAstro("https://experimental-site-testing-only.github.io");

@@ -1,7 +1,7 @@
 import { d as createAstro, c as createComponent, g as defineStyleVars, r as renderTemplate, m as maybeRenderHead, s as spreadAttributes, f as addAttribute, u as unescapeHTML, a as renderComponent, e as renderSlot, F as Fragment } from './astro/server_DFSFkPP8.mjs';
 import 'kleur/colors';
 import { f as AstroUserError } from './astro/assets-service_BJoLDnY7.mjs';
-import { s as starlightConfig, B as BuiltInDefaultLocale, u as useTranslations } from './translations_CZoaAZvG.mjs';
+import { s as starlightConfig, B as BuiltInDefaultLocale, u as useTranslations } from './translations_DKOXEwTt.mjs';
 import * as z from 'zod';
 /* empty css                                                             */
 import 'clsx';
@@ -1416,7 +1416,7 @@ async function createRenderer() {
   }
   let mergedEcConfig = { ...ecConfigFileOptions, ...ecIntegrationOptions };
   try {
-    const { default: preprocessEcConfig } = await import('./preprocess-config_Nx85Cis4.mjs');
+    const { default: preprocessEcConfig } = await import('./preprocess-config_Cwb6CvH5.mjs');
     mergedEcConfig = await preprocessEcConfig({ ecConfig: mergedEcConfig, astroConfig }) || mergedEcConfig;
   } catch (error) {
     const msg = error instanceof Error ? error.message : error;
