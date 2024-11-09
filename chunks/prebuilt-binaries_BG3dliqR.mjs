@@ -1,5 +1,5 @@
 import { c as createComponent, r as renderTemplate, m as maybeRenderHead, u as unescapeHTML, s as spreadAttributes } from './astro/server_DFSFkPP8.mjs';
-import { g as getImage } from './_astro_assets_Chkh7uj9.mjs';
+import { g as getImage } from './_astro_assets_vwwZhGgV.mjs';
 import 'clsx';
 
 const Astro__Z12QOxj = new Proxy({"src":"/_astro/windows_setup.B7_7i2iH.png","width":1030,"height":594,"format":"png"}, {

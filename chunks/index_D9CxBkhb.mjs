@@ -1,5 +1,5 @@
 async function getMod() {
-						return import('./prebuilt-binaries_CbguCZ7U.mjs');
+						return import('./index_DpwoVltM.mjs');
 					}
 					const collectedLinks = "@@ASTRO-LINKS@@";
 					const collectedStyles = "@@ASTRO-STYLES@@";

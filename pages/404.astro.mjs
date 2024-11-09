@@ -1,8 +1,8 @@
 import { c as createComponent, r as renderTemplate, m as maybeRenderHead, u as unescapeHTML, a as renderComponent } from '../chunks/astro/server_DFSFkPP8.mjs';
 import 'kleur/colors';
-import { s as starlightConfig, u as useTranslations, g as getEntry, B as BuiltInDefaultLocale } from '../chunks/translations_DKOXEwTt.mjs';
+import { s as starlightConfig, u as useTranslations, g as getEntry, B as BuiltInDefaultLocale } from '../chunks/translations_BgEPedE0.mjs';
 import 'clsx';
-import { $ as $$Common } from '../chunks/common_BnNyDhYJ.mjs';
+import { $ as $$Common } from '../chunks/common_Cn2fybd_.mjs';
 export { renderers } from '../renderers.mjs';
 
 const html = "";

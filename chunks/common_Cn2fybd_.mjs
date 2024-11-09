@@ -1,13 +1,13 @@
 import { d as createAstro, c as createComponent, r as renderTemplate, m as maybeRenderHead, u as unescapeHTML, e as renderSlot, a as renderComponent, f as addAttribute, F as Fragment, g as defineStyleVars, s as spreadAttributes, b as renderHead } from './astro/server_DFSFkPP8.mjs';
 import 'kleur/colors';
-import { s as starlightConfig, a as getCollection, B as BuiltInDefaultLocale, p as pickLang, D as DeprecatedLabelsPropProxy, u as useTranslations } from './translations_DKOXEwTt.mjs';
+import { s as starlightConfig, a as getCollection, B as BuiltInDefaultLocale, p as pickLang, D as DeprecatedLabelsPropProxy, u as useTranslations } from './translations_BgEPedE0.mjs';
 import { f as AstroUserError } from './astro/assets-service_BJoLDnY7.mjs';
-import { s as stripTrailingSlash, a as stripLeadingSlash, e as ensureHtmlExtension, b as ensureTrailingSlash, c as stripHtmlExtension, d as slugToLocaleData, f as slugToParam, l as localizedSlug, g as localizedId, h as localeToLang, i as ensureLeadingSlash, j as stripLeadingAndTrailingSlashes, k as slugToPathname, $ as $$Icon, m as $$LinkButton, n as $$Badge } from './Code_CG8Xlprh.mjs';
+import { s as stripTrailingSlash, a as stripLeadingSlash, e as ensureHtmlExtension, b as ensureTrailingSlash, c as stripHtmlExtension, d as slugToLocaleData, f as slugToParam, l as localizedSlug, g as localizedId, h as localeToLang, i as ensureLeadingSlash, j as stripLeadingAndTrailingSlashes, k as slugToPathname, $ as $$Icon, m as $$LinkButton, n as $$Badge } from './Code_Brojeh4W.mjs';
 /* empty css                         */
 import 'clsx';
 import * as z from 'zod';
 import '@astrojs/internal-helpers/path';
-import { $ as $$Image } from './_astro_assets_Chkh7uj9.mjs';
+import { $ as $$Image } from './_astro_assets_vwwZhGgV.mjs';
 
 const project = {"build":{"format":"directory"},"root":"file:///home/josh/git/c3_tests/experimental-site-testing-only__local_changes/","srcDir":"file:///home/josh/git/c3_tests/experimental-site-testing-only__local_changes/src/","trailingSlash":"ignore"};
 
@@ -522,7 +522,7 @@ function getSiteTitleHref(locale) {
   return formatPath(locale || "/");
 }
 
-const $$Astro$v = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$v = createAstro("https://c3-lang.org");
 const $$Banner = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$v, $$props, $$slots);
   Astro2.self = $$Banner;
@@ -534,7 +534,7 @@ const $$ContentPanel = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${maybeRenderHead()}<div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z">${renderSlot($$result, $$slots["default"])}</div> </div> `;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/ContentPanel.astro", void 0);
 
-const $$Astro$u = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$u = createAstro("https://c3-lang.org");
 const $$ContentNotice = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$u, $$props, $$slots);
   Astro2.self = $$ContentNotice;
@@ -542,21 +542,21 @@ const $$ContentNotice = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${maybeRenderHead()}<p class="sl-flex astro-opzsrvew"> ${renderComponent($$result, "Icon", $$Icon, { "name": icon, "size": "1.5em", "color": "var(--sl-color-orange-high)", "class": "astro-opzsrvew" })} <span class="astro-opzsrvew">${label}</span> </p> `;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/ContentNotice.astro", void 0);
 
-const $$Astro$t = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$t = createAstro("https://c3-lang.org");
 const $$FallbackContentNotice = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$t, $$props, $$slots);
   Astro2.self = $$FallbackContentNotice;
   return renderTemplate`${renderComponent($$result, "ContentNotice", $$ContentNotice, { "icon": "warning", "label": Astro2.locals.t("i18n.untranslatedContent") })}`;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/FallbackContentNotice.astro", void 0);
 
-const $$Astro$s = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$s = createAstro("https://c3-lang.org");
 const $$DraftContentNotice = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$s, $$props, $$slots);
   Astro2.self = $$DraftContentNotice;
   return renderTemplate`${renderComponent($$result, "ContentNotice", $$ContentNotice, { "icon": "warning", "label": Astro2.locals.t("page.draft") })}`;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/DraftContentNotice.astro", void 0);
 
-const $$Astro$r = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$r = createAstro("https://c3-lang.org");
 const $$EditLink = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$r, $$props, $$slots);
   Astro2.self = $$EditLink;
@@ -564,7 +564,7 @@ const $$EditLink = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${editUrl && renderTemplate`${maybeRenderHead()}<a${addAttribute(editUrl, "href")} class="sl-flex astro-eez2twj6">${renderComponent($$result, "Icon", $$Icon, { "name": "pencil", "size": "1.2em", "class": "astro-eez2twj6" })}${Astro2.locals.t("page.editLink")}</a>`}`;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/EditLink.astro", void 0);
 
-const $$Astro$q = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$q = createAstro("https://c3-lang.org");
 const $$LastUpdated = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$q, $$props, $$slots);
   Astro2.self = $$LastUpdated;
@@ -572,7 +572,7 @@ const $$LastUpdated = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${lastUpdated && renderTemplate`${maybeRenderHead()}<p>${Astro2.locals.t("page.lastUpdated")}${" "}<time${addAttribute(lastUpdated.toISOString(), "datetime")}>${lastUpdated.toLocaleDateString(lang, { dateStyle: "medium", timeZone: "UTC" })}</time></p>`}`;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/LastUpdated.astro", void 0);
 
-const $$Astro$p = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$p = createAstro("https://c3-lang.org");
 const $$Pagination = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$p, $$props, $$slots);
   Astro2.self = $$Pagination;
@@ -582,7 +582,7 @@ const $$Pagination = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${maybeRenderHead()}<div class="pagination-links astro-u2l5gyhi"${addAttribute(dir, "dir")}> ${prev && renderTemplate`<a${addAttribute(prev.href, "href")} rel="prev" class="astro-u2l5gyhi"> ${renderComponent($$result, "Icon", $$Icon, { "name": isRtl ? "right-arrow" : "left-arrow", "size": "1.5rem", "class": "astro-u2l5gyhi" })} <span class="astro-u2l5gyhi"> ${Astro2.locals.t("page.previousLink")} <br class="astro-u2l5gyhi"> <span class="link-title astro-u2l5gyhi">${prev.label}</span> </span> </a>`} ${next && renderTemplate`<a${addAttribute(next.href, "href")} rel="next" class="astro-u2l5gyhi"> ${renderComponent($$result, "Icon", $$Icon, { "name": isRtl ? "left-arrow" : "right-arrow", "size": "1.5rem", "class": "astro-u2l5gyhi" })} <span class="astro-u2l5gyhi"> ${Astro2.locals.t("page.nextLink")} <br class="astro-u2l5gyhi"> <span class="link-title astro-u2l5gyhi">${next.label}</span> </span> </a>`} </div> `;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/Pagination.astro", void 0);
 
-const $$Astro$o = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$o = createAstro("https://c3-lang.org");
 const $$Footer = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$o, $$props, $$slots);
   Astro2.self = $$Footer;
@@ -695,7 +695,7 @@ function localizedUrl(url, locale) {
   return url;
 }
 
-const $$Astro$n = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$n = createAstro("https://c3-lang.org");
 const $$Head = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$n, $$props, $$slots);
   Astro2.self = $$Head;
@@ -779,14 +779,14 @@ const $$Head = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${head.map(({ tag: Tag, attrs, content }) => renderTemplate`${renderComponent($$result, "Tag", Tag, { ...attrs }, { "default": ($$result2) => renderTemplate`${unescapeHTML(content)}` })}`)}`;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/Head.astro", void 0);
 
-const $$Astro$m = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$m = createAstro("https://c3-lang.org");
 const $$Select = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$m, $$props, $$slots);
   Astro2.self = $$Select;
   return renderTemplate`${maybeRenderHead()}<label${addAttribute(`--sl-select-width: ${Astro2.props.width}`, "style")} class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">${Astro2.props.label}</span> ${renderComponent($$result, "Icon", $$Icon, { "name": Astro2.props.icon, "class": "icon label-icon astro-4yphtoen" })} <select${addAttribute(Astro2.props.value, "value")} class="astro-4yphtoen"> ${Astro2.props.options.map(({ value, selected, label }) => renderTemplate`<option${addAttribute(value, "value")}${addAttribute(selected, "selected")} class="astro-4yphtoen">${unescapeHTML(label)}</option>`)} </select> ${renderComponent($$result, "Icon", $$Icon, { "name": "down-caret", "class": "icon caret astro-4yphtoen" })} </label> `;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/Select.astro", void 0);
 
-const $$Astro$l = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$l = createAstro("https://c3-lang.org");
 const $$LanguageSelect = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$l, $$props, $$slots);
   Astro2.self = $$LanguageSelect;
@@ -804,7 +804,7 @@ var __freeze$3 = Object.freeze;
 var __defProp$3 = Object.defineProperty;
 var __template$3 = (cooked, raw) => __freeze$3(__defProp$3(cooked, "raw", { value: __freeze$3(cooked.slice()) }));
 var _a$3;
-const $$Astro$k = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$k = createAstro("https://c3-lang.org");
 const $$Search = createComponent(async ($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$k, $$props, $$slots);
   Astro2.self = $$Search;
@@ -817,7 +817,7 @@ const $$Search = createComponent(async ($$result, $$props, $$slots) => {
   return renderTemplate(_a$3 || (_a$3 = __template$3(["", "  <script>\n	(() => {\n		const openBtn = document.querySelector('button[data-open-modal]');\n		const shortcut = openBtn?.querySelector('kbd');\n		if (!openBtn || !(shortcut instanceof HTMLElement)) return;\n		const platformKey = shortcut.querySelector('kbd');\n		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {\n			platformKey.textContent = '⌘';\n			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');\n		}\n		shortcut.style.display = '';\n	})();\n</script>   "])), renderComponent($$result, "site-search", "site-search", { "data-translations": JSON.stringify(pagefindTranslations), "data-strip-trailing-slash": project.trailingSlash === "never", "class": "astro-v37mnknz" }, { "default": () => renderTemplate` ${maybeRenderHead()}<button data-open-modal disabled${addAttribute(Astro2.locals.t("search.label"), "aria-label")} aria-keyshortcuts="Control+K" class="astro-v37mnknz"> ${renderComponent($$result, "Icon", $$Icon, { "name": "magnifier", "class": "astro-v37mnknz" })} <span class="sl-hidden md:sl-block astro-v37mnknz" aria-hidden="true">${Astro2.locals.t("search.label")}</span> <kbd class="sl-hidden md:sl-flex astro-v37mnknz" style="display: none;"> <kbd class="astro-v37mnknz">${Astro2.locals.t("search.ctrlKey")}</kbd><kbd class="astro-v37mnknz">K</kbd> </kbd> </button> <dialog style="padding:0"${addAttribute(Astro2.locals.t("search.label"), "aria-label")} class="astro-v37mnknz"> <div class="dialog-frame sl-flex astro-v37mnknz">  <button data-close-modal class="sl-flex md:sl-hidden astro-v37mnknz"> ${Astro2.locals.t("search.cancelLabel")} </button> ${renderTemplate`<div class="search-container astro-v37mnknz"> <div id="starlight__search" class="astro-v37mnknz"></div> </div>`} </div> </dialog> ` }));
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/Search.astro", void 0);
 
-const $$Astro$j = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$j = createAstro("https://c3-lang.org");
 const $$SiteTitle = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$j, $$props, $$slots);
   Astro2.self = $$SiteTitle;
@@ -834,7 +834,7 @@ var __freeze$2 = Object.freeze;
 var __defProp$2 = Object.defineProperty;
 var __template$2 = (cooked, raw) => __freeze$2(__defProp$2(cooked, "raw", { value: __freeze$2(cooked.slice()) }));
 var _a$2;
-const $$Astro$i = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$i = createAstro("https://c3-lang.org");
 const $$ThemeSelect = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$i, $$props, $$slots);
   Astro2.self = $$ThemeSelect;
@@ -845,7 +845,7 @@ const $$ThemeSelect = createComponent(($$result, $$props, $$slots) => {
   ], "width": "6.25em" })} ` }));
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/ThemeSelect.astro", void 0);
 
-const $$Astro$h = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$h = createAstro("https://c3-lang.org");
 const $$Header = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$h, $$props, $$slots);
   Astro2.self = $$Header;
@@ -853,7 +853,7 @@ const $$Header = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${maybeRenderHead()}<div class="header sl-flex astro-kmkmnagf"> <div class="title-wrapper sl-flex astro-kmkmnagf"> ${renderComponent($$result, "SiteTitle", $$SiteTitle, { ...Astro2.props, "class": "astro-kmkmnagf" })} </div> <div class="sl-flex astro-kmkmnagf"> ${shouldRenderSearch && renderTemplate`${renderComponent($$result, "Search", $$Search, { ...Astro2.props, "class": "astro-kmkmnagf" })}`} </div> <div class="sl-hidden md:sl-flex right-group astro-kmkmnagf"> <div class="sl-flex social-icons astro-kmkmnagf"> ${renderComponent($$result, "SocialIcons", $$SocialIcons, { ...Astro2.props, "class": "astro-kmkmnagf" })} </div> ${renderComponent($$result, "ThemeSelect", $$ThemeSelect, { ...Astro2.props, "class": "astro-kmkmnagf" })} ${renderComponent($$result, "LanguageSelect", $$LanguageSelect, { ...Astro2.props, "class": "astro-kmkmnagf" })} </div> </div> `;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/Header.astro", void 0);
 
-const $$Astro$g = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$g = createAstro("https://c3-lang.org");
 const $$Hero = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$g, $$props, $$slots);
   Astro2.self = $$Hero;
@@ -888,14 +888,14 @@ const $$MarkdownContent = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${maybeRenderHead()}<div class="sl-markdown-content">${renderSlot($$result, $$slots["default"])}</div>`;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/MarkdownContent.astro", void 0);
 
-const $$Astro$f = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$f = createAstro("https://c3-lang.org");
 const $$MobileMenuToggle = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$f, $$props, $$slots);
   Astro2.self = $$MobileMenuToggle;
   return renderTemplate`${renderComponent($$result, "starlight-menu-button", "starlight-menu-button", { "class": "astro-jif73yzw" }, { "default": () => renderTemplate` ${maybeRenderHead()}<button aria-expanded="false"${addAttribute(Astro2.locals.t("menuButton.accessibleLabel"), "aria-label")} aria-controls="starlight__sidebar" class="sl-flex md:sl-hidden astro-jif73yzw"> ${renderComponent($$result, "Icon", $$Icon, { "name": "bars", "class": "astro-jif73yzw" })} </button> ` })}   `;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/MobileMenuToggle.astro", void 0);
 
-const $$Astro$e = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$e = createAstro("https://c3-lang.org");
 const $$PageFrame = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$e, $$props, $$slots);
   Astro2.self = $$PageFrame;
@@ -903,7 +903,7 @@ const $$PageFrame = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${maybeRenderHead()}<div class="page sl-flex astro-vrdttmbt"> <header class="header astro-vrdttmbt">${renderSlot($$result, $$slots["header"])}</header> ${hasSidebar && renderTemplate`<nav class="sidebar astro-vrdttmbt"${addAttribute(Astro2.locals.t("sidebarNav.accessibleLabel"), "aria-label")}> ${renderComponent($$result, "MobileMenuToggle", $$MobileMenuToggle, { ...Astro2.props, "class": "astro-vrdttmbt" })} <div id="starlight__sidebar" class="sidebar-pane astro-vrdttmbt"> <div class="sidebar-content sl-flex astro-vrdttmbt"> ${renderSlot($$result, $$slots["sidebar"])} </div> </div> </nav>`} <div class="main-frame astro-vrdttmbt">${renderSlot($$result, $$slots["default"])}</div> </div> `;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/PageFrame.astro", void 0);
 
-const $$Astro$d = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$d = createAstro("https://c3-lang.org");
 const $$TableOfContentsList = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$d, $$props, $$slots);
   Astro2.self = $$TableOfContentsList;
@@ -912,7 +912,7 @@ const $$TableOfContentsList = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${maybeRenderHead()}<ul${addAttribute([{ isMobile }, "astro-g2bywc46"], "class:list")}${addAttribute($$definedVars, "style")}> ${toc.map((heading) => renderTemplate`<li class="astro-g2bywc46"${addAttribute($$definedVars, "style")}> <a${addAttribute("#" + heading.slug, "href")} class="astro-g2bywc46"${addAttribute($$definedVars, "style")}> <span class="astro-g2bywc46"${addAttribute($$definedVars, "style")}>${heading.text}</span> </a> ${heading.children.length > 0 && renderTemplate`${renderComponent($$result, "Astro.self", Astro2.self, { "toc": heading.children, "depth": depth + 1, "isMobile": isMobile, "class": "astro-g2bywc46" })}`} </li>`)} </ul> `;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/TableOfContents/TableOfContentsList.astro", void 0);
 
-const $$Astro$c = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$c = createAstro("https://c3-lang.org");
 const $$MobileTableOfContents = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$c, $$props, $$slots);
   Astro2.self = $$MobileTableOfContents;
@@ -920,7 +920,7 @@ const $$MobileTableOfContents = createComponent(($$result, $$props, $$slots) => 
   return renderTemplate`${toc && renderTemplate`${renderComponent($$result, "mobile-starlight-toc", "mobile-starlight-toc", { "data-min-h": toc.minHeadingLevel, "data-max-h": toc.maxHeadingLevel, "class": "astro-doynk5tl" }, { "default": () => renderTemplate`${maybeRenderHead()}<nav aria-labelledby="starlight__on-this-page--mobile" class="astro-doynk5tl"><details id="starlight__mobile-toc" class="astro-doynk5tl"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-doynk5tl"><div class="toggle sl-flex astro-doynk5tl">${Astro2.locals.t("tableOfContents.onThisPage")}${renderComponent($$result, "Icon", $$Icon, { "name": "right-caret", "class": "caret astro-doynk5tl", "size": "1rem" })}</div><span class="display-current astro-doynk5tl"></span></summary><div class="dropdown astro-doynk5tl">${renderComponent($$result, "TableOfContentsList", $$TableOfContentsList, { "toc": toc.items, "isMobile": true, "class": "astro-doynk5tl" })}</div></details></nav>` })}`}`;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/MobileTableOfContents.astro", void 0);
 
-const $$Astro$b = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$b = createAstro("https://c3-lang.org");
 const $$TableOfContents = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$b, $$props, $$slots);
   Astro2.self = $$TableOfContents;
@@ -928,21 +928,21 @@ const $$TableOfContents = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${toc && renderTemplate`${renderComponent($$result, "starlight-toc", "starlight-toc", { "data-min-h": toc.minHeadingLevel, "data-max-h": toc.maxHeadingLevel }, { "default": () => renderTemplate`${maybeRenderHead()}<nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">${Astro2.locals.t("tableOfContents.onThisPage")}</h2>${renderComponent($$result, "TableOfContentsList", $$TableOfContentsList, { "toc": toc.items })}</nav>` })}`}`;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/TableOfContents.astro", void 0);
 
-const $$Astro$a = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$a = createAstro("https://c3-lang.org");
 const $$PageSidebar = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$a, $$props, $$slots);
   Astro2.self = $$PageSidebar;
   return renderTemplate`${Astro2.props.toc && renderTemplate`${renderComponent($$result, "Fragment", Fragment, { "class": "astro-pb3aqygn" }, { "default": ($$result2) => renderTemplate`${maybeRenderHead()}<div class="lg:sl-hidden astro-pb3aqygn">${renderComponent($$result2, "MobileTableOfContents", $$MobileTableOfContents, { ...Astro2.props, "class": "astro-pb3aqygn" })}</div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-pb3aqygn"><div class="sl-container astro-pb3aqygn">${renderComponent($$result2, "TableOfContents", $$TableOfContents, { ...Astro2.props, "class": "astro-pb3aqygn" })}</div></div>` })}`}`;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/PageSidebar.astro", void 0);
 
-const $$Astro$9 = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$9 = createAstro("https://c3-lang.org");
 const $$PageTitle = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$9, $$props, $$slots);
   Astro2.self = $$PageTitle;
   return renderTemplate`${maybeRenderHead()}<h1${addAttribute(PAGE_TITLE_ID, "id")} class="astro-j6tvhyss">${Astro2.props.entry.data.title}</h1> `;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/PageTitle.astro", void 0);
 
-const $$Astro$8 = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$8 = createAstro("https://c3-lang.org");
 const $$MobileMenuFooter = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$8, $$props, $$slots);
   Astro2.self = $$MobileMenuFooter;
@@ -953,7 +953,7 @@ var __freeze$1 = Object.freeze;
 var __defProp$1 = Object.defineProperty;
 var __template$1 = (cooked, raw) => __freeze$1(__defProp$1(cooked, "raw", { value: __freeze$1(cooked.slice()) }));
 var _a$1;
-const $$Astro$7 = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$7 = createAstro("https://c3-lang.org");
 const $$SidebarPersister = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$7, $$props, $$slots);
   Astro2.self = $$SidebarPersister;
@@ -961,7 +961,7 @@ const $$SidebarPersister = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${renderComponent($$result, "sl-sidebar-state-persist", "sl-sidebar-state-persist", { "data-hash": hash, "class": "astro-kku4brbg" }, { "default": () => renderTemplate(_a$1 || (_a$1 = __template$1([" <script>\n		(() => {\n			try {\n				if (!matchMedia('(min-width: 50em)').matches) return;\n				/** @type {HTMLElement | null} */\n				const target = document.querySelector('sl-sidebar-state-persist');\n				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');\n				if (!target || !state || target.dataset.hash !== state.hash) return;\n				window._starlightScrollRestore = state.scroll;\n				customElements.define(\n					'sl-sidebar-restore',\n					class SidebarRestore extends HTMLElement {\n						connectedCallback() {\n							try {\n								const idx = parseInt(this.dataset.index || '');\n								const details = this.closest('details');\n								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];\n							} catch {}\n						}\n					}\n				);\n			} catch {}\n		})();\n	<\/script> ", " <script>\n		(() => {\n			const scroller = document.getElementById('starlight__sidebar');\n			if (!window._starlightScrollRestore || !scroller) return;\n			scroller.scrollTop = window._starlightScrollRestore;\n			delete window._starlightScrollRestore;\n		})();\n	<\/script> "])), renderSlot($$result, $$slots["default"])) })} `;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/SidebarPersister.astro", void 0);
 
-const $$Astro$6 = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$6 = createAstro("https://c3-lang.org");
 const $$SidebarRestorePoint = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$6, $$props, $$slots);
   Astro2.self = $$SidebarRestorePoint;
@@ -972,7 +972,7 @@ const $$SidebarRestorePoint = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${renderComponent($$result, "sl-sidebar-restore", "sl-sidebar-restore", { "data-index": index })}`;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/SidebarRestorePoint.astro", void 0);
 
-const $$Astro$5 = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$5 = createAstro("https://c3-lang.org");
 const $$SidebarSublist = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$5, $$props, $$slots);
   Astro2.self = $$SidebarSublist;
@@ -980,7 +980,7 @@ const $$SidebarSublist = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${maybeRenderHead()}<ul${addAttribute([{ "top-level": !nested }, "astro-3ii7xxms"], "class:list")}> ${sublist.map((entry) => renderTemplate`<li class="astro-3ii7xxms"> ${entry.type === "link" ? renderTemplate`<a${addAttribute(entry.href, "href")}${addAttribute(entry.isCurrent && "page", "aria-current")}${addAttribute([[{ large: !nested }, entry.attrs.class], "astro-3ii7xxms"], "class:list")}${spreadAttributes(entry.attrs)}> <span class="astro-3ii7xxms">${entry.label}</span> ${entry.badge && renderTemplate`${renderComponent($$result, "Badge", $$Badge, { "variant": entry.badge.variant, "class": (entry.badge.class ?? "") + " astro-3ii7xxms", "text": entry.badge.text })}`} </a>` : renderTemplate`<details${addAttribute(flattenSidebar(entry.entries).some((i) => i.isCurrent) || !entry.collapsed, "open")} class="astro-3ii7xxms"> ${renderComponent($$result, "SidebarRestorePoint", $$SidebarRestorePoint, { "class": "astro-3ii7xxms" })} <summary class="astro-3ii7xxms"> <div class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">${entry.label}</span> ${entry.badge && renderTemplate`${renderComponent($$result, "Badge", $$Badge, { "variant": entry.badge.variant, "class": (entry.badge.class ?? "") + " astro-3ii7xxms", "text": entry.badge.text })}`} </div> ${renderComponent($$result, "Icon", $$Icon, { "name": "right-caret", "class": "caret astro-3ii7xxms", "size": "1.25rem" })} </summary> ${renderComponent($$result, "Astro.self", Astro2.self, { "sublist": entry.entries, "nested": true, "class": "astro-3ii7xxms" })} </details>`} </li>`)} </ul> `;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/SidebarSublist.astro", void 0);
 
-const $$Astro$4 = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$4 = createAstro("https://c3-lang.org");
 const $$Sidebar = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$4, $$props, $$slots);
   Astro2.self = $$Sidebar;
@@ -988,7 +988,7 @@ const $$Sidebar = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`${renderComponent($$result, "SidebarPersister", $$SidebarPersister, { ...Astro2.props }, { "default": ($$result2) => renderTemplate` ${renderComponent($$result2, "SidebarSublist", $$SidebarSublist, { "sublist": sidebar })} ` })} ${maybeRenderHead()}<div class="md:sl-hidden"> ${renderComponent($$result, "MobileMenuFooter", $$MobileMenuFooter, { ...Astro2.props })} </div>`;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/Sidebar.astro", void 0);
 
-const $$Astro$3 = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$3 = createAstro("https://c3-lang.org");
 const $$SkipLink = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$3, $$props, $$slots);
   Astro2.self = $$SkipLink;
@@ -1003,14 +1003,14 @@ const $$ThemeProvider = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate(_a || (_a = __template(["<script>\n	window.StarlightThemeProvider = (() => {\n		const storedTheme =\n			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');\n		const theme =\n			storedTheme ||\n			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');\n		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';\n		return {\n			updatePickers(theme = storedTheme || 'auto') {\n				document.querySelectorAll('starlight-theme-select').forEach((picker) => {\n					const select = picker.querySelector('select');\n					if (select) select.value = theme;\n					/** @type {HTMLTemplateElement | null} */\n					const tmpl = document.querySelector(`#theme-icons`);\n					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);\n					if (newIcon) {\n						const oldIcon = picker.querySelector('svg.label-icon');\n						if (oldIcon) {\n							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);\n						}\n					}\n				});\n			},\n		};\n	})();\n<\/script><template id=\"theme-icons\">", "", "", "</template>"], ["<script>\n	window.StarlightThemeProvider = (() => {\n		const storedTheme =\n			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');\n		const theme =\n			storedTheme ||\n			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');\n		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';\n		return {\n			updatePickers(theme = storedTheme || 'auto') {\n				document.querySelectorAll('starlight-theme-select').forEach((picker) => {\n					const select = picker.querySelector('select');\n					if (select) select.value = theme;\n					/** @type {HTMLTemplateElement | null} */\n					const tmpl = document.querySelector(\\`#theme-icons\\`);\n					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);\n					if (newIcon) {\n						const oldIcon = picker.querySelector('svg.label-icon');\n						if (oldIcon) {\n							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);\n						}\n					}\n				});\n			},\n		};\n	})();\n<\/script><template id=\"theme-icons\">", "", "", "</template>"])), renderComponent($$result, "Icon", $$Icon, { "name": "sun", "class": "light" }), renderComponent($$result, "Icon", $$Icon, { "name": "moon", "class": "dark" }), renderComponent($$result, "Icon", $$Icon, { "name": "laptop", "class": "auto" }));
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/ThemeProvider.astro", void 0);
 
-const $$Astro$2 = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$2 = createAstro("https://c3-lang.org");
 const $$TwoColumnContent = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$2, $$props, $$slots);
   Astro2.self = $$TwoColumnContent;
   return renderTemplate`${maybeRenderHead()}<div class="lg:sl-flex astro-67yu43on"> ${Astro2.props.toc && renderTemplate`<aside class="right-sidebar-container astro-67yu43on"> <div class="right-sidebar astro-67yu43on"> ${renderSlot($$result, $$slots["right-sidebar"])} </div> </aside>`} <div class="main-pane astro-67yu43on">${renderSlot($$result, $$slots["default"])}</div> </div> `;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/TwoColumnContent.astro", void 0);
 
-const $$Astro$1 = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro$1 = createAstro("https://c3-lang.org");
 const $$Page = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro$1, $$props, $$slots);
   Astro2.self = $$Page;
@@ -1018,7 +1018,7 @@ const $$Page = createComponent(($$result, $$props, $$slots) => {
   return renderTemplate`<html${addAttribute(Astro2.props.lang, "lang")}${addAttribute(Astro2.props.dir, "dir")}${addAttribute(Boolean(Astro2.props.toc), "data-has-toc")}${addAttribute(Astro2.props.hasSidebar, "data-has-sidebar")}${addAttribute(Boolean(Astro2.props.entry.data.hero), "data-has-hero")} data-theme="dark" class="astro-bguv2lll"> <head>${renderComponent($$result, "Head", $$Head, { ...Astro2.props, "class": "astro-bguv2lll" })}${renderComponent($$result, "ThemeProvider", $$ThemeProvider, { ...Astro2.props, "class": "astro-bguv2lll" })}${renderHead()}</head> <body class="astro-bguv2lll"> ${renderComponent($$result, "SkipLink", $$SkipLink, { ...Astro2.props, "class": "astro-bguv2lll" })} ${renderComponent($$result, "PageFrame", $$PageFrame, { ...Astro2.props, "class": "astro-bguv2lll" }, { "default": ($$result2) => renderTemplate`   ${renderComponent($$result2, "TwoColumnContent", $$TwoColumnContent, { ...Astro2.props, "class": "astro-bguv2lll" }, { "default": ($$result3) => renderTemplate`  <main${addAttribute(pagefindEnabled, "data-pagefind-body")}${addAttribute(Astro2.props.entryMeta.lang, "lang")}${addAttribute(Astro2.props.entryMeta.dir, "dir")} class="astro-bguv2lll">  ${renderComponent($$result3, "Banner", $$Banner, { ...Astro2.props, "class": "astro-bguv2lll" })} ${Astro2.props.entry.data.hero ? renderTemplate`${renderComponent($$result3, "ContentPanel", $$ContentPanel, { ...Astro2.props, "class": "astro-bguv2lll" }, { "default": ($$result4) => renderTemplate` ${renderComponent($$result4, "Hero", $$Hero, { ...Astro2.props, "class": "astro-bguv2lll" })} ${renderComponent($$result4, "MarkdownContent", $$MarkdownContent, { ...Astro2.props, "class": "astro-bguv2lll" }, { "default": ($$result5) => renderTemplate` ${renderSlot($$result5, $$slots["default"])} ` })} ${renderComponent($$result4, "Footer", $$Footer, { ...Astro2.props, "class": "astro-bguv2lll" })} ` })}` : renderTemplate`${renderComponent($$result3, "Fragment", Fragment, { "class": "astro-bguv2lll" }, { "default": ($$result4) => renderTemplate` ${renderComponent($$result4, "ContentPanel", $$ContentPanel, { ...Astro2.props, "class": "astro-bguv2lll" }, { "default": ($$result5) => renderTemplate` ${renderComponent($$result5, "PageTitle", $$PageTitle, { ...Astro2.props, "class": "astro-bguv2lll" })} ${Astro2.props.entry.data.draft && renderTemplate`${renderComponent($$result5, "DraftContentNotice", $$DraftContentNotice, { ...Astro2.props, "class": "astro-bguv2lll" })}`}${Astro2.props.isFallback && renderTemplate`${renderComponent($$result5, "FallbackContentNotice", $$FallbackContentNotice, { ...Astro2.props, "class": "astro-bguv2lll" })}`}` })} ${renderComponent($$result4, "ContentPanel", $$ContentPanel, { ...Astro2.props, "class": "astro-bguv2lll" }, { "default": ($$result5) => renderTemplate` ${renderComponent($$result5, "MarkdownContent", $$MarkdownContent, { ...Astro2.props, "class": "astro-bguv2lll" }, { "default": ($$result6) => renderTemplate` ${renderSlot($$result6, $$slots["default"])} ` })} ${renderComponent($$result5, "Footer", $$Footer, { ...Astro2.props, "class": "astro-bguv2lll" })} ` })} ` })}`} </main> `, "right-sidebar": ($$result3) => renderTemplate`${renderComponent($$result3, "PageSidebar", $$PageSidebar, { "slot": "right-sidebar", ...Astro2.props, "class": "astro-bguv2lll" })}` })} `, "header": ($$result2) => renderTemplate`${renderComponent($$result2, "Header", $$Header, { "slot": "header", ...Astro2.props, "class": "astro-bguv2lll" })}`, "sidebar": ($$result2) => renderTemplate`${Astro2.props.hasSidebar && renderTemplate`${renderComponent($$result2, "Sidebar", $$Sidebar, { "slot": "sidebar", ...Astro2.props, "class": "astro-bguv2lll" })}`}` })} </body></html>`;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/node_modules/@astrojs/starlight/components/Page.astro", void 0);
 
-const $$Astro = createAstro("https://experimental-site-testing-only.github.io");
+const $$Astro = createAstro("https://c3-lang.org");
 const $$Common = createComponent(async ($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
   Astro2.self = $$Common;
