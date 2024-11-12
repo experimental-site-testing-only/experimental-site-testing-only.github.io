@@ -1,4 +1,4 @@
-<!DOCTYPE html><head><meta lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta name="og:title" content="C3"><meta name="og:description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta content="/logo.svg" property="og:image"><meta content="#4355ec" data-react-helmet="true" name="theme-color"><meta name="og:image" content="/logo.svg"><link rel="icon" href="/ico.svg" type="image/x-icon"><title>C3 | An evolution, not a revolution</title><link rel="stylesheet" href="/_astro/hoisted.C6C4Tvnt.css"><script type="module">function o(e){return function(t){if(localStorage[e]!=null&&localStorage[e]!=null&&localStorage[e]!=""&&t.target.value!=localStorage[e]){let a=document.getElementById(localStorage[e]);a.classList.remove("flex"),a.classList.add("hidden")}localStorage[e]=t.target.value;let l=document.getElementById(localStorage[e]);l.classList.remove("hidden"),l.classList.add("flex")}}const n="safety_selected_tab_id",s=["Optionals","Defer","Slices","Contracts"],c=o(n);document.getElementById("safety_code_examples").addEventListener("change",c);localStorage[n]=s[0];const d="perf_selected_tab_id",r=["Temp Allocator","SIMD","Inline ASM","Threads"],i=o(d);document.getElementById("perf_code_examples").addEventListener("change",i);localStorage[d]=r[0];
+<!DOCTYPE html><head><meta lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta name="og:title" content="C3"><meta name="og:description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta content="/logo.svg" property="og:image"><meta content="#4355ec" data-react-helmet="true" name="theme-color"><meta name="og:image" content="/logo.svg"><link rel="icon" href="/ico.svg" type="image/x-icon"><title>C3 | An evolution, not a revolution</title><link rel="stylesheet" href="/_astro/hoisted.MVN4vuKd.css"><script type="module">function o(e){return function(t){if(localStorage[e]!=null&&localStorage[e]!=null&&localStorage[e]!=""&&t.target.value!=localStorage[e]){let a=document.getElementById(localStorage[e]);a.classList.remove("flex"),a.classList.add("hidden")}localStorage[e]=t.target.value;let l=document.getElementById(localStorage[e]);l.classList.remove("hidden"),l.classList.add("flex")}}const n="safety_selected_tab_id",s=["Optionals","Defer","Slices","Contracts"],c=o(n);document.getElementById("safety_code_examples").addEventListener("change",c);localStorage[n]=s[0];const d="perf_selected_tab_id",r=["Temp Allocator","SIMD","Inline ASM","Threads"],i=o(d);document.getElementById("perf_code_examples").addEventListener("change",i);localStorage[d]=r[0];
 </script>
 <script type="module" src="/_astro/page.7qqag-5g.js"></script></head> <!-- <div class="
     grid
@@ -26,10 +26,37 @@
             dark:border-b-gray-800
         "/>
         <div class="row-span-1 h-[24rem]"/>
-    </div> --> <!-- hsl(240,11%,96%) --> <!-- bg-[hsl(224,47%,90%)] --> <!-- bg-[hsl(224,25%,97%)] --> <body class="
+    </div> --> <!-- hsl(240,11%,96%) --> <!-- bg-[hsl(224,47%,90%)] --> <!-- bg-[hsl(224,25%,97%)] --> <!-- bg-[hsl(224,25%,96%)]
+    dark:bg-[hsl(224,27%,2%)] --> <body class="
+        relative
         bg-[hsl(224,25%,96%)]
         dark:bg-[hsl(224,27%,2%)]
-    "> <div> <script lang="js">
+    "> <!-- <div class="
+        pointer-events-none
+        absolute
+        left-[-20rem]
+        bg-indigo-200/50
+        w-[50vw]
+        h-[80rem]
+        rounded-full
+        blur-3xl
+        z-0
+        mix-blend-darken
+    "/>
+
+    <div class="
+        pointer-events-none
+        absolute
+        right-[-45rem]
+
+        bg-purple-200/50
+        w-[50vw]
+        h-[80rem]
+        rounded-full
+        blur-3xl
+        z-0
+        mix-blend-darken
+    "/> --> <div> <script lang="js">
     // record browser preference
     let browserPreferDark = false;
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -468,6 +495,7 @@ Effortlessly safe, high performance, modular code
             border-[hsl(217,32%,85%)] 
             dark:border-[hsl(217,32%,20%)]
         "> <!-- TODO: replace with hello world without a select --> <!-- TODO: special case for single item in select remove select? -->  <div class="
+z-50
     bg-white
     dark:bg-[hsl(224,32%,12%)]
     rounded-2xl
@@ -644,6 +672,7 @@ If you're working in a C codebase and you want some more
             lg:row-start-1
 
         ">  <div class="
+z-50
     bg-white
     dark:bg-[hsl(224,32%,12%)]
     rounded-2xl
@@ -958,6 +987,7 @@ Generic modules make it easy to create abstract data types
                 border-[hsl(300,32%,85%)] 
                 dark:border-[hsl(300,32%,20%)]
             ">  <div class="
+z-50
     bg-white
     dark:bg-[hsl(224,32%,12%)]
     rounded-2xl
@@ -1256,6 +1286,7 @@ You no longer have to choose between performance and correctness,
             border-[hsl(175,32%,85%)] 
             dark:border-[hsl(175,32%,20%)]
         ">  <div class="
+z-50
     bg-white
     dark:bg-[hsl(224,32%,12%)]
     rounded-2xl
@@ -1503,6 +1534,7 @@ Flexibly choose how you manage safety, as each feature
             lg:col-start-2
             lg:row-start-1
         ">  <div class="
+z-50
     bg-white
     dark:bg-[hsl(224,32%,12%)]
     rounded-2xl
