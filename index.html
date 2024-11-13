@@ -1,4 +1,4 @@
-<!DOCTYPE html><head><meta lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta name="og:title" content="C3"><meta name="og:description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta content="/logo.svg" property="og:image"><meta content="#4355ec" data-react-helmet="true" name="theme-color"><meta name="og:image" content="/logo.svg"><link rel="icon" href="/ico.svg" type="image/x-icon"><title>C3 | An evolution, not a revolution</title><link rel="stylesheet" href="/_astro/hoisted.MVN4vuKd.css"><script type="module">function o(e){return function(t){if(localStorage[e]!=null&&localStorage[e]!=null&&localStorage[e]!=""&&t.target.value!=localStorage[e]){let a=document.getElementById(localStorage[e]);a.classList.remove("flex"),a.classList.add("hidden")}localStorage[e]=t.target.value;let l=document.getElementById(localStorage[e]);l.classList.remove("hidden"),l.classList.add("flex")}}const n="safety_selected_tab_id",s=["Optionals","Defer","Slices","Contracts"],c=o(n);document.getElementById("safety_code_examples").addEventListener("change",c);localStorage[n]=s[0];const d="perf_selected_tab_id",r=["Temp Allocator","SIMD","Inline ASM","Threads"],i=o(d);document.getElementById("perf_code_examples").addEventListener("change",i);localStorage[d]=r[0];
+<!DOCTYPE html><head><meta lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta name="og:title" content="C3"><meta name="og:description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta content="/logo.svg" property="og:image"><meta content="#4355ec" data-react-helmet="true" name="theme-color"><meta name="og:image" content="/logo.svg"><link rel="icon" href="/ico.svg" type="image/x-icon"><title>C3 | An evolution, not a revolution</title><link rel="stylesheet" href="/_astro/hoisted.D_XMFowF.css"><script type="module">function o(e){return function(t){if(localStorage[e]!=null&&localStorage[e]!=null&&localStorage[e]!=""&&t.target.value!=localStorage[e]){let a=document.getElementById(localStorage[e]);a.classList.remove("flex"),a.classList.add("hidden")}localStorage[e]=t.target.value;let l=document.getElementById(localStorage[e]);l.classList.remove("hidden"),l.classList.add("flex")}}const n="safety_selected_tab_id",s=["Optionals","Defer","Slices","Contracts"],c=o(n);document.getElementById("safety_code_examples").addEventListener("change",c);localStorage[n]=s[0];const d="perf_selected_tab_id",r=["Temp Allocator","SIMD","Inline ASM","Threads"],i=o(d);document.getElementById("perf_code_examples").addEventListener("change",i);localStorage[d]=r[0];
 </script>
 <script type="module" src="/_astro/page.7qqag-5g.js"></script></head> <!-- <div class="
     grid
@@ -26,11 +26,11 @@
             dark:border-b-gray-800
         "/>
         <div class="row-span-1 h-[24rem]"/>
-    </div> --> <!-- hsl(240,11%,96%) --> <!-- bg-[hsl(224,47%,90%)] --> <!-- bg-[hsl(224,25%,97%)] --> <!-- bg-[hsl(224,25%,96%)]
+    </div> --> <!-- bg-[hsl(224,25%,96%)]
     dark:bg-[hsl(224,27%,2%)] --> <body class="
         relative
-        bg-[hsl(224,25%,96%)]
-        dark:bg-[hsl(224,27%,2%)]
+        bg-gray-50
+        dark:bg-[hsl(224,32%,6%)]
     "> <!-- <div class="
         pointer-events-none
         absolute
@@ -495,7 +495,6 @@ Effortlessly safe, high performance, modular code
             border-[hsl(217,32%,85%)] 
             dark:border-[hsl(217,32%,20%)]
         "> <!-- TODO: replace with hello world without a select --> <!-- TODO: special case for single item in select remove select? -->  <div class="
-z-50
     bg-white
     dark:bg-[hsl(224,32%,12%)]
     rounded-2xl
@@ -604,14 +603,16 @@ Choose Code Example
     code={code_input_perf}
     highlighter={highlighter}
     />
-</div> --> <!-- ================================ --> <!-- ================================ --> <!-- Section on C interop --> <!-- TODO: One dominant colour per block, desaturate that for the background --> <!-- TODO: Add examples of how to import C3 code from C --> <!-- TODO: Add examples of how to import C code from --> <!-- bg-gray-50 before --> <!-- bg-[hsl(224,22%,97%)] --> <!-- bg-[hsl(193,2%,98%)] --> <div class="
+</div> --> <!-- ================================ --> <!-- ================================ --> <!-- Section on C interop --> <!-- TODO: One dominant colour per block, desaturate that for the background --> <!-- TODO: Add examples of how to import C3 code from C --> <!-- TODO: Add examples of how to import C code from --> <!-- bg-gray-50 before --> <!-- bg-[hsl(224,22%,97%)] --> <!-- bg-[hsl(193,2%,98%)] --> <!-- ORIGINAL C3 USES C ABI SLICE --> <!-- <div class="
     my-24
     sm:my-40
     
     bg-gray-50
     
     dark:bg-[hsl(224,32%,6%)]
-    "> <div class="
+    "
+>
+    <div class="
         grid
         grid-cols-1
         lg:grid-cols-2
@@ -623,7 +624,9 @@ Choose Code Example
         lg:pt-20
         max-w-[90rem]
         mx-auto
-        "> <div class="
+        "
+    >
+        <div class="
             lg:row-start-1
             lg:col-start-2
             
@@ -632,47 +635,350 @@ Choose Code Example
             lg:pb-0
             lg:pr-0
             lg:pl-24
-        "> <hr class="
+        ">
+            <hr class="
                 border-[3px] 
                 border-cyan-700
                 dark:border-cyan-500
                 mb-4
-            "> <h2 class="
+            ">
+
+            <h2 class="
                 text-4xl
                 md:text-5xl
                 font-bold
                 dark:text-gray-100
                 pb-4
-                ">
-C3 Uses C ABI
-</h2> <p class="
+                "
+            >
+                C3 Uses C ABI
+            </h2>
+
+            <p class="
                 pb-12
                 text-gray-500 
                 dark:text-gray-400
                 font-semibold
-                ">
-C3 fits into existing C projects, like
-<a class="
+                "
+            >
+                C3 fits into existing C projects, like
+                <a class="
                     font-bold 
                     text-blue-500 
-                    underline" href="https://github.com/c3lang/vkQuake" aria-label="C3 integrates with C projects here's an example with VKQuake">
-VKQuake</a> for example that natively integrated with C3.
+                    underline" 
+                    href="https://github.com/c3lang/vkQuake"
+                    aria-label="C3 integrates with C projects here's an example with VKQuake"
+                >
+                VKQuake</a> for example that natively integrated with C3.
                 You can also natively link C into C3 projects without C3 bindings.
-</p> <p class="
+            </p>
+
+
+            <p class="
                 pb-12
                 text-gray-500 
                 dark:text-gray-400
                 font-semibold
-                ">
-If you're working in a C codebase and you want some more 
+                "
+            >
+                If you're working in a C codebase and you want some more 
                 modern features like improved error handling, contracts and safety,
-                you might be interested in writing new functionality in C3.
-</p> </div> <!-- No border on this div, but forces tailwind to compile these classes --> <div class="
+                you might be interested in writing new functionality in C3. 
+            </p>
+
+            
+        </div>
+
+
+        <div class="
             lg:col-start-1
             lg:row-start-1
 
+        ">
+            <DemoCode
+                selectID="perf_code_examples"
+                buttons={
+                    [
+                        "Temp Allocator",
+                        "SIMD",
+                        "Inline ASM",
+                        "Threads"
+                    ]
+                }
+                code={code_input_perf}
+                highlighter={highlighter}
+            />
+        </div>        
+
+    </div>
+
+
+    <div class="
+        py-20
+        px-4
+        sm:px-24
+        mx-auto
+        max-w-[90rem]
+        grid
+        grid-cols-1
+        md:grid-cols-2
+
+        gap-x-[7.5rem]
+        lg:gap-x-[10rem]
+        gap-y-14
+        lg:gap-y-20
+        text-gray-800 
+        dark:text-gray-200 
+        "
+    >
+        
+        <div class="   
+            flex
+            flex-col
+            "
+        >
+            <svg class="
+                fill-cyan-700
+                dark:fill-cyan-500
+                pb-4
+                w-12
+                h-12
+                "
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24"
+            >
+                <path d="M19 8h-3V5c0-1.103-.897-2-2-2H5c-1.103 0-2 .897-2 2v9c0 1.103.897 2 2 2h3v3c0 1.103.897 2 2 2h9c1.103 0 2-.897 2-2v-9c0-1.103-.897-2-2-2zm-4 7H9V9h6v6z"></path>
+            </svg>
+
+
+            <h3 class="
+                text-2xl
+                lg:text-3xl
+                font-bold
+                pb-2
+            ">
+                Full C ABI Compatibility
+            </h3>
+            <p class="
+                
+                text-gray-500 
+                dark:text-gray-400
+                font-semibold
+                "
+            >
+                <span class="
+                    text-cyan-700
+                    dark:text-cyan-500
+                    font-bold
+                ">
+                The full C3 feature set is available from C.</span>
+                C3 fits right into your C/C++ application with full C ABI
+                compatibility out of the box. 
+            </p>
+        </div>
+
+
+        <div class="   
+            flex
+            flex-col
+            "
+        >
+            <svg class="
+                fill-cyan-700
+                dark:fill-cyan-500
+                pr-4
+                w-12
+                h-12
+                rotate-90
+                "
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24"
+            >
+                
+                <path d="M3 8h2v5c0 2.206 1.794 4 4 4h2v5h2v-5h2c2.206 0 4-1.794 4-4V8h2V6H3v2zm4-6h2v3H7zm8 0h2v3h-2z"></path>
+            </svg>
+
+
+            <h3 class="
+                text-2xl
+                lg:text-3xl
+                font-bold
+                pb-2
+            ">
+                C3 integrates with C
+            </h3>
+
+            <p class="
+                col-start-2 
+                text-gray-500 
+                dark:text-gray-400
+                font-semibold
+                "
+            >
+                <span class="
+                    font-bold
+                    text-cyan-700
+                    dark:text-cyan-500
+                ">When compiled, C and C3 code are
+                indistinguishable</span> and can work together seamlessly.
+            </p>
+        </div>
+
+
+        <div class="   
+            flex
+            flex-col
+            "
+        >
+            <svg class="
+                fill-cyan-700
+                dark:fill-cyan-500
+                pl-4
+                w-12
+                h-12
+                -rotate-90
+                "
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24"
+            >
+                <path d="M3 8h2v5c0 2.206 1.794 4 4 4h2v5h2v-5h2c2.206 0 4-1.794 4-4V8h2V6H3v2zm4-6h2v3H7zm8 0h2v3h-2z"></path>
+            </svg>
+
+
+            <h3 class="
+                text-2xl
+                lg:text-3xl
+                font-bold
+                pb-2
+            ">
+                C Integrates With C3
+            </h3>
+
+            <p class="
+                col-start-2 
+                text-gray-500 
+                dark:text-gray-400
+                font-semibold
+                "
+            >
+            <span class="
+                font-bold
+                text-cyan-700
+                dark:text-cyan-500
+            ">C libraries can be compiled natively with C3 code</span> so 
+            it's easy to benefit from the rich C ecosystem from C3. 
+            </p>
+        </div>
+
+
+
+        <div class="   
+            flex
+            flex-col
+            "
+        >
+            <svg class="
+                fill-cyan-700
+                dark:fill-cyan-500
+                pb-4
+                w-12
+                h-12
+                "
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24"
+            >
+                <path d="M18 10H9V7c0-1.654 1.346-3 3-3s3 1.346 3 3h2c0-2.757-2.243-5-5-5S7 4.243 7 7v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2zm-7.939 5.499A2.002 2.002 0 0 1 14 16a1.99 1.99 0 0 1-1 1.723V20h-2v-2.277a1.992 1.992 0 0 1-.939-2.224z"></path>
+            </svg>
+
+            
+            <h3 class="
+                text-2xl
+                lg:text-3xl
+                font-bold
+                pb-2
+            ">
+                Unlock The power Of C3  
+            </h3>
+
+            <p class="
+                col-start-2 
+                text-gray-500 
+                dark:text-gray-400
+                font-semibold
+                "
+            >
+                <span class="
+                    font-bold
+                    text-cyan-700
+                    dark:text-cyan-500
+                ">Wrapping a C library with C3 adds library support for C3.</span>
+                Like marking variables as Optionals so errors are always handled,
+                adding programming-by-contract support or adding interface support and 
+                much more.
+            </p>
+        </div>
+
+    </div>
+    
+</div> --> <div class="
+    my-24
+    sm:my-40
+    bg-gray-100
+    dark:bg-[hsl(224,32%,8%)]
+    "> <div class="
+        grid
+        grid-cols-1
+        lg:grid-cols-2
+        grid-rows-[repeat(3,min-content)]
+        px-4
+        sm:px-24
+
+        dark:text-gray-200 
+        pt-16
+        lg:pt-20
+        max-w-[90rem]
+        mx-auto
+        "> <div class="
+            lg:col-span-1
+            
+            pb-20
+
+            flex
+            flex-col
+            items-left
+        "> <!-- <hr class="
+                border-[3px] 
+                border-green-500
+                dark:border-green-500
+                mb-4
+                w-full
+            "> --> <h2 class="
+                text-4xl
+                md:text-5xl
+                font-bold
+                dark:text-gray-100
+                mb-4
+                ">
+C3 Uses C ABI
+</h2> <p class="
+                pb-4
+                text-gray-500 
+                dark:text-gray-400
+                font-semibold
+                "> <span class="
+                    font-extrabold
+                    text-green-600
+                    dark:text-green-500
+                ">C3 natively integrates into existing C projects</span>
+You can also natively link C into C3 projects without C3 bindings.
+            
+                If you're working in a C codebase and you want some more 
+                modern features like improved error handling, contracts and safety,
+                you might be interested in writing new functionality in C3.
+</p> </div> <div class="
+            lg:col-span-2
+            
         ">  <div class="
-z-50
     bg-white
     dark:bg-[hsl(224,32%,12%)]
     rounded-2xl
@@ -793,10 +1099,9 @@ Choose Code Example
 <span class="line"></span>
 <span class="line"><span class="text-blue-800 dark:text-cyan-400">    t1</span><span class="text-[#212121] dark:text-[#D5CED9]">.</span><span class="text-orange-700 dark:text-amber-400">join</span><span class="text-gray-800 dark:text-white">()</span><span class="text-red-800 dark:text-red-500">!</span><span class="text-gray-800 dark:text-white">;</span></span>
 <span class="line"><span class="text-blue-800 dark:text-cyan-400">    t2</span><span class="text-[#212121] dark:text-[#D5CED9]">.</span><span class="text-orange-700 dark:text-amber-400">join</span><span class="text-gray-800 dark:text-white">()</span><span class="text-red-800 dark:text-red-500">!</span><span class="text-gray-800 dark:text-white">;</span></span>
-<span class="line"><span class="text-gray-800 dark:text-white">}</span></span></code></pre> </div> </div> </div> </div> </div> <div class="
-        py-20
-        px-4
-        sm:px-24
+<span class="line"><span class="text-gray-800 dark:text-white">}</span></span></code></pre> </div> </div> </div> </div> <div class="
+        lg:col-span-2
+
         mx-auto
         max-w-[90rem]
         grid
@@ -806,44 +1111,63 @@ Choose Code Example
         gap-x-[7.5rem]
         lg:gap-x-[10rem]
         gap-y-14
-        lg:gap-y-20
+        lg:gap-y-20 
+
+        py-20
+
+        
+  
         text-gray-800 
         dark:text-gray-200 
-        "> <div class="   
+        "> <!-- <div class="   
             flex
             flex-col
-            "> <svg class="
-                fill-cyan-700
+            "
+        >
+            <svg class="
+                fill-cyan-600
                 dark:fill-cyan-500
                 pb-4
                 w-12
                 h-12
-                " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M19 8h-3V5c0-1.103-.897-2-2-2H5c-1.103 0-2 .897-2 2v9c0 1.103.897 2 2 2h3v3c0 1.103.897 2 2 2h9c1.103 0 2-.897 2-2v-9c0-1.103-.897-2-2-2zm-4 7H9V9h6v6z"></path> </svg> <h3 class="
+                "
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24"
+            >
+                <path d="M19 8h-3V5c0-1.103-.897-2-2-2H5c-1.103 0-2 .897-2 2v9c0 1.103.897 2 2 2h3v3c0 1.103.897 2 2 2h9c1.103 0 2-.897 2-2v-9c0-1.103-.897-2-2-2zm-4 7H9V9h6v6z"></path>
+            </svg>
+
+
+            <h3 class="
                 text-2xl
                 lg:text-3xl
                 font-bold
                 pb-2
             ">
-Full C ABI Compatibility
-</h3> <p class="
+                Full C ABI Compatibility
+            </h3>
+            <p class="
                 
                 text-gray-500 
                 dark:text-gray-400
                 font-semibold
-                "> <span class="
-                    text-cyan-700
+                "
+            >
+                <span class="
+                    text-cyan-600
                     dark:text-cyan-500
                     font-bold
                 ">
-The full C3 feature set is available from C.</span>
-C3 fits right into your C/C++ application with full C ABI
-                compatibility out of the box.
-</p> </div> <div class="   
+                The full C3 feature set is available from C.</span>
+                C3 fits right into your C/C++ application with full C ABI
+                compatibility out of the box. 
+            </p>
+        </div> --> <div class="   
             flex
             flex-col
             "> <svg class="
-                fill-cyan-700
-                dark:fill-cyan-500
+                fill-green-500
+                dark:fill-green-500
                 pr-4
                 w-12
                 h-12
@@ -861,17 +1185,17 @@ C3 integrates with C
                 dark:text-gray-400
                 font-semibold
                 "> <span class="
-                    font-bold
-                    text-cyan-700
-                    dark:text-cyan-500
+                    font-extrabold
+                    text-green-600
+                    dark:text-green-500
                 ">When compiled, C and C3 code are
                 indistinguishable</span> and can work together seamlessly.
 </p> </div> <div class="   
             flex
             flex-col
             "> <svg class="
-                fill-cyan-700
-                dark:fill-cyan-500
+                fill-green-500
+                dark:fill-green-500
                 pl-4
                 w-12
                 h-12
@@ -889,45 +1213,63 @@ C Integrates With C3
                 dark:text-gray-400
                 font-semibold
                 "> <span class="
-                font-bold
-                text-cyan-700
-                dark:text-cyan-500
+                font-extrabold
+                text-green-600
+                dark:text-green-500
             ">C libraries can be compiled natively with C3 code</span> so 
             it's easy to benefit from the rich C ecosystem from C3.
-</p> </div> <div class="   
+</p> </div> <!-- <div class="   
             flex
             flex-col
-            "> <svg class="
-                fill-cyan-700
+            "
+        >
+            <svg class="
+                fill-cyan-600
                 dark:fill-cyan-500
                 pb-4
                 w-12
                 h-12
-                " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"> <path d="M18 10H9V7c0-1.654 1.346-3 3-3s3 1.346 3 3h2c0-2.757-2.243-5-5-5S7 4.243 7 7v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2zm-7.939 5.499A2.002 2.002 0 0 1 14 16a1.99 1.99 0 0 1-1 1.723V20h-2v-2.277a1.992 1.992 0 0 1-.939-2.224z"></path> </svg> <h3 class="
+                "
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24"
+            >
+                <path d="M18 10H9V7c0-1.654 1.346-3 3-3s3 1.346 3 3h2c0-2.757-2.243-5-5-5S7 4.243 7 7v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2zm-7.939 5.499A2.002 2.002 0 0 1 14 16a1.99 1.99 0 0 1-1 1.723V20h-2v-2.277a1.992 1.992 0 0 1-.939-2.224z"></path>
+            </svg>
+
+            
+            <h3 class="
                 text-2xl
                 lg:text-3xl
                 font-bold
                 pb-2
             ">
-Unlock The power Of C3
-</h3> <p class="
+                Unlock The power Of C3  
+            </h3>
+
+            <p class="
                 col-start-2 
                 text-gray-500 
                 dark:text-gray-400
                 font-semibold
-                "> <span class="
+                "
+            >
+                <span class="
                     font-bold
-                    text-cyan-700
+                    text-cyan-600
                     dark:text-cyan-500
                 ">Wrapping a C library with C3 adds library support for C3.</span>
-Like marking variables as Optionals so errors are always handled,
+                Like marking variables as Optionals so errors are always handled,
                 adding programming-by-contract support or adding interface support and 
                 much more.
-</p> </div> </div> </div> <!-- Modules and generic modules and Reflection --> <!-- TODO: Add examples of Modules --> <!-- TODO: Add examples of Generic modules --> <!-- TODO: Add examples of Macros --> <!-- TODO: Add examples of Reflection --> <!-- TODO: Add bullet points for Allocator --> <!-- TODO: Add bullet points for os abstractions eg threads --> <!-- TODO: One dominant colour per block, desaturate that for the background --> <div class="
-    my-24
+            </p>
+        </div> --> </div> </div> </div> <!-- Modules and generic modules and Reflection --> <!-- TODO: Add examples of Modules --> <!-- TODO: Add examples of Generic modules --> <!-- TODO: Add examples of Macros --> <!-- TODO: Add examples of Reflection --> <!-- TODO: Add bullet points for Allocator --> <!-- TODO: Add bullet points for os abstractions eg threads --> <!-- TODO: One dominant colour per block, desaturate that for the background --> <!-- my-24
     sm:my-40
     bg-gray-50
-    dark:bg-[hsl(224,32%,6%)]
+    dark:bg-[hsl(224,32%,6%)] --> <div class="
+    my-24
+    sm:my-40
+    bg-gray-100
+    dark:bg-[hsl(224,32%,8%)]
 "> <div class="
             grid
             grid-cols-1
@@ -949,12 +1291,12 @@ Like marking variables as Optionals so errors are always handled,
                 lg:pb-0
                 lg:pl-0
                 lg:pr-24
-            "> <hr class="
+            "> <!-- <hr class="
                     border-[3px] 
-                    border-purple-700
+                    border-purple-600
                     dark:border-purple-500
                     mb-4
-                "> <h2 class="
+                "> --> <h2 class="
                     text-4xl
                     md:text-5xl
                     font-bold
@@ -987,7 +1329,6 @@ Generic modules make it easy to create abstract data types
                 border-[hsl(300,32%,85%)] 
                 dark:border-[hsl(300,32%,20%)]
             ">  <div class="
-z-50
     bg-white
     dark:bg-[hsl(224,32%,12%)]
     rounded-2xl
@@ -1108,7 +1449,7 @@ Choose Code Example
             flex
             flex-col
             "> <svg class="
-                fill-purple-800
+                fill-purple-600
                 dark:fill-purple-400
                 pb-4
                 w-12
@@ -1125,21 +1466,21 @@ Modules
                 dark:text-gray-400
                 font-semibold
                 "> <span class="
-                    text-purple-800
+                    text-purple-700
                     dark:text-purple-400
-                    font-bold
+                    font-extrabold
                 ">To namespace and organise</span> your code 
                 simple and scalable design which follows established patterns
 <span class="
-                    text-purple-800
+                    text-purple-700
                     dark:text-purple-400
-                    font-bold
+                    font-extrabold
                 ">making large codebases easy to manage</span>.
 </p> </div> <div class="   
             flex
             flex-col
             "> <svg class="
-            fill-purple-800
+            fill-purple-700
             dark:fill-purple-400
             pb-4
             w-12
@@ -1156,7 +1497,7 @@ Generic Modules
                 dark:text-gray-400
                 font-semibold
                 "> <span class="
-                    text-purple-800
+                    text-purple-700
                     dark:text-purple-400 
                     font-bold
                 ">For simple polymorphism</span>
@@ -1166,7 +1507,7 @@ anyone can understand, read and contribute to, not just the
             flex
             flex-col
             "> <svg class="
-                fill-purple-800
+                fill-purple-600
                 dark:fill-purple-400
                 pb-4
                 w-12
@@ -1183,9 +1524,9 @@ Declarative Macros
                 dark:text-gray-400
                 font-semibold
                 "> <span class="
-                text-purple-800
-                dark:text-purple-400
-                font-bold
+                    text-purple-700
+                    dark:text-purple-400
+                    font-extrabold
                 ">That are just as easy as regular functions</span>.
                 Packing much more power than C's preprocessor, they're deliberately
                 balanced to ensure that code reading isn't made difficult.
@@ -1193,7 +1534,7 @@ Declarative Macros
             flex
             flex-col
             "> <svg class="
-                fill-purple-800
+                fill-purple-600
                 dark:fill-purple-400
                 pb-4
                 w-12
@@ -1210,16 +1551,16 @@ Runtime And Compiletime Reflection
                 dark:text-gray-400
                 font-semibold
                 "> <span class="
-                    text-purple-800
+                    text-purple-700
                     dark:text-purple-400
-                    font-bold
+                    font-extrabold
                 ">For type introspection</span>
 powering flexible macros and functions.
 </p> </div> </div> </div> <!-- High Performance --> <!-- TODO: One dominant colour per block, desaturate that for the background --> <div class="
     my-24
     sm:my-40
-    bg-gray-50
-    dark:bg-[hsl(224,32%,6%)]
+    bg-gray-100
+    dark:bg-[hsl(224,32%,8%)]
 "> <div class="
         grid
         grid-cols-1
@@ -1241,12 +1582,12 @@ powering flexible macros and functions.
             lg:pr-0
             lg:pl-24
             
-        "> <hr class="
+        "> <!-- <hr class="
                 border-[3px] 
-                border-teal-700
-                dark:border-teal-500
+                border-blue-500
+                dark:border-blue-500
                 mb-4
-            "> <h2 class="
+            "> --> <h2 class="
                 text-4xl
                 md:text-5xl
                 font-bold
@@ -1286,7 +1627,6 @@ You no longer have to choose between performance and correctness,
             border-[hsl(175,32%,85%)] 
             dark:border-[hsl(175,32%,20%)]
         ">  <div class="
-z-50
     bg-white
     dark:bg-[hsl(224,32%,12%)]
     rounded-2xl
@@ -1427,8 +1767,8 @@ Choose Code Example
             flex
             flex-col
             "> <svg class="
-                fill-teal-700
-                dark:fill-teal-500
+                fill-blue-500
+                dark:fill-blue-500
                 pb-4
                 w-12
                 h-12
@@ -1445,16 +1785,17 @@ Inline Assembly
                 dark:text-gray-400
                 font-semibold
                 "> <span class="
-                    text-teal-700
-                    dark:text-teal-500
+                    text-blue-600
+                    dark:text-blue-500
+                    font-extrabold
                 ">Write asm as regular inline code</span> without using strings or cryptic
                 constraints.
 </p> </div> <div class="   
             flex
             flex-col
             "> <svg class="
-                fill-teal-700
-                dark:fill-teal-500
+                fill-blue-500
+                dark:fill-blue-500
                 pb-4
                 w-12
                 h-12
@@ -1476,8 +1817,8 @@ Error handling that combines the best parts of "Result" errors
 </p> </div> </div> </div> <!-- Safety And Flexibility --> <!-- TODO: One dominant colour per block, desaturate that for the background --> <div class="
     my-24
     sm:my-40
-    bg-gray-50
-    dark:bg-[hsl(224,32%,6%)]
+    bg-gray-100
+    dark:bg-[hsl(224,32%,8%)]
 "> <div class="
         grid
         grid-cols-1
@@ -1499,12 +1840,12 @@ Error handling that combines the best parts of "Result" errors
             lg:pb-0
             lg:pl-0
             lg:pr-24
-        "> <hr class="
+        "> <!-- <hr class="
                 border-[3px] 
-                border-rose-700
-                dark:border-rose-500
+                border-orange-600
+                dark:border-orange-500
                 mb-4
-            "> <h2 class="
+            "> --> <h2 class="
                 text-4xl
                 md:text-5xl
                 font-bold
@@ -1534,7 +1875,6 @@ Flexibly choose how you manage safety, as each feature
             lg:col-start-2
             lg:row-start-1
         ">  <div class="
-z-50
     bg-white
     dark:bg-[hsl(224,32%,12%)]
     rounded-2xl
@@ -1655,8 +1995,8 @@ Choose Code Example
             flex
             flex-col
             "> <svg class="
-                fill-rose-700
-                dark:fill-rose-500
+                fill-orange-600
+                dark:fill-orange-500
                 pb-4
                 w-12
                 h-12
@@ -1679,8 +2019,8 @@ Slices are type safe "pointer + length" types that natively
             flex
             flex-col
             "> <svg class="
-                fill-rose-700
-                dark:fill-rose-500
+                fill-orange-600
+                dark:fill-orange-500
                 pb-4
                 w-12
                 h-12
@@ -1704,8 +2044,8 @@ C3 brings programming-by-contract to the mainstream with
             flex
             flex-col
             "> <svg class="
-                fill-rose-700
-                dark:fill-rose-500
+                fill-orange-600
+                dark:fill-orange-500
                 pb-4
                 w-12
                 h-12
@@ -1722,8 +2062,8 @@ Debug With Safety Checks
                 dark:text-gray-400
                 font-semibold
                 "> <span class="
-                text-rose-700 
-                dark:text-rose-500
+                text-orange-700 
+                dark:text-orange-500
                 ">Feel confident in your code's correctness</span> in debug mode the
                 compiler inserts extensive runtime bounds checks and value checks,
                 which together with contracts will let you catch bugs early.
@@ -1731,8 +2071,8 @@ Debug With Safety Checks
             flex
             flex-col
             "> <svg class="
-                fill-rose-700
-                dark:fill-rose-500
+                fill-orange-600
+                dark:fill-orange-500
                 pb-4
                 w-12
                 h-12
