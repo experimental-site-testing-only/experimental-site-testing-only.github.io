@@ -7,7 +7,7 @@ import 'kleur/colors';
 import './chunks/astro/server_afRpe8AA.mjs';
 import 'clsx';
 import 'html-escaper';
-import { u as useTranslations } from './chunks/translations_Dx1zbrZX.mjs';
+import { u as useTranslations } from './chunks/translations_BGgu4mWs.mjs';
 
 const DELETED_EXPIRATION = /* @__PURE__ */ new Date(0);
 const DELETED_VALUE = "deleted";

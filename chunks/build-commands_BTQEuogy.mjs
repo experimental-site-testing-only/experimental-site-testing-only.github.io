@@ -1,5 +1,5 @@
 async function getMod() {
-						return import('./build-commands_DMF_l_uW.mjs');
+						return import('./build-commands_CyKOnDBP.mjs');
 					}
 					const collectedLinks = "@@ASTRO-LINKS@@";
 					const collectedStyles = "@@ASTRO-STYLES@@";

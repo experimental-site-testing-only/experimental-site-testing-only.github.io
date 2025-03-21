@@ -1,5 +1,5 @@
 async function getMod() {
-						return import('./build-commands_CISWwrP1.mjs');
+						return import('./projects_DthTAkgp.mjs');
 					}
 					const collectedLinks = "@@ASTRO-LINKS@@";
 					const collectedStyles = "@@ASTRO-STYLES@@";

@@ -1,7 +1,7 @@
 import { F as Fragment, _ as __astro_tag_component__, l as createVNode } from './astro/server_afRpe8AA.mjs';
 import '@astrojs/internal-helpers/path';
 import { $ as $$Image } from './_astro_assets_BVH1XDQ-.mjs';
-import { o as $$FileTree } from './Code_BvAaiDpz.mjs';
+import { o as $$FileTree } from './Code_CcT-14r-.mjs';
 import 'clsx';
 
 const frontmatter = {
@@ -69,15 +69,15 @@ function _missingMdxReference(id, component) {
   throw new Error("Expected " + ("component" ) + " `" + id + "` to be defined: you likely forgot to import, pass, or provide it.");
 }
 
-const url = "src/content/docs/Getting%20Started/projects.mdx";
-const file = "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/src/content/docs/Getting Started/projects.mdx";
+const url = "src/content/docs/Previous%20Versions/v0_6_8/Getting%20Started/projects.mdx";
+const file = "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/src/content/docs/Previous Versions/v0_6_8/Getting Started/projects.mdx";
 const Content = (props = {}) => MDXContent({
   ...props,
   components: { Fragment: Fragment, ...props.components, "astro-image":  props.components?.img ?? $$Image },
 });
 Content[Symbol.for('mdx-component')] = true;
 Content[Symbol.for('astro.needsHeadRendering')] = !Boolean(frontmatter.layout);
-Content.moduleId = "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/src/content/docs/Getting Started/projects.mdx";
+Content.moduleId = "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/src/content/docs/Previous Versions/v0_6_8/Getting Started/projects.mdx";
 __astro_tag_component__(Content, 'astro:jsx');
 
 export { Content, __usesAstroImage, Content as default, file, frontmatter, getHeadings, url };
