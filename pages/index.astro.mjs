@@ -1,4 +1,4 @@
-import { c as createComponent, r as renderTemplate, m as maybeRenderHead, a as renderComponent, b as renderHead } from '../chunks/astro/server_DFSFkPP8.mjs';
+import { c as createComponent, r as renderTemplate, m as maybeRenderHead, a as renderComponent, b as addAttribute, d as renderHead } from '../chunks/astro/server_afRpe8AA.mjs';
 import 'kleur/colors';
 import 'clsx';
 export { renderers } from '../renderers.mjs';
@@ -76,12 +76,13 @@ Get started
           </svg>
         </span>
       </a> --> </div> <div class="mt-5 flex justify-center items-center gap-x-1 sm:gap-x-3"> <span class="text-sm text-gray-600 dark:text-gray-400">Current version:
-</span> <span class="text-sm font-bold text-gray-900 dark:text-white">0.6.3</span> <svg class="h-5 w-5 text-gray-300 dark:text-gray-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"> <path d="M6 13L10 3" stroke="currentColor" stroke-linecap="round"></path> </svg> <a class="inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 hover:underline font-medium" href="/getting-started/prebuilt-binaries">
+</span> <span class="text-sm font-bold text-gray-900 dark:text-white">0.6.8</span> <svg class="h-5 w-5 text-gray-300 dark:text-gray-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"> <path d="M6 13L10 3" stroke="currentColor" stroke-linecap="round"></path> </svg> <a class="inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 hover:underline font-medium" href="/getting-started/prebuilt-binaries">
 Installation Guide
 <svg class="w-2.5 h-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none"> <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path> </svg> </a> </div> </div> </div>`;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/src/components/hero.astro", void 0);
 
 const $$Download = createComponent(($$result, $$props, $$slots) => {
+  const downloadUrl = (os, ext = "zip") => `https://github.com/c3lang/c3c/releases/latest/download/c3-${os}.${ext}`;
   return renderTemplate`${maybeRenderHead()}<div class="mt-3 flex"> <a id="download-button" class="bg-blue-600
       border-blue-600
       hover:border-slate-950
@@ -101,7 +102,7 @@ const $$Download = createComponent(($$result, $$props, $$slots) => {
       dark:bg-blue-600
       dark:hover:border-blue-500
       dark:border-blue-600
-      dark:text-white" href="https://github.com/c3lang/c3c/releases/download/latest/c3-windows.zip">
+      dark:text-white"${addAttribute(downloadUrl("windows"), "href")}>
 Download for Windows
 </a> <button class="relative
     flex
@@ -139,19 +140,19 @@ Download for Windows
       text-gray-900
         hover:shadow-sm hover:bg-blue-200
       dark:hover:bg-blue-700 dark:text-white
-        focus:ring-2 focus:ring-blue-500" href="https://github.com/c3lang/c3c/releases/download/latest/c3-windows.zip">
+        focus:ring-2 focus:ring-blue-500"${addAttribute(downloadUrl("windows"), "href")}>
 Windows
 </a> </li> <li tabindex="3"> <a id="macos-download" class="flex justify-end items-center gap-x-3.5 py-2 px-3 rounded-md text-sm select-none
       text-gray-900
         hover:shadow-sm hover:bg-blue-200
       dark:hover:bg-blue-700 dark:text-white
-        focus:ring-2 focus:ring-blue-500" href="https://github.com/c3lang/c3c/releases/download/latest/c3-macos.zip">
+        focus:ring-2 focus:ring-blue-500"${addAttribute(downloadUrl("macos"), "href")}>
 MacOS
 </a> </li> <li tabindex="4"> <a id="linux-download" class="flex justify-end items-center gap-x-3.5 py-2 px-3 rounded-md text-sm select-none
       text-gray-900
         hover:shadow-sm hover:bg-blue-200
       dark:hover:bg-blue-700 dark:text-white
-        focus:ring-2 focus:ring-blue-500" href="https://github.com/c3lang/c3c/releases/download/latest/c3-linux.tar.gz">
+        focus:ring-2 focus:ring-blue-500"${addAttribute(downloadUrl("linux", "tar.gz"), "href")}>
 Linux
 </a> </li> </ul> </div> </div> `;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/src/components/download.astro", void 0);
@@ -295,7 +296,9 @@ Check out the C3 manual to start programming with C3.
 Engage
 </h3> <p class="mt-1 text-gray-500">
 Help us improve C3 by being a part of the community.
-</p> </div> </button> </div> </div> <footer class="mt-auto w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto"> <!-- Grid --> <div class="text-center"> <div> <a class="flex-none text-xl font-semibold text-black dark:text-white" href="#" aria-label="Brand">C3</a> </div> <!-- End Col --> <div class="mt-3"> <p class="text-gray-500">
+</p> </div> </button> </div> </div> <footer class="mt-auto w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto"> <!-- Grid --> <div class="text-center"> <div>
+Sponsors
+<div> <a href="https://huly.io"><img style="margin:auto" src="/huly-safe-black.svg" alt="Huly logo" width="30%"></a> </div> </div> <!-- End Col --> <div class="mt-3"> <p class="text-gray-500">
 This website is <a class="font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400" href="https://github.com/onrirr/c3-web">Open Source</a>.
 </p> </div> </div> <!-- End Grid --> </footer>`;
 }, "/home/josh/git/c3_tests/experimental-site-testing-only__local_changes/src/components/community.astro", void 0);

@@ -1,6 +1,6 @@
-import { d as createAstro, c as createComponent, r as renderTemplate, a as renderComponent } from '../chunks/astro/server_DFSFkPP8.mjs';
+import { e as createAstro, c as createComponent, r as renderTemplate, a as renderComponent } from '../chunks/astro/server_afRpe8AA.mjs';
 import 'kleur/colors';
-import { $ as $$Common, p as paths } from '../chunks/common_Cn2fybd_.mjs';
+import { $ as $$Common, p as paths } from '../chunks/common_BPAD89ek.mjs';
 export { renderers } from '../renderers.mjs';
 
 const $$Astro = createAstro("https://c3-lang.org");
