@@ -155,14 +155,15 @@ starlight-file-tree:where(.astro-p67cqifm){--x-space: 1.5rem;--y-space: .125rem;
 </ol>
 <h3 id="changed-1">Changed</h3>
 <ol>
-<li><code dir="auto">typedef</code> is replaced by <code dir="auto">def</code> and has somewhat different syntax (e.g. <code dir="auto">def MyTypeAlias = int;</code>).</li>
+<li>C’s typedef is replaced by <code dir="auto">alias</code> and has somewhat different syntax (e.g. <code dir="auto">alias MyTypeAlias = int;</code>).</li>
 <li>Function pointer syntax is prefix <code dir="auto">fn</code> followed by a regular function declaration without the function name.</li>
+<li><code dir="auto">typedef</code> in C3 creates a new type which can have it’s own methods, but shares the common internal representation as the original type.</li>
 </ol>
 <h3 id="removed-2">Removed</h3>
 <ol>
 <li>Enums, structs and unions no longer have distinct namespaces.</li>
 <li>Enum, struct and union declarations should not have a trailing ’;’</li>
-<li>Inline <code dir="auto">typedef</code> is not allowed. <code dir="auto">def</code> can only be used at the top level.</li>
+<li><code dir="auto">alias</code> can only be used at the top level, not inside a function.</li>
 <li>Anonymous structs are not allowed.</li>
 <li>Type qualifiers are all removed, including <code dir="auto">const</code>, <code dir="auto">restrict</code>, <code dir="auto">volatile</code></li>
 <li>Function pointers types <strong>cannot</strong> be used “raw”, but must always be used through a type alias.</li>
@@ -235,7 +236,7 @@ starlight-file-tree:where(.astro-p67cqifm){--x-space: 1.5rem;--y-space: .125rem;
 </ol>
 <h2 id="attributes">Attributes</h2>
 <p>C3 adds a long range of attributes in the form <code dir="auto">@name(...)</code>. It is possible to create custom
-attribute groups using <code dir="auto">def</code> (e.g. <code dir="auto">def MyAttribute(usz align) = { @aligned(align) @weak };</code>) which
+attribute groups using <code dir="auto">attrdef</code> (e.g. <code dir="auto">attrdef MyAttribute(usz align) = { @aligned(align) @weak };</code>) which
 groups certain attributes. Empty attribute groups are permitted.</p>
 <p>The complete list: <code dir="auto">@align</code>, <code dir="auto">@benchmark</code>, <code dir="auto">@bigendian</code>, <code dir="auto">@builtin</code>,
 <code dir="auto">@callconv</code>, <code dir="auto">@deprecated</code>, <code dir="auto">@dynamic</code>, <code dir="auto">@export</code>,
@@ -323,7 +324,7 @@ groups certain attributes. Empty attribute groups are permitted.</p>
 <h3 id="changed-6">Changed</h3>
 <ol>
 <li><code dir="auto">#define</code> for constants is replaced by untyped constants, e.g. <code dir="auto">#define SOME_CONSTANT 1</code> becomes <code dir="auto">const SOME_CONSTANT = 1;</code>.</li>
-<li><code dir="auto">#define</code> for variable and function aliases is replaced by <code dir="auto">def</code>, e.g. <code dir="auto">#define native_foo win32_foo</code> becomes <code dir="auto">def native_foo = win32_foo;</code></li>
+<li><code dir="auto">#define</code> for variable and function aliases is replaced by <code dir="auto">alias</code>, e.g. <code dir="auto">#define native_foo win32_foo</code> becomes <code dir="auto">alias native_foo = win32_foo;</code></li>
 <li>In-function <code dir="auto">#if...#else..#endif</code> is replaced by <code dir="auto">$if</code>, <code dir="auto">#if...#elif...#endif</code> is replaced by <code dir="auto">$switch</code>.</li>
 <li>For converting code into a string use <code dir="auto">$stringify</code>.</li>
 <li>Macros for date, line etc are replaced by <code dir="auto">$$DATE</code>, <code dir="auto">$$FILE</code>, <code dir="auto">$$FILEPATH</code>, <code dir="auto">$$FUNC</code>, <code dir="auto">$$LINE</code>, <code dir="auto">$$MODULE</code>, <code dir="auto">$$TIME</code>.</li>
@@ -381,7 +382,7 @@ but nonetheless provided unique functionality:</p>
 <li><code dir="auto">@local</code> means only visible to the current module section.</li>
 <li>Imports are recursive. For example, <code dir="auto">import my_lib</code> will implicitly also import <code dir="auto">my_lib::net</code>.</li>
 <li>Multiple imports may be specified with the same <code dir="auto">import</code>, e.g. <code dir="auto">import std::net, std::io;</code>.</li>
-<li>Generic modules have a set of parameters after the module name <code dir="auto">module arr{ Type, LEN };</code></li>
+<li>Generic modules have a set of parameters after the module name <code dir="auto">module arr {Type, LEN};</code></li>
 <li>Generic modules are not type checked until any of its types, functions or globals are instantiated.</li>
 </ol>
 <h2 id="contracts">Contracts</h2>
