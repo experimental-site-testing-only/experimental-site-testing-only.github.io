@@ -1,4 +1,4 @@
-<!DOCTYPE html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta name="og:title" content="C3"><meta name="og:description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta content="/logo.svg" property="og:image"><meta content="#4355ec" data-react-helmet="true" name="theme-color"><meta name="og:image" content="/logo.svg"><link rel="icon" href="/ico.svg" type="image/x-icon"><title>C3 | Blog | An evolution, not a revolution</title><link rel="stylesheet" href="/_astro/blog.TeEGJza2.css">
+<!DOCTYPE html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta name="og:title" content="C3"><meta name="og:description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta content="/logo.svg" property="og:image"><meta content="#4355ec" data-react-helmet="true" name="theme-color"><meta name="og:image" content="/logo.svg"><link rel="icon" href="/ico.svg" type="image/x-icon"><title>C3 | Blog | An evolution, not a revolution</title><link rel="stylesheet" href="/_astro/blog.D-tMYbcM.css">
 <link rel="stylesheet" href="/_astro/index.CLxMlQ5a.css"><script type="module" src="/_astro/page.7qqag-5g.js"></script></head> <body class="dark:bg-stone-950 bg-white"> <div style="height: auto"> <script>
 
 	// get theme preference from local storage
@@ -352,7 +352,7 @@ Blog
 		dark:text-white
 		mb-2
 		text-justify
-	 astro-izoogwj6"> Stability - time for 0.7.2 </h2> <p class="
+	 astro-izoogwj6"> Gradual improvements: C3 0.7.2 </h2> <p class="
 		text-md
 		lg:text-l 
 		text-gray-800 
@@ -362,60 +362,68 @@ Blog
 		text-justify
 	 astro-izoogwj6"> 2025-06-01 </p> <div class="
 		text-justify
-		 astro-izoogwj6" id="child_slots">  <p>It’s another months and consequently it’s time for a new incremental 0.7 release.</p>
-<h2 id="additions">Additions</h2>
-<p>Unlike 0.7.1, 0.7.2 doesn’t really add anything major, but just add a few quality of life enhancements:</p>
-<h3 id="-and--with-variable-right-hand-side">||| and &#x26;&#x26;&#x26; with variable right hand side</h3>
-<p>Rather than writing:</p>
+		 astro-izoogwj6" id="child_slots">  <p>Unlike 0.7.1, 0.7.2 not a big feature release, instead we focused on adding quality of life improvements which are <a href="/getting-started/roadmap/#c3-is-feature-stable">backwards compatible</a> with other 0.7 releases.</p>
+<h2 id="compile-time-additions">Compile time additions</h2>
+<aside aria-label="Note" class="starlight-aside starlight-aside--note"><p class="starlight-aside__title" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="starlight-aside__icon"><path d="M12 11C11.7348 11 11.4804 11.1054 11.2929 11.2929C11.1054 11.4804 11 11.7348 11 12V16C11 16.2652 11.1054 16.5196 11.2929 16.7071C11.4804 16.8946 11.7348 17 12 17C12.2652 17 12.5196 16.8946 12.7071 16.7071C12.8946 16.5196 13 16.2652 13 16V12C13 11.7348 12.8946 11.4804 12.7071 11.2929C12.5196 11.1054 12.2652 11 12 11ZM12.38 7.08C12.1365 6.97998 11.8635 6.97998 11.62 7.08C11.4973 7.12759 11.3851 7.19896 11.29 7.29C11.2017 7.3872 11.1306 7.49882 11.08 7.62C11.024 7.73868 10.9966 7.86882 11 8C10.9992 8.13161 11.0245 8.26207 11.0742 8.38391C11.124 8.50574 11.1973 8.61656 11.29 8.71C11.3872 8.79833 11.4988 8.86936 11.62 8.92C11.7715 8.98224 11.936 9.00632 12.099 8.99011C12.2619 8.97391 12.4184 8.91792 12.5547 8.82707C12.691 8.73622 12.8029 8.61328 12.8805 8.46907C12.9582 8.32486 12.9992 8.16378 13 8C12.9963 7.73523 12.8927 7.48163 12.71 7.29C12.6149 7.19896 12.5028 7.12759 12.38 7.08ZM12 2C10.0222 2 8.08879 2.58649 6.4443 3.6853C4.79981 4.78412 3.51809 6.3459 2.76121 8.17317C2.00433 10.0004 1.8063 12.0111 2.19215 13.9509C2.578 15.8907 3.53041 17.6725 4.92894 19.0711C6.32746 20.4696 8.10929 21.422 10.0491 21.8079C11.9889 22.1937 13.9996 21.9957 15.8268 21.2388C17.6541 20.4819 19.2159 19.2002 20.3147 17.5557C21.4135 15.9112 22 13.9778 22 12C22 10.6868 21.7413 9.38642 21.2388 8.17317C20.7363 6.95991 19.9997 5.85752 19.0711 4.92893C18.1425 4.00035 17.0401 3.26375 15.8268 2.7612C14.6136 2.25866 13.3132 2 12 2ZM12 20C10.4178 20 8.87104 19.5308 7.55544 18.6518C6.23985 17.7727 5.21447 16.5233 4.60897 15.0615C4.00347 13.5997 3.84504 11.9911 4.15372 10.4393C4.4624 8.88743 5.22433 7.46197 6.34315 6.34315C7.46197 5.22433 8.88743 4.4624 10.4393 4.15372C11.9911 3.84504 13.5997 4.00346 15.0615 4.60896C16.5233 5.21447 17.7727 6.23984 18.6518 7.55544C19.5308 8.87103 20 10.4177 20 12C20 14.1217 19.1572 16.1566 17.6569 17.6569C16.1566 19.1571 14.1217 20 12 20Z"></path></svg>Note</p><div class="starlight-aside__content"><p>C3 has visual differentiation between <em>compile time</em> and <em>runtime code</em>, to make it explicit <em>when</em> the code will be run.</p><p>Compile time code uses <code dir="auto">$if condition:</code> … <code dir="auto">$endif</code> for conditional logic.
+Learn more about <a href="/generic-programming/macros/">macros</a> and <a href="/generic-programming/compiletime/">compile time evaluation</a>.</p></div></aside>
+<h4 id="simplifying-compile-time-evaluated-code">Simplifying compile time evaluated code</h4>
+<p>Setting a variable at compile time can now be simplified using <code dir="auto">|||</code> and <code dir="auto">&#x26;&#x26;&#x26;</code> with a variable right hand expression.</p>
+<p>The original code to set a variable at compile time:</p>
 <div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.v4551.css"><script type="module" src="/_astro/ec.8zarh.js"></script><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">$</span><span style="--0:#C792EA;--1:#8844AE">if</span><span style="--0:#D6DEEB;--1:#403F53"> FOO:</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> x </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">true</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">$</span><span style="--0:#C792EA;--1:#8844AE">else</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> x </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">foo</span><span style="--0:#D6DEEB;--1:#403F53">();</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">$endif</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="$if FOO:    bool x = true;$else    bool x = foo();$endif"><div></div></button></div></figure></div>
-<p>It’s now possible to use <code dir="auto">|||</code> to write this compactly as:</p>
+<p>Now this compile time variable can be set with <code dir="auto">|||</code> compactly as:</p>
 <div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">bool</span><span style="--0:#D6DEEB;--1:#403F53"> x </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> FOO </span><span style="--0:#C792EA;--1:#8844AE">|||</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">foo</span><span style="--0:#D6DEEB;--1:#403F53">();</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="bool x = FOO ||| foo();"><div></div></button></div></figure></div>
-<p><code dir="auto">&#x26;&#x26;&#x26;</code> also supports this.</p>
-<h3 id="compile-time-random-rnd">Compile time random: @rnd</h3>
+<p>You can also use <code dir="auto">&#x26;&#x26;&#x26;</code> for logical in compile time code.</p>
+<h4 id="compile-time-random-rnd">Compile time random: <code dir="auto">@rnd</code></h4>
 <p>Sometimes it can be useful to create unique ids at compile time. This is now possible with the <code dir="auto">@rnd</code> macro.</p>
-<h3 id="compile-time-ceil-mathceil">Compile time ceil: math::@ceil</h3>
+<h4 id="compile-time-ceil-mathceil">Compile time ceil: <code dir="auto">math::@ceil</code></h4>
 <p>It is somewhat hard to write a good compile time <code dir="auto">ceil</code> function, so 0.7.2 adds a builtin which is accessible using the <code dir="auto">math::@ceil</code> macro.</p>
-<h3 id="set-the-run-directory">Set the run directory</h3>
-<p>As a convenience for using <code dir="auto">c3c run</code> and <code dir="auto">c3c compile-run</code>, it’s not possible to use <code dir="auto">--run-dir</code> (or the project setting <code dir="auto">run-dir</code>) to set from what directory the compiler should run the resulting binary.</p>
-<h3 id="suffix-deprecations">Suffix deprecations</h3>
-<p>The bitsize suffixes are deprecated, so rather than writing <code dir="auto">23u64</code> use the C style <code dir="auto">23UL</code> instead. <code dir="auto">u128</code> and <code dir="auto">i128</code> suffixes are replaces by <code dir="auto">ULL</code> and <code dir="auto">LL</code> suffixes.</p>
-<p>Finally, the <code dir="auto">d</code> suffix for doubles have been added as a complement to <code dir="auto">f</code>.</p>
-<h3 id="compile-time-reflection-deprecations">Compile time reflection deprecations</h3>
-<p><code dir="auto">MyEnum.elements</code> have been deprecated. Use <code dir="auto">MyEnum.len</code> instead.</p>
-<p><code dir="auto">SomeFn.params</code> have been deprecated. Use <code dir="auto">SomeFn.paramsof</code> instead.</p>
-<h3 id="limits-to-simd-sizes">Limits to SIMD sizes</h3>
+<h2 id="general-additions">General additions</h2>
+<h4 id="set-the-run-directory">Set the run directory</h4>
+<p>To make <code dir="auto">c3c run</code> and <code dir="auto">c3c compile-run</code> more convenient, it’s now possible to use <code dir="auto">--run-dir</code> (or the project setting <code dir="auto">run-dir</code>) to set the director from which the compiler runs the resulting binary.</p>
+<h4 id="limits-to-simd-sizes">Limits to SIMD sizes</h4>
 <p>Limitations of vectors are sometimes misunderstood, they will cause code bloat if used for large vectors. For this reason a max vector size has been introduced. By default this is 4096 bits, so basically the size of <code dir="auto">double[&#x3C;64>]</code>. It is possible to increase this using <code dir="auto">--max-vector-size</code> as needed. (As a comparison, the biggest SIMD vectors on x64 is 512 bits, so such a 4096 bit vector would be represented by 8 registers).</p>
-<h3 id="has_tagof-works-on-builtin-types"><code dir="auto">has_tagof</code> works on builtin types</h3>
+<h4 id="has_tagof-works-on-builtin-types"><code dir="auto">has_tagof</code> works on builtin types</h4>
 <p>While <code dir="auto">has_tagof</code> will always return false on builtin types, this change nonetheless simplifies writing compile time code involving tags.</p>
-<h3 id="allow-recursive-generic-modules">Allow recursive generic modules</h3>
+<h4 id="allow-recursive-generic-modules">Allow recursive generic modules</h4>
 <p>To simplify generic module resolution it was not possible to recursively generate generic module. This restriction has been lifted in 0.7.1.</p>
-<h3 id="deprecation-for-old-param-docs">Deprecation for old <code dir="auto">@param</code> docs</h3>
+<h2 id="deprecations">Deprecations</h2>
+<h4 id="bitsize-suffix">Bitsize suffix</h4>
+<p>The bitsize suffixes are deprecated, so rather than writing <code dir="auto">23u64</code> use the C style <code dir="auto">23UL</code> instead. <code dir="auto">u128</code> and <code dir="auto">i128</code> suffixes are replaced by <code dir="auto">ULL</code> and <code dir="auto">LL</code> suffixes.</p>
+<p>Finally, the <code dir="auto">d</code> suffix for doubles have been added as a complement to <code dir="auto">f</code>.</p>
+<h4 id="compile-time-reflection-deprecations">Compile time reflection deprecations</h4>
+<p><code dir="auto">MyEnum.elements</code> have been deprecated. Use <code dir="auto">MyEnum.len</code> instead.
+<code dir="auto">SomeFn.params</code> have been deprecated. Use <code dir="auto">SomeFn.paramsof</code> instead.</p>
+<h4 id="deprecation-for-old-param-docs">Deprecation for old <code dir="auto">@param</code> docs</h4>
 <p>By 0.7.1 the declaration style <code dir="auto">@param foo "abc"</code> would be allowed rather than <code dir="auto">@param foo : "abc"</code>. This was by accident. It’s now properly deprecated.</p>
 <h3 id="generic-faults-are-not-allowed">Generic faults are not allowed</h3>
 <p>Creating faults that are parameterized is usually a mistake and should not have been allowed. It’s been completely removed in 0.7.2 as it was classified as a bug.</p>
-<p>So no more</p>
+<p>This is no longer allowed:</p>
 <div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">module</span><span style="--0:#D6DEEB;--1:#403F53"> Foo {Type};</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">typedef</span><span style="--0:#D6DEEB;--1:#403F53"> BAZ, HELLO;</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="module Foo {Type};typedef BAZ, HELLO;"><div></div></button></div></figure></div>
-<p>Faults should be places in a parent or sub-module instead.</p>
+<p>Faults should be defined in a non-generic module, such as a parent module or sub-module instead.</p>
 <h2 id="fixes">Fixes</h2>
 <p>This release contains about 30 different fixes, most of them newly discovered and not regressions.</p>
+<p>They range from fixes to advanced generic types to stdlib bugs.</p>
 <h2 id="stdlib-updates">Stdlib updates</h2>
 <p>Currently a new version of the matrix library is incubating, and while it didn’t make it for the 0.7.2 release, I hope it can be included by 0.7.4.</p>
-<h3 id="optimized-string---zstring-conversions">Optimized String -> ZString conversions</h3>
+<h4 id="optimized-string---zstring-conversions">Optimized String -> ZString conversions</h4>
 <p>Sometimes a String is already pointing to a valid ZString, so no copy is needed. To check this, String gets two new methods <code dir="auto">.is_zstr</code> to check if the String is also zero terminated, and <code dir="auto">.quick_zstr</code> which will create a temp ZString if needed, but otherwise use the String.</p>
-<h3 id="stdascii-moves-into-core">std::ascii moves into core</h3>
+<h4 id="stdascii-moves-into-core">std::ascii moves into core</h4>
 <p><code dir="auto">std::ascii</code> moved into <code dir="auto">std::core::ascii</code>. Old _m variants are deprecated, as is uint methods.</p>
-<h3 id="better-tokenization">Better tokenization</h3>
+<h4 id="better-string-tokenization">Better String tokenization</h4>
 <p>It’s now possible to further customize tokenization, to ignore empty elements in the middle (or not), ignore any last empty elements at the end (or not). This introduces <code dir="auto">.tokenize_all</code> which replaces the now deprecated <code dir="auto">.splitter</code> method.</p>
-<h3 id="count-and-replace">Count and replace</h3>
+<h4 id="count-and-replace">Count and replace</h4>
 <p>String further gets some conveniences: <code dir="auto">.count</code> to count the number of instances of a string within the string and <code dir="auto">replace</code> / <code dir="auto">treplace</code> to return a new String with a substring replaced. This functionality was already in DString, but was now added to String as well.</p>
-<h3 id="operator-overloads-for-stdtime-and-maybe">Operator overloads for std::time and Maybe</h3>
+<h4 id="operator-overloads-for-stdtime-and-maybe">Operator overloads for std::time and Maybe</h4>
 <p><code dir="auto">Duration * Int</code>, <code dir="auto">Clock - Clock</code> and <code dir="auto">DateTime + Duration</code> overloads were added for manipulating time.</p>
 <p>For <code dir="auto">Maybe</code>, the <code dir="auto">==</code> operator is available when the inner type is equatable.</p>
-<h3 id="subprocess-improvements">Subprocess improvements</h3>
+<h4 id="subprocess-improvements">Subprocess improvements</h4>
 <p>Subprocess added an <code dir="auto">inherit_stdio</code> option to inherit the parent’s stdin, stdout, and stderr instead of creating pipes.</p>
-<h2 id="changelist">Changelist</h2>
-<p>The full changelist is here:</p>
-<h3 id="changes--improvements">Changes / improvements</h3>
+<h3 id="change-log">Change Log</h3>
+<details>
+	<summary class="text-black dark:text-white font-medium text-lg">
+		Click for full change log
+	</summary>
+<h4 id="changes--improvements">Changes / improvements</h4>
 <ul>
 <li>Better default assert messages when no message is specified #2122</li>
 <li>Add <code dir="auto">--run-dir</code>, to specify directory for running executable using <code dir="auto">compile-run</code> and <code dir="auto">run</code> #2121.</li>
@@ -441,7 +449,7 @@ Blog
 <li>Add <code dir="auto">--header-output</code> and <code dir="auto">header-output</code> options for controlling header output folder.</li>
 <li>Generic faults is disallowed.</li>
 </ul>
-<h3 id="fixes-1">Fixes</h3>
+<h4 id="fixes-1">Fixes</h4>
 <ul>
 <li>Assert triggered when casting from <code dir="auto">int[2]</code> to <code dir="auto">uint[2]</code> #2115</li>
 <li>Assert when a macro with compile time value is discarded, e.g. <code dir="auto">foo();</code> where <code dir="auto">foo()</code> returns an untyped list. #2117</li>
@@ -477,7 +485,7 @@ Blog
 <li>Incorrect ensure on String.split.</li>
 <li>Removed the naive check for compile time modification, which fixes #1997 but regresses in detection.</li>
 </ul>
-<h3 id="stdlib-changes">Stdlib changes</h3>
+<h4 id="stdlib-changes">Stdlib changes</h4>
 <ul>
 <li>Added <code dir="auto">String.quick_ztr</code> and <code dir="auto">String.is_zstr</code></li>
 <li>std::ascii moved into std::core::ascii. Old _m variants are deprecated, as is uint methods.</li>
@@ -490,7 +498,11 @@ Blog
 <li>Add <code dir="auto">inherit_stdio</code> option to <code dir="auto">SubProcessOptions</code> to inherit parent’s stdin, stdout, and stderr instead of creating pipes. #2012</li>
 <li>Remove superfluous <code dir="auto">cleanup</code> parameter in <code dir="auto">os::exit</code> and <code dir="auto">os::fastexit</code>.</li>
 <li>Add <code dir="auto">extern fn ioctl(CInt fd, ulong request, ...)</code> binding to libc;</li>
-</ul>  <!-- Markdown will be inserted here --> </div> </div> </div> </div> <!-- End of main content --> <!-- Sidebar on desktop --> <!-- Bottom on small/mobile --> <div class="
+</ul>
+</details>
+<h3 id="want-to-dive-into-c3">Want To Dive Into C3?</h3>
+<p>Check out the <a href="/getting-started">documentation</a>
+or <a href="/getting-started/prebuilt-binaries">download it and try it out</a>, if you have any questions chat to us on <a href="https://discord.gg/qN76R87">discord</a>.</p>  <!-- Markdown will be inserted here --> </div> </div> </div> </div> <!-- End of main content --> <!-- Sidebar on desktop --> <!-- Bottom on small/mobile --> <div class="
 					block 
 					lg:mt-68
 					px-6
@@ -506,100 +518,4 @@ Blog
 						lg:pl-4
 					">
 Blog Archive
-</h2> <div class="
-							hover:bg-slate-100
-							hover:dark:bg-slate-800
-							py-2
-							px-4
-							my-2
-						"> <a class="
-								text-[var(--sl-color-text-accent)]
-								text-justify
-								" href="/blog/c3-0-7-2-release-this-one-is-getting-big-now"> <div class="
-									flex
-									flex-col
-									text-[var(--sl-color-gray-1)]
-									lg:text-xs
-									
-								"> <h4 class="
-										"> C3 0.7.2 Release this one is getting big now </h4> <p class=""> 2024-01-02 </p> </div> </a> </div><div class="
-							hover:bg-slate-100
-							hover:dark:bg-slate-800
-							py-2
-							px-4
-							my-2
-						"> <a class="
-								text-[var(--sl-color-text-accent)]
-								text-justify
-								" href="/blog/new-beginnings-5"> <div class="
-									flex
-									flex-col
-									text-[var(--sl-color-gray-1)]
-									lg:text-xs
-									
-								"> <h4 class="
-										"> New Beginnings 5 </h4> <p class=""> 2023-06-01 </p> </div> </a> </div><div class="
-							hover:bg-slate-100
-							hover:dark:bg-slate-800
-							py-2
-							px-4
-							my-2
-						"> <a class="
-								text-[var(--sl-color-text-accent)]
-								text-justify
-								" href="/blog/new-beginnings-2"> <div class="
-									flex
-									flex-col
-									text-[var(--sl-color-gray-1)]
-									lg:text-xs
-									
-								"> <h4 class="
-										"> New Beginnings 2 </h4> <p class=""> 2023-01-02 </p> </div> </a> </div><div class="
-							hover:bg-slate-100
-							hover:dark:bg-slate-800
-							py-2
-							px-4
-							my-2
-						"> <a class="
-								text-[var(--sl-color-text-accent)]
-								text-justify
-								" href="/blog/new-beginnings-6"> <div class="
-									flex
-									flex-col
-									text-[var(--sl-color-gray-1)]
-									lg:text-xs
-									
-								"> <h4 class="
-										"> New Beginnings 6 </h4> <p class=""> 2022-08-01 </p> </div> </a> </div><div class="
-							hover:bg-slate-100
-							hover:dark:bg-slate-800
-							py-2
-							px-4
-							my-2
-						"> <a class="
-								text-[var(--sl-color-text-accent)]
-								text-justify
-								" href="/blog/new-beginnings-3"> <div class="
-									flex
-									flex-col
-									text-[var(--sl-color-gray-1)]
-									lg:text-xs
-									
-								"> <h4 class="
-										"> New Beginnings 3 </h4> <p class=""> 2022-05-02 </p> </div> </a> </div><div class="
-							hover:bg-slate-100
-							hover:dark:bg-slate-800
-							py-2
-							px-4
-							my-2
-						"> <a class="
-								text-[var(--sl-color-text-accent)]
-								text-justify
-								" href="/blog/new-beginnings-4"> <div class="
-									flex
-									flex-col
-									text-[var(--sl-color-gray-1)]
-									lg:text-xs
-									
-								"> <h4 class="
-										"> New Beginnings 4 </h4> <p class=""> 2021-06-02 </p> </div> </a> </div> </div> <!-- End of Sidebar --> </div> <!-- End of page grid layout for sidebar and main --> </div> </div> </body>
+</h2>  </div> <!-- End of Sidebar --> </div> <!-- End of page grid layout for sidebar and main --> </div> </div> </body>
