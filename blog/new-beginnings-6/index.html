@@ -1,6 +1,5 @@
-<!DOCTYPE html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta name="og:title" content="C3"><meta name="og:description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta content="/logo.svg" property="og:image"><meta content="#4355ec" data-react-helmet="true" name="theme-color"><meta name="og:image" content="/logo.svg"><link rel="icon" href="/ico.svg" type="image/x-icon"><title>C3 | Blog | An evolution, not a revolution</title><!-- Styles needed for styling the markdown added n --><script type="module" src="/_astro/_blog_title_.astro_astro_type_script_index_0_lang.D_hXm-4m.js"></script><link rel="stylesheet" href="/_astro/blog.feR911R3.css">
-<link rel="stylesheet" href="/_astro/index.DrYL-Ugm.css">
-<link rel="stylesheet" href="/_astro/blog.CjCeeFzc.css"><script type="module" src="/_astro/page.7qqag-5g.js"></script></head> <body class="dark:bg-stone-950 bg-white"> <div style="height: auto"> <script>
+<!DOCTYPE html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta name="og:title" content="C3"><meta name="og:description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta content="/logo.svg" property="og:image"><meta content="#4355ec" data-react-helmet="true" name="theme-color"><meta name="og:image" content="/logo.svg"><link rel="icon" href="/ico.svg" type="image/x-icon"><title>C3 | Blog | An evolution, not a revolution</title><link rel="stylesheet" href="/_astro/blog.BcApSFSk.css">
+<link rel="stylesheet" href="/_astro/index.DMhnhvuU.css"><script type="module" src="/_astro/page.7qqag-5g.js"></script></head> <body class="dark:bg-stone-950 bg-white"> <div style="height: auto"> <script>
 
 	// get theme preference from local storage
 	let theme = localStorage.getItem("starlight-theme");
@@ -181,10 +180,10 @@
 			justify-between
 			"> <a class="
 				text-blue-600
+				dark:text-blue-500
 				flex-none 
 				text-xl 
 				font-semibold 
-				dark:text-white
 				" href="/" aria-label="Brand">
 C3
 </a> <div class="sm:hidden" id="mobile-menu-parent"> <!-- Mobile topMenu toggle --> <button class="
@@ -302,37 +301,39 @@ Support us
 			relative
 			overflow-hidden
 			"> <div class="
-		relative
-		overflow-hidden
-		"> <div class="
-			max-w-[48rem] 
-			mx-auto 
-			px-4 
-			sm:px-6 
-			lg:px-8 
-			pt-8
-			md:pt-24 
-			pb-12
-			"> <div class="mt-5 mx-auto"> <h1 class="
-					block 
-					text-3xl 
-					font-bold 
-					text-gray-800 
-					sm:text-4xl 
-					lg:text-6xl 
-					lg:leading-tight 
-					dark:text-white
-					text-center
-					mb-8
-					md:mb-18
-					"> <a href="/blog">
+				grid
+				lg:grid-cols-[2fr_4fr_2fr]
+				lg:max-w-[calc(20rem+40rem+20rem)]
+				mx-auto
+			"> <!-- Empty content for symmetry and centering of main content --> <div class="hidden lg:block"></div> <!-- Main content --> <!-- max-w-[40rem] 
+				mx-auto  --> <!-- max-w-[40rem] --> <div class="
+					px-4 
+					sm:px-6 
+					lg:px-8 
+					pt-8
+					md:pt-24 
+					pb-12
+					"> <div class="mt-5 mx-auto"> <h1 class="
+							block 
+							text-3xl 
+							font-bold 
+							text-gray-800 
+							sm:text-4xl 
+							lg:text-6xl 
+							lg:leading-tight 
+							dark:text-white
+							text-center
+							sm:text-justify
+							mb-8
+							md:mb-18
+							"> <a href="/blog">
 The
 <span class="
-							bg-clip-text 
-							bg-gradient-to-l 
-							from-violet-600 
-							to-blue-600 
-							text-transparent">
+									bg-clip-text 
+									bg-gradient-to-l 
+									from-violet-600 
+									to-blue-600 
+									text-transparent">
 C3
 </span>
 Blog
@@ -377,126 +378,165 @@ So if you find the project interesting, here’s what you can do to help:</p>
 <li><a href="https://github.com/c3lang/c3c/issues/1456">A list of what’s needed is on Github</a>.</li>
 <li><a href="https://github.com/c3lang/c3c">Help on the compiler</a>.</li>
 <li><a href="https://github.com/c3lang/c3-web">Help on the docs</a>.</li>
-</ul>  <!-- Markdown will be inserted here --> </div> </div> <div> <h2 class="
-							text-[var(--sl-color-gray-1)]
-							mt-8
-							mb-4
-							font-bold
-							text-3xl
-						">
-Recent Blog Posts
+</ul>  <!-- Markdown will be inserted here --> </div> </div> <!-- Related blog posts (mobile only) --> <!-- <div class="sm:hidden">
+								<h2 class="
+									text-[var(--sl-color-gray-1)]
+									mt-8
+									mb-4
+									font-bold
+									text-3xl
+								">
+									Recent Blog Posts
+								</h2>
+								
+								{sortedOtherBlogs.map((BlogPost) => {
+									
+									const blogPostUrl = titleToLowerCaseKebab(BlogPost.title)
+									
+									return <div class="
+										hover:bg-slate-100
+										hover:dark:bg-slate-800
+										rounded-3xl
+										px-4
+										py-1
+										my-1		
+									">
+										<a class="
+											text-[var(--sl-color-text-accent)]
+											text-justify
+											"
+											href={"/blog/"+blogPostUrl}
+										>
+											
+											<div class="
+												flex
+												flex-col
+												sm:ml-4
+												
+												text-[var(--sl-color-gray-1)]
+											">
+												<h3 class="
+													text-l 
+													font-bold
+													"
+												>
+													{BlogPost.title}
+												</h3>
+												<p class="font-medium">
+													{BlogPost.date.slice(0,10)}
+												</p>
+											</div>
+										</a>
+									
+									</div>
+								} 
+								)}
+
+							</div> --> </div> </div> <!-- End of main content --> <!-- Sidebar on desktop --> <!-- Bottom on small/mobile --> <div class="
+					block 
+					lg:mt-68
+					px-6
+					"> <h2 class="
+						text-[var(--sl-color-gray-1)]
+						mb-4
+						font-bold
+						text-3xl
+					">
+Blog Posts
 </h2> <div class="
-								hover:bg-slate-100
-								hover:dark:bg-slate-800
-								rounded-3xl
-								px-4
-								py-1
-								my-1		
-							"> <a class="
-									text-[var(--sl-color-text-accent)]
-									text-justify
-									" href="/blog/stability-time-for-0-7-2"> <div class="
-										flex
-										flex-col
-										sm:ml-4
-										
-										text-[var(--sl-color-gray-1)]
-									"> <h3 class="
-											text-l 
-											font-bold
-											"> Stability - time for 0.7.2 </h3> <p class="font-medium"> 2025-06-01 </p> </div> </a> </div><div class="
-								hover:bg-slate-100
-								hover:dark:bg-slate-800
-								rounded-3xl
-								px-4
-								py-1
-								my-1		
-							"> <a class="
-									text-[var(--sl-color-text-accent)]
-									text-justify
-									" href="/blog/c3-0-7-2-release-this-one-is-getting-big-now"> <div class="
-										flex
-										flex-col
-										sm:ml-4
-										
-										text-[var(--sl-color-gray-1)]
-									"> <h3 class="
-											text-l 
-											font-bold
-											"> C3 0.7.2 Release this one is getting big now </h3> <p class="font-medium"> 2024-01-02 </p> </div> </a> </div><div class="
-								hover:bg-slate-100
-								hover:dark:bg-slate-800
-								rounded-3xl
-								px-4
-								py-1
-								my-1		
-							"> <a class="
-									text-[var(--sl-color-text-accent)]
-									text-justify
-									" href="/blog/new-beginnings-5"> <div class="
-										flex
-										flex-col
-										sm:ml-4
-										
-										text-[var(--sl-color-gray-1)]
-									"> <h3 class="
-											text-l 
-											font-bold
-											"> New Beginnings 5 </h3> <p class="font-medium"> 2023-06-01 </p> </div> </a> </div><div class="
-								hover:bg-slate-100
-								hover:dark:bg-slate-800
-								rounded-3xl
-								px-4
-								py-1
-								my-1		
-							"> <a class="
-									text-[var(--sl-color-text-accent)]
-									text-justify
-									" href="/blog/new-beginnings-2"> <div class="
-										flex
-										flex-col
-										sm:ml-4
-										
-										text-[var(--sl-color-gray-1)]
-									"> <h3 class="
-											text-l 
-											font-bold
-											"> New Beginnings 2 </h3> <p class="font-medium"> 2023-01-02 </p> </div> </a> </div><div class="
-								hover:bg-slate-100
-								hover:dark:bg-slate-800
-								rounded-3xl
-								px-4
-								py-1
-								my-1		
-							"> <a class="
-									text-[var(--sl-color-text-accent)]
-									text-justify
-									" href="/blog/new-beginnings-3"> <div class="
-										flex
-										flex-col
-										sm:ml-4
-										
-										text-[var(--sl-color-gray-1)]
-									"> <h3 class="
-											text-l 
-											font-bold
-											"> New Beginnings 3 </h3> <p class="font-medium"> 2022-05-02 </p> </div> </a> </div><div class="
-								hover:bg-slate-100
-								hover:dark:bg-slate-800
-								rounded-3xl
-								px-4
-								py-1
-								my-1		
-							"> <a class="
-									text-[var(--sl-color-text-accent)]
-									text-justify
-									" href="/blog/new-beginnings-4"> <div class="
-										flex
-										flex-col
-										sm:ml-4
-										
-										text-[var(--sl-color-gray-1)]
-									"> <h3 class="
-											text-l 
-											font-bold
-											"> New Beginnings 4 </h3> <p class="font-medium"> 2021-06-02 </p> </div> </a> </div> </div> </div> </div> </div> </div> </div></body>
+							hover:bg-slate-100
+							hover:dark:bg-slate-800
+							py-1
+							px-2
+							my-1		
+						"> <a class="
+								text-[var(--sl-color-text-accent)]
+								text-justify
+								" href="/blog/stability-time-for-0-7-2"> <div class="
+									flex
+									flex-col
+									text-[var(--sl-color-gray-1)]
+								"> <h3 class="
+										text-l 
+										font-bold
+										"> Stability - time for 0.7.2 </h3> <p class="font-medium"> 2025-06-01 </p> </div> </a> </div><div class="
+							hover:bg-slate-100
+							hover:dark:bg-slate-800
+							py-1
+							px-2
+							my-1		
+						"> <a class="
+								text-[var(--sl-color-text-accent)]
+								text-justify
+								" href="/blog/c3-0-7-2-release-this-one-is-getting-big-now"> <div class="
+									flex
+									flex-col
+									text-[var(--sl-color-gray-1)]
+								"> <h3 class="
+										text-l 
+										font-bold
+										"> C3 0.7.2 Release this one is getting big now </h3> <p class="font-medium"> 2024-01-02 </p> </div> </a> </div><div class="
+							hover:bg-slate-100
+							hover:dark:bg-slate-800
+							py-1
+							px-2
+							my-1		
+						"> <a class="
+								text-[var(--sl-color-text-accent)]
+								text-justify
+								" href="/blog/new-beginnings-5"> <div class="
+									flex
+									flex-col
+									text-[var(--sl-color-gray-1)]
+								"> <h3 class="
+										text-l 
+										font-bold
+										"> New Beginnings 5 </h3> <p class="font-medium"> 2023-06-01 </p> </div> </a> </div><div class="
+							hover:bg-slate-100
+							hover:dark:bg-slate-800
+							py-1
+							px-2
+							my-1		
+						"> <a class="
+								text-[var(--sl-color-text-accent)]
+								text-justify
+								" href="/blog/new-beginnings-2"> <div class="
+									flex
+									flex-col
+									text-[var(--sl-color-gray-1)]
+								"> <h3 class="
+										text-l 
+										font-bold
+										"> New Beginnings 2 </h3> <p class="font-medium"> 2023-01-02 </p> </div> </a> </div><div class="
+							hover:bg-slate-100
+							hover:dark:bg-slate-800
+							py-1
+							px-2
+							my-1		
+						"> <a class="
+								text-[var(--sl-color-text-accent)]
+								text-justify
+								" href="/blog/new-beginnings-3"> <div class="
+									flex
+									flex-col
+									text-[var(--sl-color-gray-1)]
+								"> <h3 class="
+										text-l 
+										font-bold
+										"> New Beginnings 3 </h3> <p class="font-medium"> 2022-05-02 </p> </div> </a> </div><div class="
+							hover:bg-slate-100
+							hover:dark:bg-slate-800
+							py-1
+							px-2
+							my-1		
+						"> <a class="
+								text-[var(--sl-color-text-accent)]
+								text-justify
+								" href="/blog/new-beginnings-4"> <div class="
+									flex
+									flex-col
+									text-[var(--sl-color-gray-1)]
+								"> <h3 class="
+										text-l 
+										font-bold
+										"> New Beginnings 4 </h3> <p class="font-medium"> 2021-06-02 </p> </div> </a> </div> </div> <!-- End of Sidebar --> </div> <!-- End of page grid layout for sidebar and main --> </div> </div> </body>
