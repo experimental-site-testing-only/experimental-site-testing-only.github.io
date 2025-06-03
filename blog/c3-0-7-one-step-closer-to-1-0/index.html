@@ -1,0 +1,615 @@
+<!DOCTYPE html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta name="og:title" content="C3"><meta name="og:description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta content="/logo.svg" property="og:image"><meta content="#4355ec" data-react-helmet="true" name="theme-color"><meta name="og:image" content="/logo.svg"><link rel="icon" href="/ico.svg" type="image/x-icon"><title>C3 | Blog | An evolution, not a revolution</title><link rel="stylesheet" href="/_astro/blog.CnkEaq2Y.css">
+<link rel="stylesheet" href="/_astro/index.CLxMlQ5a.css"><script type="module" src="/_astro/page.7qqag-5g.js"></script></head> <body class="dark:bg-stone-950 bg-white"> <div style="height: auto"> <script>
+
+	// get theme preference from local storage
+	let theme = localStorage.getItem("starlight-theme");
+	
+	// Set existing preference of light, from previous page load
+	if (theme === "light") 
+	{
+		document.documentElement.classList.remove("dark");
+		document.documentElement.setAttribute("data-theme", "light");
+	}
+	// Set existing preference of dark, from previous page load
+	else if (theme === "dark") 
+	{
+		document.documentElement.classList.add("dark");
+		document.documentElement.setAttribute("data-theme", "dark");
+	}
+	// default to light mode if no value in local storage
+	else
+	{
+		document.documentElement.setAttribute("data-theme", "light");
+	}
+	
+
+	function toggleDarkMode() {
+		// get theme preference from local storage
+		let theme = localStorage.getItem("starlight-theme")
+
+		// Switch existing preference from light to dark
+		if (theme === "light") 
+		{
+			localStorage.setItem("starlight-theme", "dark");
+			document.documentElement.classList.add("dark");
+			document.documentElement.setAttribute("data-theme", "dark");
+		}
+		// Switch existing preference from dark to light
+		else if (theme === "dark") 
+		{
+			localStorage.setItem("starlight-theme", "light");
+			document.documentElement.classList.remove("dark");
+			document.documentElement.setAttribute("data-theme", "light");
+		}
+		// no local storage preference, but browser prefer dark, add dark class to root html element
+		else if (window.matchMedia("(prefers-color-scheme: dark)").matches) 
+		{
+			localStorage.setItem("starlight-theme", "dark");
+			document.documentElement.classList.add("dark");
+			document.documentElement.setAttribute("data-theme", "dark");
+		}
+		// No local storage or browser preference, add dark class to root html element
+		else 
+		{
+			localStorage.setItem("starlight-theme", "dark");
+			document.documentElement.classList.add("dark");
+			document.documentElement.setAttribute("data-theme", "dark");
+		}	
+	}
+	
+
+	
+	// is the moreDropdown menu open
+	let isMoreDropdownOpen = false;
+	
+	document.addEventListener("mousedown", (event) => {
+		moreDropdownHandleClickInner(event);
+	})
+	
+	
+	function moreDropdownHandleClickInner(event) {
+		
+		const dropdownParent = document.getElementById("more-dropdown-parent")
+		const dropdown = document.getElementById("more-dropdown")
+		
+		// We clicked on the menu
+		if (dropdownParent.contains(event.target)) {
+			
+			// if menu is open and we clicked to close it
+			if (isMoreDropdownOpen) {
+				isMoreDropdownOpen = false
+				
+				setTimeout(
+					function() {
+						dropdown.classList.add("hidden");
+					}, 
+					200,
+				);
+				return;
+			}
+			
+			// Opening the menu
+			isMoreDropdownOpen = true;
+			
+			setTimeout(
+				function() {
+					dropdown.classList.remove("hidden");
+				}, 
+				200,
+			);
+		
+		}
+		// We clicked off the menu, close the menu
+		else
+		{
+			// Closing the menu
+			isMoreDropdownOpen = false;
+			
+			setTimeout(
+				function() {
+					dropdown.classList.add("hidden");
+				}, 
+				200,
+			);
+	
+		}	
+	}
+	
+	
+	
+	// is the mobileMenu open
+	let isMobileMenuOpen = false;
+	
+	document.addEventListener("mousedown", (event) => {
+		mobileMenuHandleClickInner(event);
+	})
+	
+	function mobileMenuHandleClickInner(event) {
+		
+		const dropdownParent = document.getElementById("mobile-menu-parent")
+		const dropdown = document.getElementById("mobile-menu")
+		const iconOpenMenu = document.getElementById("icon-open-mobile-menu")
+		const iconCloseMenu = document.getElementById("icon-close-mobile-menu")
+		
+		
+		// We clicked on the menu
+		if (dropdownParent.contains(event.target)) {
+			
+			// if menu is open and we clicked to close it
+			if (isMobileMenuOpen) {
+				isMobileMenuOpen = false
+				
+				dropdown.classList.add("hidden");
+				iconOpenMenu.classList.remove("hidden");
+				iconCloseMenu.classList.add("hidden");
+				
+				return;
+			}
+			
+			// Opening the menu
+			isMobileMenuOpen = true;
+			
+			dropdown.classList.remove("hidden");
+			iconOpenMenu.classList.add("hidden");
+			iconCloseMenu.classList.remove("hidden");
+		}	
+	}	
+	
+</script> <header class="
+	flex 
+	flex-wrap 
+	sm:justify-start 
+	sm:flex-nowrap 
+	z-50 
+	w-full 
+	border-b 
+	border-gray-200
+	text-sm 
+	py-3 
+	sm:py-0 
+	dark:border-stone-700
+	"> <nav class="
+		relative 
+		max-w-7xl 
+		w-full 
+		mx-auto 
+		px-4 
+		sm:flex 
+		sm:items-center 
+		sm:justify-between 
+		sm:px-6 
+		lg:px-8
+		" aria-label="Global"> <div class="
+			flex 
+			items-center 
+			justify-between
+			"> <a class="
+				text-blue-600
+				dark:text-blue-500
+				flex-none 
+				text-xl 
+				font-semibold 
+				" href="/" aria-label="Brand">
+C3
+</a> <div class="sm:hidden" id="mobile-menu-parent"> <!-- Mobile topMenu toggle --> <button class="
+					hs-collapse-toggle 
+					p-2 
+					inline-flex 
+					justify-center 
+					items-center 
+					gap-2 
+					rounded-md border 
+					font-medium 
+					bg-white 
+					text-stone-700 
+					shadow-sm 
+					align-middle 
+					hover:bg-gray-50 
+					focus:outline-none 
+					focus:ring-2 
+					focus:ring-offset-2 
+					focus:ring-offset-white 
+					focus:ring-blue-600 
+					transition-all 
+					text-sm 
+					dark:bg-slate-900 
+					dark:hover:bg-slate-800 
+					dark:border-stone-700 
+					dark:text-gray-400 
+					dark:hover:text-white 
+					dark:focus:ring-offset-stone-950" type="button" aria-controls="mobile-menu" aria-label="Toggle navigation"> <!-- Icon openMobileMenu --> <svg class="
+						opacity-100
+						w-4 
+						h-4
+						" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" id="icon-open-mobile-menu"> <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path> </svg> <!-- Icon closeMobileMenu --> <svg class="
+						hidden 
+						w-4 
+						h-4
+						" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" id="icon-close-mobile-menu"> <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path> </svg> </button> </div> </div> <!-- mobile menu --> <div class="
+			hidden 
+			sm:block
+			overflow-hidden 
+			
+			transition-all 
+			duration-1000 
+			ease-linear
+			
+			basis-full 
+			grow 
+			" id="mobile-menu"> <div class="
+				flex 
+				flex-col 
+				gap-y-4 
+				gap-x-0 
+				mt-5 
+				sm:flex-row 
+				sm:items-center 
+				sm:justify-end 
+				sm:gap-y-0 
+				sm:gap-x-7 
+				sm:mt-0 
+				sm:pl-7"> <a class="font-medium text-gray-500 hover:text-blue-500 sm:py-6 dark:text-gray-400 dark:hover:text-blue-500" href="/getting-started/">Docs</a> <a class="font-medium text-gray-500 hover:text-blue-500 sm:py-6 dark:text-gray-400 dark:hover:text-blue-500" href="/language-overview/examples">Examples</a> <a class="font-medium text-gray-500 hover:text-blue-500 sm:py-6 dark:text-gray-400 dark:hover:text-blue-500" href="/getting-started/prebuilt-binaries">Download</a> <a class="font-medium text-gray-500 hover:text-blue-500 sm:py-6 dark:text-gray-400 dark:hover:text-blue-500" href="https://discord.gg/qN76R87">
+Discord
+</a> <a class="font-medium text-gray-500 hover:text-blue-500 sm:py-6 dark:text-gray-400 dark:hover:text-blue-500" href="/blog">
+Blog
+</a> <div class="
+					hs-dropdown [--strategy:static] 
+					sm:[--strategy:fixed] 
+					[--adaptive:none] 
+					sm:[--trigger:hover] 
+					sm:py-4
+					"> <!-- Desktop toggle More dropdown menu --> <button id="more-dropdown-parent" type="button" class="flex items-center w-full text-stone-600 hover:text-blue-500 font-medium dark:text-gray-400 dark:hover:text-blue-500">
+More
+<svg class="ml-2 w-2.5 h-2.5 text-stone-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path> </svg> </button> <!-- Desktop More dropdown menu --> <div id="more-dropdown" class="
+						hidden
+						absolute
+						top-full 
+						sm:right-[4rem]
+						z-10
+						sm:w-52 
+						bg-white
+						rounded-lg
+						sm:border 
+						sm:dark:border
+						border-gray-200
+						shadow-md
+						dark:bg-stone-950 
+						dark:border-stone-700 
+						sm:mt-1
+						mt-[-1.5rem]
+						p-2			
+						"> <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-md font-medium text-stone-600 hover:text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-blue-700 dark:hover:text-gray-100" href="https://github.com/c3lang/c3c">
+Github
+</a> <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-md font-medium text-stone-600 hover:text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-blue-700 dark:hover:text-gray-100" href="https://github.com/sponsors/c3lang">
+Support us
+</a> </div> </div> <!-- Enable dark mode, from light mode --> <a class="
+					group
+					flex 
+					items-center 
+					text-gray-600 
+					hover:text-blue-600 
+					font-medium 
+					dark:hidden
+					dark:text-gray-400 
+					dark:hover:text-gray-500
+					" href="#!" onclick="toggleDarkMode()"> <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"> <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"></path> </svg> </a> <!-- Enable light mode from dark mode --> <a class="
+					hidden 
+					dark:flex
+					group 
+					items-center 
+					text-gray-600 
+					hover:text-blue-600 
+					font-medium 
+					dark:text-gray-400 
+					dark:hover:text-gray-500
+					" href="#!" onclick="toggleDarkMode()"> <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"> <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path> </svg> </a> </div> </div> </nav> </header> <div class="
+			relative
+			overflow-hidden
+			"> <div class="
+				grid
+				max-w-[40rem]
+				xl:grid-cols-[1.5fr_40rem_1.5fr]
+				xl:max-w-[calc(20rem+40rem+20rem)]
+				lg:grid-cols-[40rem_1.5fr]
+				lg:max-w-[calc(40rem+20rem)]
+				mx-auto
+			"> <!-- Empty content for symmetry and centering of main content --> <div class="hidden xl:block"></div> <!-- Main content --> <div class="
+					px-4 
+					sm:px-6 
+					lg:px-8 
+					lg:pt-24 
+					pt-8
+					pb-8
+					"> <div class="mt-5 mx-auto"> <h1 class="
+							block 
+							font-bold 
+							text-gray-800 
+							text-5xl 
+							lg:text-6xl 
+							lg:leading-tight 
+							dark:text-white
+							text-justify
+							mb-8
+							sm:mb-18
+							"> <a href="/blog">
+The
+<span class="
+									bg-clip-text 
+									bg-gradient-to-l 
+									from-violet-600 
+									to-blue-600 
+									text-transparent">
+C3
+</span>
+Blog
+</a> </h1> <!-- Show only current blogpost --> <!-- Using CSS variables from global styles, since those change with dark mode --><div class="
+	lg:my-20
+	 astro-izoogwj6"> <h2 class="
+		text-3xl 
+		lg:text-4xl 
+		font-bold 
+		dark:text-white
+		mb-2
+		text-justify
+	 astro-izoogwj6"> C3 0.7 - One Step Closer To 1.0 </h2> <p class="
+		text-md
+		lg:text-l 
+		text-gray-800 
+		dark:text-white
+		mb-12
+		sm:mb-16
+		text-justify
+	 astro-izoogwj6"> 2025-03-30 </p> <div class="
+		text-justify
+		 astro-izoogwj6" id="child_slots">  <h2 id="the-070-milestone-reached">The 0.7.0 milestone reached</h2>
+<p>Originally I was going to write this as normal release notes, but it’s a bit too much to go through
+the whys and wherefores of the changes. So the format of this blog post is going to be a bit different.</p>
+<p>0.6.0 was tagged in June 2024, and since then there’s been monthly releases up until the last one, 0.6.8.
+While the language has evolved during this year, each 0.6.x version has been <a href="/getting-started/roadmap/">backwards compatible</a> with code written for previous 0.6 versions. Despite this constraint, there have been a lot of improvements,
+especially in enhancing compile time to have much fewer corners, and of course the standard library has
+been improved as well.</p>
+<p>Well worth mentioning is the impact <a href="https://www.twitch.tv/tsoding">Tsoding</a> had on the visibility of the
+language. His “recreational programming” streams on C3 brought a lot of new users to the community, and
+with it a lot of extremely valuable feedback on both the langage and the standard library.</p>
+<p>The release format of C3 allows for breaking changes in every new 0.x release. This means that 0.7.0 and
+0.6.8 code will not be compatible. Some of this is already deprecated code in 0.6.8, but for some things there
+were no clear migration path.</p>
+<p>For that reason, I’d like to start by giving an primer on how to convert 0.6.x code to 0.7.0</p>
+<h2 id="migrating-to-070">Migrating to 0.7.0</h2>
+<p>While these changes may <em>seem</em> like a lot, most of the changes were actually gradually introduced in 0.6.x with the now removed variants are being deprecated.</p>
+<h3 id="syntax-changes">Syntax changes</h3>
+<ol>
+<li>Generics now use <code dir="auto">{}</code> rather than <code dir="auto">(&#x3C;>)</code>. E.g. <code dir="auto">List(&#x3C;int>) x;</code> -> <code dir="auto">List {int} x;</code></li>
+<li>The keyword <code dir="auto">def</code> has been replaced by <code dir="auto">alias</code>, syntax is otherwise unchanged. E.g. <code dir="auto">def Foo = int;</code> -> <code dir="auto">alias Foo = int;</code></li>
+<li>The keyword <code dir="auto">distinct</code> has been replaced by <code dir="auto">typedef</code>, syntax is otherwise unchanged. E.g. <code dir="auto">distinct Bar = int;</code> -> <code dir="auto">typedef Bar = int;</code></li>
+<li>Optional types are now declared with <code dir="auto">?</code> instad of <code dir="auto">!</code>. E.g. <code dir="auto">int! a;</code> -> <code dir="auto">int? a;</code></li>
+<li>Declare faults with <code dir="auto">faultdef</code>: <code dir="auto">fault MyFault { ABC, FOO_FAULT }</code> -> <code dir="auto">faultdef ABC, FOO_FAULT;</code></li>
+<li>The <code dir="auto">anyfault</code> type is now called <code dir="auto">fault</code>. E.g. <code dir="auto">anyfault the_err = @catch(foo);</code> -> <code dir="auto">fault the_err = @catch(foo);</code></li>
+<li>Compound literal syntax <code dir="auto">Foo { 1, 2 }</code> is no longer valid. Use C-style <code dir="auto">(Foo) { 1, 2 }</code> instead.</li>
+<li><code dir="auto">{| |}</code> expression blocks have been removed. Use <code dir="auto">do { ... };</code> with <code dir="auto">break</code> instead.</li>
+<li><code dir="auto">&#x26;ref</code> and <code dir="auto">$varef</code> have been removed. Use <code dir="auto">#expr</code> and <code dir="auto">$vaexpr</code> instead.</li>
+<li><code dir="auto">$vaarg(1)</code> syntax is now invalid. Use <code dir="auto">$vaarg[1]</code> instead.</li>
+<li>Casting an enum to its ordinal is no longer valid. <code dir="auto">.ordinal</code> instead.</li>
+<li><code dir="auto">$or</code>, <code dir="auto">$and</code> are removed. Use <code dir="auto">|||</code> and <code dir="auto">&#x26;&#x26;&#x26;</code>.</li>
+<li><code dir="auto">$concat</code> is removed. Use <code dir="auto">+++</code> instead.</li>
+<li><code dir="auto">.allocator = allocator</code> syntax for named arguments in calls is removed. Use the new syntax <code dir="auto">allocator: allocator</code> instead.</li>
+<li>The “any-switch” has been removed. Switch on <code dir="auto">foo.type</code> then explicitly do the cast instead.</li>
+<li><code dir="auto">if (catch foo) { case ... }</code> syntax is removed. Use <code dir="auto">if (catch err = foo) { switch (err) { ... } }</code> instead.</li>
+<li><code dir="auto">$foreach</code>, <code dir="auto">$for</code> and <code dir="auto">$switch</code> no longer uses <code dir="auto">()</code>. Remove the parentheses and end the statement with <code dir="auto">:</code>, e.g. <code dir="auto">$foreach ($x, $y : $foo)</code> -> <code dir="auto">$foreach $x, $y : $foo:</code></li>
+<li>Remove the <code dir="auto">int[?]</code> syntax which was tested as an alternative to <code dir="auto">int[*]</code>.</li>
+<li><code dir="auto">@return!</code> in contracts are changed to <code dir="auto">@return?</code></li>
+<li>Contracts that have a trailing description, now MUST have a <code dir="auto">:</code> before the description. E.g. <code dir="auto">@require a > b "a must be greater than b"</code> -> <code dir="auto">@require a > b : "a must be greater than b"</code>.</li>
+<li>Order of attribute declaration is changed for <code dir="auto">alias</code>: <code dir="auto">def Foo = int @public;</code> -> <code dir="auto">alias Foo @public = int;</code></li>
+<li>Definition of new attributes use <code dir="auto">attrdef</code> as the keyword rather than <code dir="auto">def</code>.</li>
+</ol>
+<h3 id="stdlib-changes">Stdlib changes</h3>
+<ol>
+<li>Use <code dir="auto">tmem</code> rather than <code dir="auto">allocator::temp()</code>.</li>
+<li>Use <code dir="auto">mem</code> rather than <code dir="auto">allocator::heap()</code>.</li>
+<li>The <code dir="auto">new_init</code> and other <code dir="auto">new_*</code> functions have been removed. Use <code dir="auto">init(mem)</code>, <code dir="auto">s.concat(mem, s2)</code> etc.</li>
+<li>The temp allocator is not implicitly set up on other than the main thread. Use <code dir="auto">@pool_init()</code> to set up a temporary memory pool on a thread.</li>
+<li>Lists and maps no longer allocate on the heap when not initialized. Instead, they use the temp allocator if not initialized.</li>
+<li><code dir="auto">@pool()</code> no longer requires (or permits) an allocator. The temp allocator supports any number on in-flight temp allocators.</li>
+</ol>
+<p>Overall, the <code dir="auto">new</code> functions, which implicitly used the heap allocator, has gone away and been replaced
+by a function that explicitly takes the allocator. There are often also temp allocator variants, which
+are then prefixed with <code dir="auto">t</code>, e.g. <code dir="auto">tconcat</code>.</p>
+<p>Try to use the temp allocator when possible.</p>
+<h2 id="additions-and-improvements">Additions and improvements</h2>
+<p>There are not only removals and changes, there are also some language additions and improvements
+in 0.7.0 compared to 0.6.8.</p>
+<ol>
+<li>Swizzling assignment is now possible, e.g. <code dir="auto">foo.xy += { 1, 2 }</code></li>
+<li>A <code dir="auto">@format</code> attribute has been added to compile time check formatting strings.</li>
+<li>Enum associated values can reference the calling enum.</li>
+<li><code dir="auto">!!foo</code> used to not work, now it properly is interpreted as <code dir="auto">!(!foo)</code>.</li>
+<li>Enum inline values were already in 0.6.8, but from 0.7.0 the <code dir="auto">.ordinal</code> has the same behaviour as associated values. This makes enums more flexible and closer to C enum behaviour.</li>
+<li><code dir="auto">@wstring</code>, <code dir="auto">@wstring32</code>, <code dir="auto">@char32</code> and <code dir="auto">@char16</code> macros were added for interfacing with wide character libraries.</li>
+</ol>
+<h2 id="thoughts-on-070">Thoughts on 0.7.0</h2>
+<p>The breaking changes of 0.7.0 are of two categories: (1) removals (2) syntax changes.</p>
+<h3 id="why-remove-things">Why remove things?</h3>
+<p>One might ask why one would remove things from a language? Surely more is better?</p>
+<p>The reason is that learning a language this “one more feature”, is additional effort to learn the language. It’s
+also one more thing for people knowing the language to remember. In this way, each feature has a cost
+outside of compiler complexity.</p>
+<p>When people encounter a rare feature such as the any-switch, they will need to look up how it works. This both
+takes time and undermines people’s confidence that they know the language.</p>
+<p>So during the development of a language it’s important to weed out things that aren’t carrying its weight, and this
+is why 0.7 removes features.</p>
+<h3 id="why-change-syntax">Why change syntax?</h3>
+<p>As an example, <code dir="auto">int! a;</code> has been used in C3 since the introduction of optionals. Why change it now?</p>
+<p>In this case it’s because the semantics of <code dir="auto">int! a;</code> was quite different from an optional when it was introduced.
+The use of <code dir="auto">!</code> was exactly <em>not</em> to confuse it with an optional. Now it’s so much closer to the “common” optional that
+a change to <code dir="auto">int? a;</code> makes perfect sense.</p>
+<p><code dir="auto">def</code> -> <code dir="auto">alias</code> follows a similar trajectory. Initially it would be used both for aliases and to <em>define</em> new
+attributes and distinct types. Then distinct type definition got its own separate definition, so it was more like
+an alias aside from the attributes. With attributes getting its own <code dir="auto">attrdef</code>, what remained were only aliases, and
+changing the name to <code dir="auto">alias</code> suddenly made perfect sense.</p>
+<p>Both these changes make the language follow <em>more common</em> syntax conventions as well, which is a win.</p>
+<p>The goal is for the syntax to feel straightforward and have as little “oh this is odd” as possible. This
+makes it both easier to learn and remember.</p>
+<h3 id="more-like-c">More like C</h3>
+<p>Even though neither <code dir="auto">alias</code> nor <code dir="auto">int?</code> exist in C, they’re familiar from adjacent languages. I believe
+this will make C3 feel “more like C”, even though the changes are not in C.</p>
+<p>Similarly, removing novel constructs like the expression block reduces the divergence from C syntax.</p>
+<h2 id="c3-071-and-onwards">C3 0.7.1 and onwards</h2>
+<p>Where C3 0.7.0 has been a big cleanup release, it doesn’t have that many improvements to general quality
+of life aside from the <code dir="auto">@format</code> attribute.</p>
+<p>I am really looking forward to inlining and resolving more function contracts on the caller side. In the
+first pass it will catch some low hanging fruit such as passing invalid constants, but this can be gradually
+improved to catch even more bugs.</p>
+<p>Another thing is improving the standard library. There are additions I’d like to do both to the collections
+and to threads.</p>
+<p>There are also a number of minor improvements to the compiler that would add to the quality of life for
+some uses. On top of this the inline asm is in need of bug fixes and cleanup.</p>
+<p>Outside of the language and the compiler, a good docgen is needed.</p>
+<p>But as for language changes, there is nothing planned, just incremental improvements to what’s already
+there.</p>
+<h2 id="change-log">Change Log</h2>
+<p>Here is the full changelist for 0.6.8 to 0.7.0. Obviously if we’d bundle all changes from 0.6.1 to 0.7.0 the
+list would be MUCH bigger :D</p>
+<details>
+	<summary class="text-black dark:text-white font-medium text-lg">
+		Click for full change log
+	</summary>
+<ul>
+<li>Removed <code dir="auto">Foo { 1, 2 }</code> initializer.</li>
+<li>Changed <code dir="auto">Foo(&#x3C;int>)</code> to <code dir="auto">Foo {int}</code>.</li>
+<li>Removed <code dir="auto">{| |}</code> expression blocks.</li>
+<li>Removed macro <code dir="auto">&#x26;ref</code> and <code dir="auto">$varef</code> parameters.</li>
+<li>Removed <code dir="auto">$vaexpr(0)</code> syntax in favour of <code dir="auto">$vaexpr[0]</code></li>
+<li>Enum does not cast to/from an integer (its ordinal).</li>
+<li>Removed use of <code dir="auto">void!</code> for main, test and benchmark functions.</li>
+<li>Removed <code dir="auto">$or</code>, <code dir="auto">$and</code>, <code dir="auto">$concat</code> compile time functions.</li>
+<li>Removed <code dir="auto">@adhoc</code> attribute.</li>
+<li>Disallow inline use of nested generics (e.g. <code dir="auto">List{List{int}}</code>.</li>
+<li>Remove <code dir="auto">.allocator = allocator</code> syntax for functions.</li>
+<li>Remove <code dir="auto">@operator(construct)</code>.</li>
+<li>Removal of “any-switch”.</li>
+<li>Allow swizzling assign, eg. <code dir="auto">abc.xz += { 5, 10 };</code></li>
+<li>Added <code dir="auto">$$wstr16</code> and <code dir="auto">$$wstr32</code> builtins.</li>
+<li><code dir="auto">$foreach</code> ”()” replaced by trailing ”:” <code dir="auto">$foreach ($x, $y : $foo)</code> -> <code dir="auto">$foreach $x, $y : $foo:</code></li>
+<li><code dir="auto">$for</code> ”()” replaced by trailing ”:” <code dir="auto">$for (var $x = 0; $x &#x3C; FOO; $x++)</code> -> <code dir="auto">$for var $x = 0; $x &#x3C; FOO; $x++:</code></li>
+<li><code dir="auto">$switch</code> ”()” replaced by trailing ”:” <code dir="auto">$switch ($Type)</code> -> <code dir="auto">$switch $Type:</code></li>
+<li>Empty <code dir="auto">$switch</code> requires trailing ”:” <code dir="auto">$switch</code> -> <code dir="auto">$switch:</code></li>
+<li>Rename <code dir="auto">@return!</code> to <code dir="auto">@return?</code> and change syntax to require ”:” after faults.</li>
+<li>Remove <code dir="auto">if (catch foo) { case ... }</code> syntax.</li>
+<li>Remove <code dir="auto">[?]</code> syntax.</li>
+<li>Change <code dir="auto">int!</code> to <code dir="auto">int?</code> syntax.</li>
+<li>New <code dir="auto">fault</code> declaration using <code dir="auto">faultdef</code>.</li>
+<li>Enum associated values can reference the calling enum.</li>
+<li>Improve error message on <code dir="auto">foo ?? io::EOF</code> with missing ’?’ #2036</li>
+<li>Make <code dir="auto">@public</code> import recursive. #2018</li>
+<li>Fault nameof prefixes the first last module path, for instance <code dir="auto">std::io::EOF</code> is rendered as <code dir="auto">io::EOF</code>.</li>
+<li>Rename <code dir="auto">def</code> to <code dir="auto">alias</code>.</li>
+<li>Change <code dir="auto">distinct</code> -> <code dir="auto">typedef</code>.</li>
+<li>Order of attribute declaration is changed for <code dir="auto">alias</code>.</li>
+<li>Added <code dir="auto">LANGUAGE_DEV_VERSION</code> env constant.</li>
+<li>Rename <code dir="auto">anyfault</code> -> <code dir="auto">fault</code>.</li>
+<li><code dir="auto">!!foo</code> now works same as as <code dir="auto">! ! foo</code>.</li>
+<li>Temp allocator now supports more than 2 in-flight stacks.</li>
+<li>Printing stacktrace uses its own temp allocator.</li>
+<li>Allow inferred type on body parameters. E.g. <code dir="auto">@stack_mem(1024; alloc) { ... };</code></li>
+<li>Use <code dir="auto">@pool_init()</code> to set up a temp pool on a thread. Only the main thread has implicit temp pool setup.</li>
+<li><code dir="auto">tmem</code> is now a variable.</li>
+<li>Compile test and benchmark functions when invoking <code dir="auto">--lsp</code> #2058.</li>
+<li>Added <code dir="auto">@format</code> attribute for compile time printf validation #2057.</li>
+<li>Formatter no longer implicitly converts enums to ordinals.</li>
+</ul>
+<h3 id="fixes">Fixes</h3>
+<ul>
+<li>Fix address sanitizer to work on MachO targets (e.g. MacOS).</li>
+<li>Post and pre-decrement operators switched places for vector elements #2010.</li>
+<li>Aliases were incorrectly considered compile time constants.</li>
+<li>FreeBSD libc stat definitions were incorrect.</li>
+<li>Atomic max was incorrect.</li>
+<li><code dir="auto">"+".to_float()</code> would panic.</li>
+<li><code dir="auto">import</code> can now both be @public and @norecurse.</li>
+<li>Crash when trying to convert a struct slice to a vector #2039.</li>
+<li>Crash resolving a method on <code dir="auto">Foo[2]</code> when <code dir="auto">Foo</code> is distinct #2042.</li>
+<li>Bug due to missing cast when doing <code dir="auto">$i[$x] = $z</code>.</li>
+<li>Incorrectly allowed getting pointer to a macro #2049.</li>
+<li>&#x26;self not runtime null-checked in macro #1827.</li>
+<li>Bug when printing a boolean value as an integer using printf.</li>
+<li>Show error when a generic module contains a self-generic type.</li>
+<li>“Single module” was not enforced when creating a static library using as a project target.</li>
+</ul>
+<h3 id="stdlib-changes-1">Stdlib changes</h3>
+<ul>
+<li><code dir="auto">new_*</code> functions in general moved to version without <code dir="auto">new_</code> prefix.</li>
+<li><code dir="auto">string::new_from_*</code> changed to <code dir="auto">string::from_*</code>.</li>
+<li><code dir="auto">String.to_utf16_copy</code> and related changed to <code dir="auto">String.to_utf16</code>.</li>
+<li><code dir="auto">String.to_utf16_tcopy</code> and related changed to <code dir="auto">String.to_temp_utf16</code></li>
+<li><code dir="auto">mem::temp_new</code> changed to <code dir="auto">mem::tnew</code>.</li>
+<li><code dir="auto">mem::temp_alloc</code> and related changed to <code dir="auto">mem::talloc</code>.</li>
+<li><code dir="auto">mem::temp_new_array</code> changed to <code dir="auto">mem::temp_array</code>.</li>
+<li>Add <code dir="auto">ONHEAP</code> variants for List/HashMap for initializing global maps on the heap.</li>
+<li>Remove Vec2 and other aliases from std::math. Replace <code dir="auto">.length_sq()</code> with <code dir="auto">sq_magnitude()</code></li>
+<li>Change all hash functions to have a common <code dir="auto">hash</code> function.</li>
+<li><code dir="auto">@wstring</code>, <code dir="auto">@wstring32</code>, <code dir="auto">@char32</code> and <code dir="auto">@char16</code> compile time macros added.</li>
+<li>Updates to <code dir="auto">Atomic</code> to handle distinct types and booleans.</li>
+<li>Added <code dir="auto">math::iota</code>.</li>
+<li><code dir="auto">@pool</code> no longer takes an argument.</li>
+<li><code dir="auto">Allocator</code> interface removes <code dir="auto">mark</code> and <code dir="auto">reset</code>.</li>
+<li>DynamicArenaAllocator has changed init function.</li>
+<li>Added <code dir="auto">BackedArenaAllocator</code> which is allocated to a fixed size, then allocates on the backing allocator and supports mark/reset.</li>
+<li><code dir="auto">AnyList</code> now also defaults to the temp allocator.</li>
+<li><code dir="auto">os::getcwd</code> and <code dir="auto">os::get_home_dir</code> requires an explicit allocator.</li>
+<li><code dir="auto">file::load_new</code> and <code dir="auto">file::load_path_new</code> removed.</li>
+<li><code dir="auto">os::exit</code> and <code dir="auto">os::fastexit</code> added.</li>
+</ul>
+</details>
+<h3 id="want-to-dive-into-c3">Want To Dive Into C3?</h3>
+<p>Check out the <a href="/getting-started">documentation</a>
+or <a href="/getting-started/prebuilt-binaries">download it and try it out</a></p>
+<p>Have questions? Come and chat to us on <a href="https://discord.gg/qN76R87">Discord</a>.</p>  <!-- Markdown will be inserted here --> </div> </div> </div> </div> <!-- End of main content --> <!-- Sidebar on desktop --> <!-- Bottom on small/mobile --> <div class="
+					block 
+					lg:mt-68
+					px-6
+					lg:pl-16
+					mb-20
+					lg:mb-0
+					"> <h2 class="
+						text-[var(--sl-color-gray-1)]
+						mb-4
+						font-semibold
+						lg:font-medium
+						text-3xl
+						lg:text-xl
+						lg:pl-4
+					">
+Blog Archive
+</h2> <div class="
+							hover:bg-slate-100
+							hover:dark:bg-slate-800
+							py-2
+							px-4
+							my-2
+						"> <a class="
+								text-[var(--sl-color-text-accent)]
+								text-justify
+								" href="/blog/c3-0-7-2-quality-of-life"> <div class="
+									flex
+									flex-col
+									text-[var(--sl-color-gray-1)]
+									lg:text-xs
+									
+								"> <h4 class="
+										"> C3 0.7.2 - Quality Of Life </h4> <p class=""> 2025-06-02 </p> </div> </a> </div><div class="
+							hover:bg-slate-100
+							hover:dark:bg-slate-800
+							py-2
+							px-4
+							my-2
+						"> <a class="
+								text-[var(--sl-color-text-accent)]
+								text-justify
+								" href="/blog/c3-0-7-1-operator-overloading"> <div class="
+									flex
+									flex-col
+									text-[var(--sl-color-gray-1)]
+									lg:text-xs
+									
+								"> <h4 class="
+										"> C3 0.7.1 - Operator Overloading </h4> <p class=""> 2025-04-30 </p> </div> </a> </div> </div> <!-- End of Sidebar --> </div> <!-- End of page grid layout for sidebar and main --> </div> </div> </body>
