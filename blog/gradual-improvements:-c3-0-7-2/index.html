@@ -360,7 +360,7 @@ Blog
 		mb-12
 		sm:mb-16
 		text-justify
-	 astro-izoogwj6"> 2025-06-01 </p> <div class="
+	 astro-izoogwj6"> 2025-06-02 </p> <div class="
 		text-justify
 		 astro-izoogwj6" id="child_slots">  <p>Unlike 0.7.1, 0.7.2 not a big feature release, instead we focused on adding quality of life improvements which are <a href="/getting-started/roadmap/#c3-is-feature-stable">backwards compatible</a> with other 0.7 releases.</p>
 <h2 id="compile-time-additions">Compile time additions</h2>
@@ -387,7 +387,7 @@ Learn more about <a href="/generic-programming/macros/">macros</a> and <a href="
 <h4 id="allow-recursive-generic-modules">Allow recursive generic modules</h4>
 <p>To simplify generic module resolution it was not possible to recursively generate generic module. This restriction has been lifted in 0.7.1.</p>
 <h2 id="deprecations">Deprecations</h2>
-<h4 id="bitsize-suffix">Bitsize suffix</h4>
+<h4 id="bitsize-suffix-deprecations">Bitsize suffix deprecations</h4>
 <p>The bitsize suffixes are deprecated, so rather than writing <code dir="auto">23u64</code> use the C style <code dir="auto">23UL</code> instead. <code dir="auto">u128</code> and <code dir="auto">i128</code> suffixes are replaced by <code dir="auto">ULL</code> and <code dir="auto">LL</code> suffixes.</p>
 <p>Finally, the <code dir="auto">d</code> suffix for doubles have been added as a complement to <code dir="auto">f</code>.</p>
 <h4 id="compile-time-reflection-deprecations">Compile time reflection deprecations</h4>
@@ -395,7 +395,7 @@ Learn more about <a href="/generic-programming/macros/">macros</a> and <a href="
 <code dir="auto">SomeFn.params</code> have been deprecated. Use <code dir="auto">SomeFn.paramsof</code> instead.</p>
 <h4 id="deprecation-for-old-param-docs">Deprecation for old <code dir="auto">@param</code> docs</h4>
 <p>By 0.7.1 the declaration style <code dir="auto">@param foo "abc"</code> would be allowed rather than <code dir="auto">@param foo : "abc"</code>. This was by accident. It’s now properly deprecated.</p>
-<h3 id="generic-faults-are-not-allowed">Generic faults are not allowed</h3>
+<h4 id="generic-faults-are-not-allowed">Generic faults are not allowed</h4>
 <p>Creating faults that are parameterized is usually a mistake and should not have been allowed. It’s been completely removed in 0.7.2 as it was classified as a bug.</p>
 <p>This is no longer allowed:</p>
 <div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">module</span><span style="--0:#D6DEEB;--1:#403F53"> Foo {Type};</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">typedef</span><span style="--0:#D6DEEB;--1:#403F53"> BAZ, HELLO;</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="module Foo {Type};typedef BAZ, HELLO;"><div></div></button></div></figure></div>
