@@ -394,13 +394,13 @@ Blog
 <h2 id="how-the-temp-allocator-works">How The Temp Allocator Works</h2>
 <p>C3 has <a href="/generic-programming/macros/#trailing-blocks-for-macros">trailing body macros</a> which automate the setting up and freeing of the arena allocator used inside the temp allocator.</p>
 <p>The temp allocator uses an arena allocator internally and when that’s full it manages heap allocations via a linked list.</p>
-<p><img src="/blogs/memory-management/pool_allocator.jpg" alt="pool allocator as it fills up"></p>
+<p><img  src="/_astro/pool_allocator.DacpFqEZ_75biL.webp" alt="pool allocator as it fills up" width="1208" height="794" loading="lazy" decoding="async"></p>
 <p>With a single memory allocation region we have to wait till the end of the scope to reset the memory, which might mean we need a bigger than strictly necessary memory allocation.</p>
-<p><img src="/blogs/memory-management/arena_capacity_single.jpg" alt="pool allocator as it fills up"></p>
+<p><img  src="/_astro/arena_capacity_single.2Y2vxh8Z_2pNN6r.webp" alt="pool allocator as it fills up" width="704" height="664" loading="lazy" decoding="async"></p>
 <h3 id="nested-allocators-for-more-control">Nested Allocators For More Control</h3>
-<p><img src="/blogs/memory-management/nested_allocators.jpg" alt="pool allocator as it fills up"></p>
+<p><img  src="/_astro/nested_allocators.yvlxtZ7x_YXqNQ.webp" alt="pool allocator as it fills up" width="1208" height="1044" loading="lazy" decoding="async"></p>
 <p>Using nested allocators we can reset the arena memory that we have finished using, before reaching the end of the temp allocator’s scope. Nested allocators are also automatically managed but give us greater control, if used for appropriately sized regions this can reduce peak memory usage and allow smaller buffer sizes.</p>
-<p><img src="/blogs/memory-management/arena_capcity_multiple.jpg" alt="pool allocator as it fills up"></p>
+<p><img  src="/_astro/arena_capcity_multiple.BloFc4Qa_1tNT3n.webp" alt="pool allocator as it fills up" width="704" height="664" loading="lazy" decoding="async"></p>
 <h3 id="configuring-the-temp-allocator">Configuring The Temp Allocator</h3>
 <p>The design of the temp allocator is flexible, so you can configure it to make the tradeoffs which suit your application. The default settings should be fine for most use-cases, but when you need to tweak the settings you can control the temp allocator via <code dir="auto">@pool_init</code> adjusting:</p>
 <ul>
