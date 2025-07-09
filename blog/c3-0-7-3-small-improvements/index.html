@@ -1,0 +1,625 @@
+<!DOCTYPE html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta name="description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta name="og:title" content="C3"><meta name="og:description" content="C3 is a programming language that builds on the syntax and semantics of the C language, with the goal of evolving it while still retaining familiarity for C programmers."><meta content="/logo.svg" property="og:image"><meta content="#4355ec" data-react-helmet="true" name="theme-color"><meta name="og:image" content="/logo.svg"><link rel="icon" href="/ico.svg" type="image/x-icon"><title>C3 | Blog | An evolution, not a revolution</title><link rel="stylesheet" href="/_astro/blog.B_6Wx1W8.css">
+<link rel="stylesheet" href="/_astro/index.CLxMlQ5a.css"><script type="module" src="/_astro/page.7qqag-5g.js"></script></head> <body class="dark:bg-stone-950 bg-white"> <div style="height: auto"> <script>
+
+	// get theme preference from local storage
+	let theme = localStorage.getItem("starlight-theme");
+	
+	// Set existing preference of light, from previous page load
+	if (theme === "light") 
+	{
+		document.documentElement.classList.remove("dark");
+		document.documentElement.setAttribute("data-theme", "light");
+	}
+	// Set existing preference of dark, from previous page load
+	else if (theme === "dark") 
+	{
+		document.documentElement.classList.add("dark");
+		document.documentElement.setAttribute("data-theme", "dark");
+	}
+	// default to light mode if no value in local storage
+	else
+	{
+		document.documentElement.setAttribute("data-theme", "light");
+	}
+	
+
+	function toggleDarkMode() {
+		// get theme preference from local storage
+		let theme = localStorage.getItem("starlight-theme")
+
+		// Switch existing preference from light to dark
+		if (theme === "light") 
+		{
+			localStorage.setItem("starlight-theme", "dark");
+			document.documentElement.classList.add("dark");
+			document.documentElement.setAttribute("data-theme", "dark");
+		}
+		// Switch existing preference from dark to light
+		else if (theme === "dark") 
+		{
+			localStorage.setItem("starlight-theme", "light");
+			document.documentElement.classList.remove("dark");
+			document.documentElement.setAttribute("data-theme", "light");
+		}
+		// no local storage preference, but browser prefer dark, add dark class to root html element
+		else if (window.matchMedia("(prefers-color-scheme: dark)").matches) 
+		{
+			localStorage.setItem("starlight-theme", "dark");
+			document.documentElement.classList.add("dark");
+			document.documentElement.setAttribute("data-theme", "dark");
+		}
+		// No local storage or browser preference, add dark class to root html element
+		else 
+		{
+			localStorage.setItem("starlight-theme", "dark");
+			document.documentElement.classList.add("dark");
+			document.documentElement.setAttribute("data-theme", "dark");
+		}	
+	}
+	
+
+	
+	// is the moreDropdown menu open
+	let isMoreDropdownOpen = false;
+	
+	document.addEventListener("mousedown", (event) => {
+		moreDropdownHandleClickInner(event);
+	})
+	
+	
+	function moreDropdownHandleClickInner(event) {
+		
+		const dropdownParent = document.getElementById("more-dropdown-parent")
+		const dropdown = document.getElementById("more-dropdown")
+		
+		// We clicked on the menu
+		if (dropdownParent.contains(event.target)) {
+			
+			// if menu is open and we clicked to close it
+			if (isMoreDropdownOpen) {
+				isMoreDropdownOpen = false
+				
+				setTimeout(
+					function() {
+						dropdown.classList.add("hidden");
+					}, 
+					200,
+				);
+				return;
+			}
+			
+			// Opening the menu
+			isMoreDropdownOpen = true;
+			
+			setTimeout(
+				function() {
+					dropdown.classList.remove("hidden");
+				}, 
+				200,
+			);
+		
+		}
+		// We clicked off the menu, close the menu
+		else
+		{
+			// Closing the menu
+			isMoreDropdownOpen = false;
+			
+			setTimeout(
+				function() {
+					dropdown.classList.add("hidden");
+				}, 
+				200,
+			);
+	
+		}	
+	}
+	
+	
+	
+	// is the mobileMenu open
+	let isMobileMenuOpen = false;
+	
+	document.addEventListener("mousedown", (event) => {
+		mobileMenuHandleClickInner(event);
+	})
+	
+	function mobileMenuHandleClickInner(event) {
+		
+		const dropdownParent = document.getElementById("mobile-menu-parent")
+		const dropdown = document.getElementById("mobile-menu")
+		const iconOpenMenu = document.getElementById("icon-open-mobile-menu")
+		const iconCloseMenu = document.getElementById("icon-close-mobile-menu")
+		
+		
+		// We clicked on the menu
+		if (dropdownParent.contains(event.target)) {
+			
+			// if menu is open and we clicked to close it
+			if (isMobileMenuOpen) {
+				isMobileMenuOpen = false
+				
+				dropdown.classList.add("hidden");
+				iconOpenMenu.classList.remove("hidden");
+				iconCloseMenu.classList.add("hidden");
+				
+				return;
+			}
+			
+			// Opening the menu
+			isMobileMenuOpen = true;
+			
+			dropdown.classList.remove("hidden");
+			iconOpenMenu.classList.add("hidden");
+			iconCloseMenu.classList.remove("hidden");
+		}	
+	}	
+	
+</script> <header class="
+	flex 
+	flex-wrap 
+	sm:justify-start 
+	sm:flex-nowrap 
+	z-50 
+	w-full 
+	border-b 
+	border-gray-200
+	text-sm 
+	py-3 
+	sm:py-0 
+	dark:border-stone-700
+	"> <nav class="
+		relative 
+		max-w-7xl 
+		w-full 
+		mx-auto 
+		px-4 
+		sm:flex 
+		sm:items-center 
+		sm:justify-between 
+		sm:px-6 
+		lg:px-8
+		" aria-label="Global"> <div class="
+			flex 
+			items-center 
+			justify-between
+			"> <a class="
+				text-blue-600
+				dark:text-blue-500
+				flex-none 
+				text-xl 
+				font-semibold 
+				" href="/" aria-label="Brand">
+C3
+</a> <div class="sm:hidden" id="mobile-menu-parent"> <!-- Mobile topMenu toggle --> <button class="
+					hs-collapse-toggle 
+					p-2 
+					inline-flex 
+					justify-center 
+					items-center 
+					gap-2 
+					rounded-md border 
+					font-medium 
+					bg-white 
+					text-stone-700 
+					shadow-sm 
+					align-middle 
+					hover:bg-gray-50 
+					focus:outline-none 
+					focus:ring-2 
+					focus:ring-offset-2 
+					focus:ring-offset-white 
+					focus:ring-blue-600 
+					transition-all 
+					text-sm 
+					dark:bg-slate-900 
+					dark:hover:bg-slate-800 
+					dark:border-stone-700 
+					dark:text-gray-400 
+					dark:hover:text-white 
+					dark:focus:ring-offset-stone-950" type="button" aria-controls="mobile-menu" aria-label="Toggle navigation"> <!-- Icon openMobileMenu --> <svg class="
+						opacity-100
+						w-4 
+						h-4
+						" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" id="icon-open-mobile-menu"> <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"></path> </svg> <!-- Icon closeMobileMenu --> <svg class="
+						hidden 
+						w-4 
+						h-4
+						" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" id="icon-close-mobile-menu"> <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path> </svg> </button> </div> </div> <!-- mobile menu --> <div class="
+			hidden 
+			sm:block
+			overflow-hidden 
+			
+			transition-all 
+			duration-1000 
+			ease-linear
+			
+			basis-full 
+			grow 
+			" id="mobile-menu"> <div class="
+				flex 
+				flex-col 
+				gap-y-4 
+				gap-x-0 
+				mt-5 
+				sm:flex-row 
+				sm:items-center 
+				sm:justify-end 
+				sm:gap-y-0 
+				sm:gap-x-7 
+				sm:mt-0 
+				sm:pl-7"> <a class="font-medium text-gray-500 hover:text-blue-500 sm:py-6 dark:text-gray-400 dark:hover:text-blue-500" href="/getting-started/">Docs</a> <a class="font-medium text-gray-500 hover:text-blue-500 sm:py-6 dark:text-gray-400 dark:hover:text-blue-500" href="/language-overview/examples">Examples</a> <a class="font-medium text-gray-500 hover:text-blue-500 sm:py-6 dark:text-gray-400 dark:hover:text-blue-500" href="/getting-started/prebuilt-binaries">Download</a> <a class="font-medium text-gray-500 hover:text-blue-500 sm:py-6 dark:text-gray-400 dark:hover:text-blue-500" href="https://discord.gg/qN76R87">
+Discord
+</a> <a class="font-medium text-gray-500 hover:text-blue-500 sm:py-6 dark:text-gray-400 dark:hover:text-blue-500" href="/blog">
+Blog
+</a> <div class="
+					hs-dropdown [--strategy:static] 
+					sm:[--strategy:fixed] 
+					[--adaptive:none] 
+					sm:[--trigger:hover] 
+					sm:py-4
+					"> <!-- Desktop toggle More dropdown menu --> <button id="more-dropdown-parent" type="button" class="flex items-center w-full text-stone-600 hover:text-blue-500 font-medium dark:text-gray-400 dark:hover:text-blue-500">
+More
+<svg class="ml-2 w-2.5 h-2.5 text-stone-600" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path> </svg> </button> <!-- Desktop More dropdown menu --> <div id="more-dropdown" class="
+						hidden
+						absolute
+						top-full 
+						sm:right-[4rem]
+						z-10
+						sm:w-52 
+						bg-white
+						rounded-lg
+						sm:border 
+						sm:dark:border
+						border-gray-200
+						shadow-md
+						dark:bg-stone-950 
+						dark:border-stone-700 
+						sm:mt-1
+						mt-[-1.5rem]
+						p-2			
+						"> <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-md font-medium text-stone-600 hover:text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-blue-700 dark:hover:text-gray-100" href="https://github.com/c3lang/c3c">
+Github
+</a> <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-md font-medium text-stone-600 hover:text-white hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-blue-700 dark:hover:text-gray-100" href="https://github.com/sponsors/c3lang">
+Support us
+</a> </div> </div> <!-- Enable dark mode, from light mode --> <a class="
+					group
+					flex 
+					items-center 
+					text-gray-600 
+					hover:text-blue-600 
+					font-medium 
+					dark:hidden
+					dark:text-gray-400 
+					dark:hover:text-gray-500
+					" href="#!" onclick="toggleDarkMode()"> <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"> <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z"></path> </svg> </a> <!-- Enable light mode from dark mode --> <a class="
+					hidden 
+					dark:flex
+					group 
+					items-center 
+					text-gray-600 
+					hover:text-blue-600 
+					font-medium 
+					dark:text-gray-400 
+					dark:hover:text-gray-500
+					" href="#!" onclick="toggleDarkMode()"> <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"> <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"></path> </svg> </a> </div> </div> </nav> </header> <div> <div class="
+				max-w-[38rem]
+				
+				lg:grid
+				xl:grid-cols-[1.5fr_40rem_1.5fr]
+				xl:max-w-[calc(20rem+40rem+20rem)]
+				lg:grid-cols-[40rem_1.5fr]
+				lg:max-w-[calc(40rem+20rem)]
+				mx-auto
+			"> <!-- Empty content for symmetry and centering of main content --> <div class="hidden xl:block"></div> <!-- Main content --> <div class="
+					px-4 
+					sm:px-6 
+					lg:px-8 
+					lg:pt-24 
+					pt-8
+					pb-8
+					"> <div class="mt-5 mx-auto"> <h1 class="
+							block 
+							font-bold 
+							text-gray-800 
+							text-5xl 
+							lg:text-6xl 
+							lg:leading-tight 
+							dark:text-white
+							text-justify
+							mb-8
+							sm:mb-18
+							"> <a href="/blog">
+The
+<span class="
+									bg-clip-text 
+									bg-gradient-to-l 
+									from-violet-600 
+									to-blue-600 
+									text-transparent">
+C3
+</span>
+Blog
+</a> </h1> <!-- Show only current blogpost --> <!-- Using CSS variables from global styles, since those change with dark mode --><div class="
+	lg:my-20
+	 astro-izoogwj6"> <h2 class="
+		text-3xl 
+		lg:text-4xl 
+		font-bold 
+		dark:text-white
+		mb-2
+		text-justify
+	 astro-izoogwj6"> C3 0.7.3 - Small Improvements </h2> <p class="
+		text-md
+		lg:text-l 
+		text-gray-800 
+		dark:text-white
+		mb-12
+		sm:mb-16
+		text-justify
+	 astro-izoogwj6"> 2025-07-05 </p> <div class="
+		text-justify
+		 astro-izoogwj6" id="child_slots">  <p>This month’s release is 0.7.3, and is about gradual improvements to the language. Some parts of a language will always have less use than others, and that is true for C3 as well. For C3 it’s mostly the compile time parts that reveal their rough edges fairly late, but they need polish as well.</p>
+<h3 id="type--typeid">Type / typeid</h3>
+<p>Types can be introspected an manipulated in two ways in C3. One is to just use the type directly, like in <code dir="auto">Type.sizeof</code>. The other is to use the <code dir="auto">typeid</code> value, to get the same thing: <code dir="auto">Type.typeid.sizeof</code>. However, they have differences: a <code dir="auto">typeid</code> value can never be in the position of a type, and only <em>compile time constant</em> <code dir="auto">typeid</code> has the full range of values:</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.v4551.css"><script type="module" src="/_astro/ec.8zarh.js"></script><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">typeid t </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">.typeid;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">const</span><span style="--0:#D6DEEB;--1:#403F53"> typeid T </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">.typeid;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">...</span></div></div><div class="ec-line"><div class="code"><span style="--0:#919F9F;--1:#5D6376">// Getting the size, this works for all</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">int</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#7FDBCA;--1:#096E72">sizeof</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">     // Compile time value</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">T</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#7FDBCA;--1:#096E72">sizeof</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">       // Compile time value</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">t</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#7FDBCA;--1:#096E72">sizeof</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">       // Runtime value</span></div></div><div class="ec-line"><div class="code"><span style="--0:#919F9F;--1:#5D6376">// But others doesn't</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">int</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#7FDBCA;--1:#096E72">max</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">        // Direct type access ok!</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">T</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#7FDBCA;--1:#096E72">max</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">          // Const typeid access ok!</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">t</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#7FDBCA;--1:#096E72">max</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376">          // ERROR! Runtime access is not ok!</span></div></div><div class="ec-line"><div class="code"><span style="--0:#919F9F;--1:#5D6376">// Using it as a type in an assignment:</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> a;</span><span style="--0:#919F9F;--1:#5D6376">          // Ok of course</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">T a;</span><span style="--0:#919F9F;--1:#5D6376">            // ERROR!</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">$</span><span style="--0:#82AAFF;--1:#3B61B0">typefrom</span><span style="--0:#D6DEEB;--1:#403F53">(T) a;</span><span style="--0:#919F9F;--1:#5D6376"> // Ok! Converts a typeid to a type.</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">$</span><span style="--0:#82AAFF;--1:#3B61B0">typefrom</span><span style="--0:#D6DEEB;--1:#403F53">(t) a;</span><span style="--0:#919F9F;--1:#5D6376"> // ERROR! Must be a compile time typeid</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="typeid t = int.typeid;const typeid T = int.typeid;...// Getting the size, this works for allint.sizeof;     // Compile time valueT.sizeof;       // Compile time valuet.sizeof;       // Runtime value// But others doesn&#x27;tint.max;        // Direct type access ok!T.max;          // Const typeid access ok!t.max;          // ERROR! Runtime access is not ok!// Using it as a type in an assignment:int a;          // Ok of courseT a;            // ERROR!$typefrom(T) a; // Ok! Converts a typeid to a type.$typefrom(t) a; // ERROR! Must be a compile time typeid"><div></div></button></div></figure></div>
+<p>For macros that had type arguments they usually looked like this:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">macro </span><span style="--0:#82AAFF;--1:#3B61B0">new_thing</span><span style="--1:#403F53"><span style="--0:#D6DEEB">($</span><span style="--0:#D7DBE0">Type</span><span style="--0:#D6DEEB">) { ... }</span></span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">...</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">Foo</span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> f </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">new_thing</span><span style="--0:#D6DEEB;--1:#403F53">(Foo);</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="macro new_thing($Type) { ... }...Foo* f = new_thing(Foo);"><div></div></button></div></figure></div>
+<p>The disadvantage was that if you had a constant typeid you’d first have to convert it to a type:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">const</span><span style="--0:#D6DEEB;--1:#403F53"> typeid T </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">Foo</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#7FDBCA;--1:#096E72">typeid</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">void*</span><span style="--0:#D6DEEB;--1:#403F53"> thing </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">new_thing</span><span style="--0:#D6DEEB;--1:#403F53">($</span><span style="--0:#82AAFF;--1:#3B61B0">typefrom</span><span style="--0:#D6DEEB;--1:#403F53">(T));</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="const typeid T = Foo.typeid;void* thing = new_thing($typefrom(T));"><div></div></button></div></figure></div>
+<p>Starting from 0.7.3 though, we can use the constant typeid directly and get an implicit conversion to a type:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">const</span><span style="--0:#D6DEEB;--1:#403F53"> typeid T </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">Foo</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#7FDBCA;--1:#096E72">typeid</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">void*</span><span style="--0:#D6DEEB;--1:#403F53"> thing </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">new_thing</span><span style="--0:#D6DEEB;--1:#403F53">(T);</span><span style="--0:#919F9F;--1:#5D6376">  // New in 0.7.3</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="const typeid T = Foo.typeid;void* thing = new_thing(T);  // New in 0.7.3"><div></div></button></div></figure></div>
+<p>The reason this is useful, is because constant macros can’t return a type directly BUT can return a typeid. So maybe you have macro code like this:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">typeid $type </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> @</span><span style="--0:#82AAFF;--1:#3B61B0">select_the_type</span><span style="--0:#D6DEEB;--1:#403F53">($foo);</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">void*</span><span style="--0:#D6DEEB;--1:#403F53"> thing </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">new_thing</span><span style="--0:#D6DEEB;--1:#403F53">($</span><span style="--0:#82AAFF;--1:#3B61B0">typefrom</span><span style="--0:#D6DEEB;--1:#403F53">($type));</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="typeid $type = @select_the_type($foo);void* thing = new_thing($typefrom($type));"><div></div></button></div></figure></div>
+<p>It can now be this instead:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">typeid $type </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> @</span><span style="--0:#82AAFF;--1:#3B61B0">select_the_type</span><span style="--0:#D6DEEB;--1:#403F53">($foo);</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">void*</span><span style="--0:#D6DEEB;--1:#403F53"> thing </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">new_thing</span><span style="--0:#D6DEEB;--1:#403F53">($type);</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="typeid $type = @select_the_type($foo);void* thing = new_thing($type);"><div></div></button></div></figure></div>
+<p>And contracting the code it’s even more of an improvement:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">void*</span><span style="--0:#D6DEEB;--1:#403F53"> thing </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">new_thing</span><span style="--0:#D6DEEB;--1:#403F53">($</span><span style="--0:#82AAFF;--1:#3B61B0">typefrom</span><span style="--0:#D6DEEB;--1:#403F53">(@</span><span style="--0:#82AAFF;--1:#3B61B0">select_the_type</span><span style="--0:#D6DEEB;--1:#403F53">($foo)));</span><span style="--0:#919F9F;--1:#5D6376"> // 0.7.2</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">void*</span><span style="--0:#D6DEEB;--1:#403F53"> thing </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">new_thing</span><span style="--0:#D6DEEB;--1:#403F53">(@</span><span style="--0:#82AAFF;--1:#3B61B0">select_the_type</span><span style="--0:#D6DEEB;--1:#403F53">($foo));</span><span style="--0:#919F9F;--1:#5D6376">            // 0.7.3</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="void* thing = new_thing($typefrom(@select_the_type($foo))); // 0.7.2void* thing = new_thing(@select_the_type($foo));            // 0.7.3"><div></div></button></div></figure></div>
+<p>It’s just overall clearer to drop the superfluous <code dir="auto">$typefrom</code>.</p>
+<p>This also extends to the <code dir="auto">$assignable</code> builtin, which also now takes either a type or a typeid.</p>
+<h3 id="removing-evaltype">Removing <code dir="auto">$evaltype</code></h3>
+<p>Also related to typeid and types is the deprecation of <code dir="auto">$evaltype</code>. It takes
+a constant string and turns it into a type, so you could write:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">String $name </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">foo</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">$</span><span style="--0:#82AAFF;--1:#3B61B0">evaltype</span><span style="--0:#D6DEEB;--1:#403F53">($name) x </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="String $name = &#x22;foo&#x22;;$evaltype($name) x = 1;"><div></div></button></div></figure></div>
+<p>In order to simplify the language <code dir="auto">$evaltype</code> is getting removed <em>but</em> the functionality is still there, because <code dir="auto">$typefrom</code> can now also take a string.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">String $name </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">foo</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">$</span><span style="--0:#82AAFF;--1:#3B61B0">typefrom</span><span style="--0:#D6DEEB;--1:#403F53">($name) x </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">;</span><span style="--0:#919F9F;--1:#5D6376"> // New in 0.7.3</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="String $name = &#x22;foo&#x22;;$typefrom($name) x = 1; // New in 0.7.3"><div></div></button></div></figure></div>
+<p>This hopefully reduces the amount of different constructs it’s necessary to know in order to understand advanced compile time code generation.</p>
+<h3 id="improved-type-inference">Improved type inference</h3>
+<p>C3 has type inference for initializers:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">fn </span><span style="--0:#C792EA;--1:#8844AE">void</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">test</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">] x)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">{ ... }</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">test</span><span style="--0:#D6DEEB;--1:#403F53">({</span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">});</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="fn void test(int[3] x){ ... }test({1, 2, 3});"><div></div></button></div></figure></div>
+<p>However, this did not extend to <code dir="auto">&#x26;&#x26;</code>:</p>
+<div class="expressive-code"><figure class="frame has-title not-content"><figcaption class="header"><span class="title">0.7.2</span></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">fn </span><span style="--0:#C792EA;--1:#8844AE">void</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">test</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">]</span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> x)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">{ ... }</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">test</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">&#x26;&#x26;</span><span style="--0:#D6DEEB;--1:#403F53">{</span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">});</span><span style="--0:#919F9F;--1:#5D6376">      // ERROR!</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="fn void test(int[3]* x){ ... }test(&#x26;&#x26;{1, 2, 3});      // ERROR!"><div></div></button></div></figure></div>
+<p>This has now been improved:</p>
+<div class="expressive-code"><figure class="frame has-title not-content"><figcaption class="header"><span class="title">0.7.3</span></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">fn </span><span style="--0:#C792EA;--1:#8844AE">void</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">test</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">]</span><span style="--0:#C792EA;--1:#8844AE">*</span><span style="--0:#D6DEEB;--1:#403F53"> x)</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">{ ... }</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">test</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C792EA;--1:#8844AE">&#x26;&#x26;</span><span style="--0:#D6DEEB;--1:#403F53">{</span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53">});</span><span style="--0:#919F9F;--1:#5D6376">      // Works in 0.7.3</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="fn void test(int[3]* x){ ... }test(&#x26;&#x26;{1, 2, 3});      // Works in 0.7.3"><div></div></button></div></figure></div>
+<h3 id="compile-time-sprintf">Compile time <code dir="auto">@sprintf</code></h3>
+<p>Creating strings at compile time is sometimes desirable, but the help for it has been complicated an inefficient. Usually the use of <code dir="auto">+++</code> has been needed:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">String $s </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> $foo </span><span style="--0:#C792EA;--1:#8844AE">+++</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">:</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">+++</span><span style="--0:#D6DEEB;--1:#403F53"> $bar;</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="String $s = $foo +++ &#x22;:&#x22; +++ $bar;"><div></div></button></div></figure></div>
+<p>Now, however, there is a <code dir="auto">@sprintf</code>. It’s not a full-fledged printf-like function. It only supports “%s” arguments, but will do a best effort to convert any compile time value:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> $v </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">123</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">Enum $x </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> FOO;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">String $s </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> @</span><span style="--0:#82AAFF;--1:#3B61B0">sprintf</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#82AAFF;--1:#3B61B0">%s</span><span style="--0:#ECC48D;--1:#984E4D">:</span><span style="--0:#82AAFF;--1:#3B61B0">%s</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, $v, $x);</span><span style="--0:#919F9F;--1:#5D6376"> // $s = "123:FOO"</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="int $v = 123;Enum $x = FOO;String $s = @sprintf(&#x22;%s:%s&#x22;, $v, $x); // $s = &#x22;123:FOO&#x22;"><div></div></button></div></figure></div>
+<p>Often this is good enough, and the operation is much cheaper than the other compile time concatenation in terms of compiler resources.</p>
+<h3 id="assert-and-error-printf"><code dir="auto">$assert</code> and <code dir="auto">$error</code> “printf”</h3>
+<p>Hand-in-hand with the <code dir="auto">@sprintf</code>, <code dir="auto">$assert</code> and <code dir="auto">$error</code> now accepts the same format as <code dir="auto">@sprintf</code> for better compile time errors:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">var $a </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">-</span><span style="--0:#F78C6C;--1:#AA0982">123</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">$assert $a </span><span style="--0:#C792EA;--1:#8844AE">></span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53"> : </span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#ECC48D;--1:#984E4D">$a was </span><span style="--0:#82AAFF;--1:#3B61B0">%s</span><span style="--0:#D9F5DD;--1:#111111">"</span><span style="--0:#D6DEEB;--1:#403F53">, $a;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#919F9F;--1:#5D6376">// Above is a compile time error printing "$a was -123"</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="var $a = -123;$assert $a > 0 : &#x22;$a was %s&#x22;, $a;// Above is a compile time error printing &#x22;$a was -123&#x22;"><div></div></button></div></figure></div>
+<h3 id="better-eval">Better <code dir="auto">$eval</code></h3>
+<p>Where <code dir="auto">$evaltype</code> is going away, <code dir="auto">$eval</code>, which can turn a string into an identifier has been improved to properly work with <code dir="auto">@foo</code>, <code dir="auto">#foo</code> and <code dir="auto">$foo</code> identifiers.</p>
+<h3 id="more-liberal-main">More liberal “main”</h3>
+<p>The <code dir="auto">main</code> function used to only support <code dir="auto">String[]</code> or <code dir="auto">int argc, char **argv</code> as parameters. Now it accepts distinct types that lowers to the same arguments, so <code dir="auto">int argc, ZString* argv</code> works properly.</p>
+<h3 id="--sources-to-add-additional-files-to-compile"><code dir="auto">--sources</code> to add additional files to compile</h3>
+<p>Sometimes it’s useful to add extra sources to compile with a regular build. <code dir="auto">--sources</code> allows you to do exactly that:</p>
+<div class="expressive-code"><figure class="frame is-terminal not-content"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="code"><span style="--0:#82AAFF;--1:#3B61B0">c3c</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">build</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">--sources</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#ECC48D;--1:#3B61B0">inject.c3</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="c3c build --sources inject.c3"><div></div></button></div></figure></div>
+<h3 id="improved-overloading-with-wildcard-types">Improved overloading with wildcard types</h3>
+<p>One omission of the arithmetic overloads was supporting macros with wildcard types, so rather than writing a <code dir="auto">macro Foo Foo.add(self, int x) @operator(+)</code> for every type you wanted to support, what if you could write <code dir="auto">macro Foo Foo.add(self, x) @operator(+)</code> and handle the rest with contracts and compile time checks?</p>
+<p>This actually crashed in 0.7.2, but in 0.7.3 this works correctly. It’s even allowed with <code dir="auto">@operator_r</code> and <code dir="auto">@operator_s</code> variants.</p>
+<h3 id="distinct-improvements">Distinct improvements</h3>
+<p>Bitstructs can now be based on a distinct type, created by typedef:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">typedef</span><span style="--0:#D6DEEB;--1:#403F53"> Test </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">bitstruct Foo : Test</span><span style="--0:#919F9F;--1:#5D6376"> // Works in 0.7.3</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">{</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> z : </span><span style="--0:#FFFFFF;--1:#984E4D">1..3</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="typedef Test = int;bitstruct Foo : Test // Works in 0.7.3{    int z : 1..3;}"><div></div></button></div></figure></div>
+<p>And it’s now possible for generics to be generic over distinct const values:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">module</span><span style="--0:#D6DEEB;--1:#403F53"> foo { VAL };</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">const</span><span style="--0:#D6DEEB;--1:#403F53"> GLOBAL </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> VAL;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">module</span><span style="--0:#D6DEEB;--1:#403F53"> test;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">import foo;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">typedef</span><span style="--0:#D6DEEB;--1:#403F53"> Bar </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">fn </span><span style="--0:#C792EA;--1:#8844AE">void</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">main</span><span style="--0:#D6DEEB;--1:#403F53">()</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">{</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">const</span><span style="--0:#D6DEEB;--1:#403F53"> Bar B </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">123</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">Bar b </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> foo::GLOBAL{B};</span><span style="--0:#919F9F;--1:#5D6376"> // Works in 0.7.3</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="module foo { VAL };const GLOBAL = VAL;module test;import foo;typedef Bar = int;fn void main(){    const Bar B = 123;    Bar b = foo::GLOBAL{B}; // Works in 0.7.3}"><div></div></button></div></figure></div>
+<h3 id="constant-vector-comparison">Constant vector comparison</h3>
+<p>Vectors has been comparable at runtime, but not at compile time. However, from 0.7.3 and onwards this works:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#C792EA;--1:#8844AE">&#x3C;</span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#C792EA;--1:#8844AE">></span><span style="--0:#D6DEEB;--1:#403F53">] $v </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> { </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53"> };</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#C792EA;--1:#8844AE">&#x3C;</span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#C792EA;--1:#8844AE">></span><span style="--0:#D6DEEB;--1:#403F53">] $w </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> { </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">2</span><span style="--0:#D6DEEB;--1:#403F53"> };</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">$assert $v </span><span style="--0:#C792EA;--1:#8844AE">==</span><span style="--0:#D6DEEB;--1:#403F53"> $w;</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="int[<2>] $v = { 1, 2 };int[<2>] $w = { 1, 2 };$assert $v == $w;"><div></div></button></div></figure></div>
+<h3 id="silence-deprecation">Silence deprecation</h3>
+<p><code dir="auto">@deprecated</code> has been mostly used as a migration mechanism for the c3 standard library, but using it with user code requires more fine-grained control, which is why there is now an <code dir="auto">@allow_deprecated</code> attribute to silence deprecation warnings inside a particular function:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">fn </span><span style="--0:#C792EA;--1:#8844AE">void</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">old</span><span style="--0:#D6DEEB;--1:#403F53">() @deprecated {}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">fn </span><span style="--0:#C792EA;--1:#8844AE">void</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">test1</span><span style="--0:#D6DEEB;--1:#403F53">()</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">{</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#82AAFF;--1:#3B61B0">old</span><span style="--0:#D6DEEB;--1:#403F53">();</span><span style="--0:#919F9F;--1:#5D6376"> // Emits warning</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">fn </span><span style="--0:#C792EA;--1:#8844AE">void</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">test2</span><span style="--0:#D6DEEB;--1:#403F53">() @allow_deprecated</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">{</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#82AAFF;--1:#3B61B0">old</span><span style="--0:#D6DEEB;--1:#403F53">();</span><span style="--0:#919F9F;--1:#5D6376"> // No warning</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="fn void old() @deprecated {}fn void test1(){    old(); // Emits warning}fn void test2() @allow_deprecated{    old(); // No warning}"><div></div></button></div></figure></div>
+<h3 id="removal-of-f-as-whitespace">Removal of <code dir="auto">'\f'</code> as whitespace</h3>
+<p><code dir="auto">\f</code> (the form-feed character) is not really used in normal text, so it has been removed from the characters recognized as whitespace by the lexer.</p>
+<h3 id="memberof-getset-improvements"><code dir="auto">$memberof</code> get/set improvements</h3>
+<p>You can get the member of a struct or union by indexing <code dir="auto">Type.membersof</code> and then use the <code dir="auto">get</code> method on the member to retrieve the value. However, there was no corresponding <code dir="auto">set</code> method, instead you had to do <code dir="auto">*&#x26;$member.get(2) = 123</code>. People have been asking for a <code dir="auto">.set</code> for a long time, and that was also the only way to properly support setting bitstruct values:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="c3"><code><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">bitstruct Foo : </span><span style="--0:#C792EA;--1:#8844AE">int</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">{</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> x : </span><span style="--0:#FFFFFF;--1:#984E4D">1..5</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> y : </span><span style="--0:#FFFFFF;--1:#984E4D">10..14</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">fn </span><span style="--0:#C792EA;--1:#8844AE">void</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#82AAFF;--1:#3B61B0">test</span><span style="--0:#D6DEEB;--1:#403F53">()</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">{</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">var $member </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#C5E478;--1:#3B61B0">Foo</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#7FDBCA;--1:#096E72">membersof</span><span style="--0:#D6DEEB;--1:#403F53">[</span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">];</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">Foo f </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> { </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">3</span><span style="--0:#D6DEEB;--1:#403F53"> };</span></div></div><div class="ec-line"><div class="code"><span class="indent">    </span><span style="--0:#C792EA;--1:#8844AE">int</span><span style="--0:#D6DEEB;--1:#403F53"> val </span><span style="--0:#C792EA;--1:#8844AE">=</span><span style="--0:#D6DEEB;--1:#403F53"> $</span><span style="--0:#C5E478;--1:#3B61B0">member</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">get</span><span style="--0:#D6DEEB;--1:#403F53">(f);</span><span style="--0:#919F9F;--1:#5D6376">        // .get on bitstructs now works</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">$</span><span style="--0:#C5E478;--1:#3B61B0">member</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#82AAFF;--1:#3B61B0">set</span><span style="--0:#D6DEEB;--1:#403F53">(f, val </span><span style="--0:#C792EA;--1:#8844AE">+</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">);</span><span style="--0:#919F9F;--1:#5D6376">         // .set method updates</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#D6DEEB;--1:#403F53">    </span></span><span style="--0:#D6DEEB;--1:#403F53">io::</span><span style="--0:#82AAFF;--1:#3B61B0">printn</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#C5E478;--1:#3B61B0">f</span><span style="--0:#D6DEEB;--1:#403F53">.</span><span style="--0:#7FDBCA;--1:#096E72">y</span><span style="--0:#D6DEEB;--1:#403F53">);</span><span style="--0:#919F9F;--1:#5D6376">                 // Prints 4</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><button title="Copy to clipboard" data-copied="Copied!" data-code="bitstruct Foo : int{    int x : 1..5;    int y : 10..14;}fn void test(){    var $member = Foo.membersof[1];    Foo f = { 1, 3 };    int val = $member.get(f);        // .get on bitstructs now works    $member.set(f, val + 1);         // .set method updates    io::printn(f.y);                 // Prints 4}"><div></div></button></div></figure></div>
+<h3 id="custom-file-extensions-in-build-targets">Custom file extensions in build targets</h3>
+<p>It’s now possible to override the extension used for libraries and executables of a target with the <code dir="auto">"extension"</code> project property.</p>
+<h3 id="bug-fixes">Bug fixes</h3>
+<p>0.7.3 shipped with around 40 bug fixes, which is a bit below average for a 0.0.1 release.</p>
+<h3 id="stdlib-additions">Stdlib additions</h3>
+<p>ZString types can now be compared using <code dir="auto">==</code> by having equality overloaded. We have a SHA512 library and <code dir="auto">String.escape</code>, <code dir="auto">String.unescape</code> for escaping and unescaping strings. <code dir="auto">io::struct_to_format</code> also now supports bitstructs, which means <code dir="auto">io::printn</code> and related functions properly prints bitstructs.</p>
+<h3 id="stdlib-deprecations">Stdlib deprecations</h3>
+<p><code dir="auto">String.is_zstr</code> and <code dir="auto">String.quick_zstr</code> are unsafe and are deprecated <code dir="auto">is_array_or_slice_of_char</code> and <code dir="auto">is_arrayptr_or_slice_of_char</code> are replaced by constant <code dir="auto">@</code> variants.</p>
+<h3 id="change-log">Change Log</h3>
+<details>
+	<summary class="text-black dark:text-white font-medium text-lg">
+		Click for full change log
+	</summary>
+<h3 id="changes--improvements">Changes / improvements</h3>
+<ul>
+<li><code dir="auto">$typefrom</code> now also accepts a constant string, and so works like <code dir="auto">$evaltype</code>.</li>
+<li><code dir="auto">$evaltype</code> is deprecated in favour of <code dir="auto">$typefrom</code>.</li>
+<li>Literal rules have changed, this makes <code dir="auto">-0xFF</code> now a signed integer.</li>
+<li>Implicitly convert from constant typeid to Type in <code dir="auto">$Type</code> assignment, and <code dir="auto">$assignable</code>.</li>
+<li>Make $Type parameters accept constant typeid values.</li>
+<li>Deprecate <code dir="auto">foo.#bar</code>.</li>
+<li>Allow inference across <code dir="auto">&#x26;&#x26;</code> #2172.</li>
+<li>Added support for custom file extensions in project.json targets.</li>
+<li><code dir="auto">$eval</code> now also works with <code dir="auto">@foo</code>, <code dir="auto">#foo</code>, <code dir="auto">$Foo</code> and <code dir="auto">$foo</code> parameters #2114.</li>
+<li><code dir="auto">@sprintf</code> macro (based on the <code dir="auto">$$sprintf</code> builtin) allows compile time format strings #1874.</li>
+<li>Improve error reports when encountering a broken “if-catch”.</li>
+<li>Add printf format to <code dir="auto">$assert</code> and <code dir="auto">$error</code> #2183.</li>
+<li>Make accepting arguments for <code dir="auto">main</code> a bit more liberal, accepting <code dir="auto">main(int argc, ZString* argv)</code></li>
+<li>Make <code dir="auto">$echo</code> and <code dir="auto">@sprintf</code> correctly stringify compile time initializers and slices.</li>
+<li>Add <code dir="auto">--sources</code> build option to add additional files to compile. #2097</li>
+<li>Support untyped second argument for operator overloading.</li>
+<li>The form-feed character ‘\f’ is no longer valid white space.</li>
+<li>Show code that caused unreachable code #2207</li>
+<li>Allow generics over distinct types #2216.</li>
+<li>Support distrinct types as the base type of bitstructs. #2218</li>
+<li>Add hash::sha512 module to stdlib. #2227</li>
+<li>Compile time type assignment (eg <code dir="auto">$Foo = int</code>) is no longer an expression.</li>
+<li>Add <code dir="auto">@allow_deprecated</code> attribute to functions to selectively allow deprecated declarations #2223.</li>
+<li>Improve error message on pointer diff #2239.</li>
+<li>Compile-time comparison of constant vectors. #1575.</li>
+<li>$member.get supports bitstructs.</li>
+<li>$member.set for setting members without the *&#x26; trick.</li>
+<li>Initial support for #1925, does not affect C compilation yet, and doesn’t try to link etc. Using “—emit-only”</li>
+</ul>
+<h3 id="fixes">Fixes</h3>
+<ul>
+<li><code dir="auto">-2147483648</code>, MIN literals work correctly.</li>
+<li>Splatting const slices would not be const. #2185</li>
+<li>Fixes to <code dir="auto">$define</code> handling of binary ops.</li>
+<li>Fixes methodsof to pick up all sorts of extension methods. #2192</li>
+<li><code dir="auto">--lsp</code> sometimes does not emit end tag #2194.</li>
+<li>Improve Android termux detection.</li>
+<li>Update Android ABI.</li>
+<li>Fixes to <code dir="auto">@format</code> checking #2199.</li>
+<li>Distinct versions of builtin types ignore @operator overloads #2204.</li>
+<li>@operator macro using untyped parameter causes compiler segfault #2200.</li>
+<li>Make <code dir="auto">unreachable()</code> only panic in safe mode.</li>
+<li><code dir="auto">cflags</code> additions for targets was not handed properly. #2209</li>
+<li><code dir="auto">$echo</code> would suppress warning about unreachable code. #2205</li>
+<li>Correctly format ‘%c’ when given a width. #2199</li>
+<li>Fix to <code dir="auto">is_array_or_slice_of_char</code> #2214.</li>
+<li>Method on array slice caused segfault #2211.</li>
+<li>In some cases, the compiler would dereference a compile time null. #2215</li>
+<li>Incorrect codegen if a macro ends with unreachable and is assigned to something. #2210</li>
+<li>Fix error for named arguments-order with compile-time arguments #2212</li>
+<li>Bug in AST copying would make operator overloading like <code dir="auto">+=</code> compile incorrectly #2217.</li>
+<li><code dir="auto">$defined(#expr)</code> broken with binary. #2219</li>
+<li>Method ambiguity when importing parent module publicly in private submodule. #2208</li>
+<li>Linker errors when shadowing @local with public function #2198</li>
+<li>Bug when offsetting pointers of large structs using ++ and —.</li>
+<li><code dir="auto">x++</code> and <code dir="auto">x--</code> works on pointer vectors #2222.</li>
+<li><code dir="auto">x += 1</code> and <code dir="auto">x -= 1</code> works properly on pointer vectors #2222.</li>
+<li>Fixes to <code dir="auto">x += { 1, 1 }</code> for enum and pointer vectors #2222.</li>
+<li>Linking fails on operator method imported as <code dir="auto">@public</code> #2224.</li>
+<li>Lambda C-style vaargs were not properly rejected, leading to crash #2229.</li>
+<li>Incorrect handling of constant null fault causing compiler crash #2232.</li>
+<li>Overload resolution fixes to inline typedef #2226.</li>
+<li><code dir="auto">math::overflow_*</code> wrappers incorrectly don’t allow distinct integers #2221.</li>
+<li>Compiler segfault when using distinct type in attribute imported from other module #2234.</li>
+<li>Assert casting bitstruct to short/char #2237.</li>
+<li>@tag didn’t work with members #2236.</li>
+<li>Assert comparing untyped lists #2240.</li>
+<li>Fix bugs relating to optional interface addr-of #2244.</li>
+<li>Compiler null pointer when building a static-lib with -o somedir/… #2246</li>
+<li>Segfault in the compiler when using a bitstruct constant defined using a cast with an operator #2248.</li>
+<li>Default assert() message drops parens #2249.</li>
+</ul>
+<h3 id="stdlib-changes">Stdlib changes</h3>
+<ul>
+<li>Deprecate <code dir="auto">String.is_zstr</code> and <code dir="auto">String.quick_zstr</code> #2188.</li>
+<li>Add comparison with <code dir="auto">==</code> for ZString types.</li>
+<li><code dir="auto">is_array_or_slice_of_char</code> and <code dir="auto">is_arrayptr_or_slice_of_char</code> are replaced by constant <code dir="auto">@</code> variants.</li>
+<li><code dir="auto">@pool</code> now has an optional <code dir="auto">reserve</code> parameter, some minor changes to the temp_allocator API</li>
+<li>io::struct_to_format now supports bitstructs.</li>
+<li>Add <code dir="auto">String.escape</code>, <code dir="auto">String.unescape</code> for escaping and unescaping a string.</li>
+</ul>
+</details>
+<h3 id="want-to-dive-into-c3">Want To Dive Into C3?</h3>
+<p>Check out the <a href="/getting-started">documentation</a>
+or <a href="/getting-started/prebuilt-binaries">download it and try it out</a></p>
+<p>Have questions? Come and chat to us on <a href="https://discord.gg/qN76R87">Discord</a>.</p>
+<p>Discuss this article on <a href="https://www.reddit.com/r/programming/comments/1lsxbpo/c3_073_released_improvements_and_bug_fixes/">Reddit</a> or <a href="https://news.ycombinator.com/item?id=44498923">Hacker News</a>.</p>  <!-- Markdown will be inserted here --> </div> </div> </div> </div> <!-- End of main content --> <!-- Sidebar on desktop --> <!-- Bottom on small/mobile --> <div class="
+					block 
+					lg:mt-68
+					px-6
+					lg:pl-16
+					mb-20
+					lg:mb-0
+					"> <h2 class="
+						text-[var(--sl-color-gray-1)]
+						mb-4
+						font-semibold
+						lg:font-medium
+						text-3xl
+						lg:text-xl
+						lg:pl-4
+						lg:pt-0
+						pt-6
+					">
+Blog Archive
+</h2> <div class="
+							hover:bg-slate-100
+							hover:dark:bg-slate-800
+							py-2
+							px-4
+							my-2
+						"> <a class="
+								text-[var(--sl-color-text-accent)]
+								text-justify
+								" href="/blog/memory-regions-a-new-old-idea"> <div class="
+									flex
+									flex-col
+									text-[var(--sl-color-gray-1)]
+									lg:text-xs
+									
+								"> <h4 class="
+										"> Memory Regions A New Old Idea </h4> <p class=""> 2025-07-09 </p> </div> </a> </div><div class="
+							hover:bg-slate-100
+							hover:dark:bg-slate-800
+							py-2
+							px-4
+							my-2
+						"> <a class="
+								text-[var(--sl-color-text-accent)]
+								text-justify
+								" href="/blog/c3-0-7-2-quality-of-life"> <div class="
+									flex
+									flex-col
+									text-[var(--sl-color-gray-1)]
+									lg:text-xs
+									
+								"> <h4 class="
+										"> C3 0.7.2 - Quality Of Life </h4> <p class=""> 2025-06-02 </p> </div> </a> </div><div class="
+							hover:bg-slate-100
+							hover:dark:bg-slate-800
+							py-2
+							px-4
+							my-2
+						"> <a class="
+								text-[var(--sl-color-text-accent)]
+								text-justify
+								" href="/blog/c3-0-7-1-operator-overloading"> <div class="
+									flex
+									flex-col
+									text-[var(--sl-color-gray-1)]
+									lg:text-xs
+									
+								"> <h4 class="
+										"> C3 0.7.1 - Operator Overloading </h4> <p class=""> 2025-04-30 </p> </div> </a> </div><div class="
+							hover:bg-slate-100
+							hover:dark:bg-slate-800
+							py-2
+							px-4
+							my-2
+						"> <a class="
+								text-[var(--sl-color-text-accent)]
+								text-justify
+								" href="/blog/c3-0-7-0-one-step-closer-to-1-0"> <div class="
+									flex
+									flex-col
+									text-[var(--sl-color-gray-1)]
+									lg:text-xs
+									
+								"> <h4 class="
+										"> C3 0.7.0 - One Step Closer To 1.0 </h4> <p class=""> 2025-03-30 </p> </div> </a> </div> </div> <!-- End of Sidebar --> </div> <!-- End of page grid layout for sidebar and main --> </div> </div> </body>
