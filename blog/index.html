@@ -348,7 +348,7 @@ Blog
 		dark:text-white
 		mb-2
 		text-justify
-	 astro-izoogwj6"> Memory Regions A New Old Idea </h2> <p class="
+	 astro-izoogwj6"> Memory Regions: A New Old Idea </h2> <p class="
 		text-md
 		lg:text-l 
 		text-gray-800 
@@ -358,8 +358,8 @@ Blog
 		text-justify
 	 astro-izoogwj6"> 2025-07-09 </p> <div class="
 		text-justify
-		 astro-izoogwj6" id="child_slots">  <p>Memory is one of the most important resources we have to manage as programmers, in this blog we’ll be talking about methods of managing dynamic memory allocations on the heap.</p>
-<p>Let’s break that down; Broadly there are two types of memory allocation in your programs, on the stack and on the heap. Allocations on the <a href="https://en.wikipedia.org/wiki/Stack_register">stack</a> are compact and are managed automatically, but they are limited in size. The heap by contrast is <a href="https://en.wikipedia.org/wiki/Memory_management">manually managed</a> and is used for dynamic allocations, which can be much larger and it’s organisation is customisable.</p>
+		 astro-izoogwj6" id="child_slots">  <p>Memory is one of the most important resources we have to manage as programmers. In this blog we’ll be talking about methods of managing dynamic memory allocations on the heap.</p>
+<p>Let’s break that down; Broadly there are two types of memory allocation in your programs, on the stack and on the heap. Allocations on the <a href="https://en.wikipedia.org/wiki/Stack_register">stack</a> are compact and are managed automatically, but they are limited in size. The heap by contrast is <a href="https://en.wikipedia.org/wiki/Memory_management">manually managed</a> and is used for dynamic allocations, which can be much larger and its organisation is customisable.</p>
 <h3 id="memory-leaks">Memory Leaks</h3>
 <p>When we dynamically allocate memory, with say <code dir="auto">malloc()</code> typically we need to <code dir="auto">free()</code> it afterwards, otherwise we can’t use that memory until the OS process exits. If that memory isn’t being used and it has not been freed this is called a <a href="https://en.wikipedia.org/wiki/Memory_leak">memory leak</a> and can lead to restricting or running out of available system memory.</p>
 <h3 id="avoiding-memory-leaks">Avoiding Memory Leaks</h3>
